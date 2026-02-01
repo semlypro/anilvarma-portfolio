@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { BlogListingPage } from '@/components/pages/BlogListingPage';
 import { getAllBlogPosts, getAllComparisonPosts, getAllListiclePosts } from '@/lib/sanity/fetch';
-import { mockBlogPosts, mockComparisonPosts, mockListiclePosts } from '@/lib/mocks/data';
 
 export const metadata: Metadata = {
   title: 'SEO Blog | Insights & Strategies | Anil Varma',
@@ -23,16 +22,11 @@ export default async function BlogPage() {
     getAllListiclePosts().catch(() => []),
   ]);
 
-  // Use Sanity data if available, otherwise fall back to mock data
-  const useBlogPosts = blogPosts.length > 0 ? blogPosts : mockBlogPosts;
-  const useComparisonPosts = comparisonPosts.length > 0 ? comparisonPosts : mockComparisonPosts;
-  const useListiclePosts = listiclePosts.length > 0 ? listiclePosts : mockListiclePosts;
-
   // Combine all post types for the listing
   const allPosts = [
-    ...useBlogPosts.map(post => ({ ...post, postType: 'article' as const })),
-    ...useComparisonPosts.map(post => ({ ...post, postType: 'comparison' as const })),
-    ...useListiclePosts.map(post => ({ ...post, postType: 'listicle' as const })),
+    ...blogPosts.map(post => ({ ...post, postType: 'article' as const })),
+    ...comparisonPosts.map(post => ({ ...post, postType: 'comparison' as const })),
+    ...listiclePosts.map(post => ({ ...post, postType: 'listicle' as const })),
   ].sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
 
   // Extract unique categories

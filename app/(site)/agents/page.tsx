@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { AgentsListingPage } from '@/components/pages/AgentsListingPage';
 import { getAllAgents } from '@/lib/sanity/fetch';
-import { mockEnrichedAgents } from '@/lib/mocks/data';
 
 export const metadata: Metadata = {
   title: 'AI SEO Agents | Powered by Claude | Anil Varma',
@@ -19,11 +18,8 @@ export default async function AgentsPage() {
   // Fetch from Sanity
   const agents = await getAllAgents().catch(() => []);
 
-  // Use Sanity data if available, otherwise fall back to mock data
-  const useAgents = agents.length > 0 ? agents : mockEnrichedAgents;
-
   // Extract unique categories
-  const categories = Array.from(new Set(useAgents.map(a => {
+  const categories = Array.from(new Set(agents.map(a => {
     if (typeof a.category === 'object' && a.category?.title) {
       return a.category.title;
     }
@@ -32,7 +28,7 @@ export default async function AgentsPage() {
 
   return (
     <AgentsListingPage
-      agents={useAgents}
+      agents={agents}
       categories={categories as string[]}
     />
   );

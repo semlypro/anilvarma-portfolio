@@ -36,7 +36,7 @@ export default async function SiteLayout({
         ctaHref={ctaHref}
       />
       <main className="flex-1">{children}</main>
-      <Footer />
+      <Footer navigation={navigation} siteSettings={siteSettings} />
     </div>
   );
 }

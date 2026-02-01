@@ -4,7 +4,7 @@ import { ExperienceTimeline } from '@/components/sections/ExperienceTimeline';
 import { SkillsSection } from '@/components/sections/SkillsSection';
 import { CertificationsSection } from '@/components/sections/CertificationsSection';
 import { CTASection } from '@/components/sections/CTASection';
-import { mockAbout } from '@/lib/mocks/data';
+import { getAbout } from '@/lib/sanity/fetch';
 
 export const metadata: Metadata = {
   title: 'About Anil Varma | SEO Expert with 15+ Years Experience',
@@ -12,8 +12,12 @@ export const metadata: Metadata = {
     'Learn about Anil Varma - SEO expert who has scaled traffic from 0 to 10M+ users. 15+ years of experience in technical SEO and content strategy.',
 };
 
-export default function AboutPage() {
-  const about = mockAbout;
+export default async function AboutPage() {
+  const about = await getAbout().catch(() => null);
+
+  if (!about) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <>

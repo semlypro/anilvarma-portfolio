@@ -1,7 +1,6 @@
 import { Metadata } from 'next';
 import { GlossaryListingPage } from '@/components/pages/GlossaryListingPage';
 import { getAllGlossaryTerms } from '@/lib/sanity/fetch';
-import { mockGlossaryTerms } from '@/lib/mocks/data';
 
 export const metadata: Metadata = {
   title: 'SEO Glossary | 200+ Terms Explained | Anil Varma',
@@ -19,25 +18,22 @@ export default async function GlossaryPage() {
   // Fetch from Sanity
   const glossaryTerms = await getAllGlossaryTerms().catch(() => []);
 
-  // Use Sanity data if available, otherwise fall back to mock data
-  const useTerms = glossaryTerms.length > 0 ? glossaryTerms : mockGlossaryTerms;
-
   // Group terms by first letter
-  const termsByLetter = useTerms.reduce((acc, term) => {
+  const termsByLetter = glossaryTerms.reduce((acc, term) => {
     const letter = term.term.charAt(0).toUpperCase();
     if (!acc[letter]) {
       acc[letter] = [];
     }
     acc[letter].push(term);
     return acc;
-  }, {} as Record<string, typeof useTerms>);
+  }, {} as Record<string, Array<(typeof glossaryTerms)[0]>>);
 
   // Get unique categories
-  const categories = Array.from(new Set(useTerms.map(t => t.category))).filter(Boolean);
+  const categories = Array.from(new Set(glossaryTerms.map(t => t.letter))).filter(Boolean);
 
   return (
     <GlossaryListingPage
-      terms={useTerms}
+      terms={glossaryTerms}
       termsByLetter={termsByLetter}
       categories={categories as string[]}
     />

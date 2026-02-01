@@ -2,11 +2,58 @@
 
 import Link from 'next/link';
 import { Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react';
-import { mockNavigation, mockSiteSettings } from '@/lib/mocks/data';
+import type { Navigation, SiteSettings } from '@/types';
 
-export function Footer() {
-  const footerNav = mockNavigation.footerNav;
-  const siteSettings = mockSiteSettings;
+// Default fallback data
+const defaultFooterNav = {
+  columns: [
+    {
+      _key: 'resources',
+      title: 'Resources',
+      items: [
+        { _key: '1', label: 'Blog', href: '/blog' },
+        { _key: '2', label: 'Templates', href: '/templates' },
+        { _key: '3', label: 'SEO Agents', href: '/agents' },
+        { _key: '4', label: 'Glossary', href: '/glossary' },
+      ],
+    },
+    {
+      _key: 'company',
+      title: 'Company',
+      items: [
+        { _key: '1', label: 'About', href: '/about' },
+        { _key: '2', label: 'Case Studies', href: '/case-studies' },
+        { _key: '3', label: 'Contact', href: '/contact' },
+      ],
+    },
+    {
+      _key: 'legal',
+      title: 'Legal',
+      items: [
+        { _key: '1', label: 'Privacy Policy', href: '/privacy' },
+        { _key: '2', label: 'Terms of Service', href: '/terms' },
+      ],
+    },
+  ],
+};
+
+const defaultSiteSettings = {
+  contactEmail: 'anilvarma2302@gmail.com',
+  contactPhone: '+31627910520',
+  socialLinks: {
+    linkedin: 'https://www.linkedin.com/in/anil-varma/',
+    twitter: 'https://twitter.com/anilvarma',
+  },
+};
+
+interface FooterProps {
+  navigation?: Navigation | null;
+  siteSettings?: SiteSettings | null;
+}
+
+export function Footer({ navigation, siteSettings }: FooterProps) {
+  const footerNav = navigation?.footerNav || defaultFooterNav;
+  const settings = siteSettings || defaultSiteSettings;
 
   const currentYear = new Date().getFullYear();
 
@@ -28,9 +75,9 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="flex gap-4 mt-6">
-              {siteSettings.socialLinks.linkedin && (
+              {settings.socialLinks?.linkedin && (
                 <a
-                  href={siteSettings.socialLinks.linkedin}
+                  href={settings.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
@@ -39,9 +86,9 @@ export function Footer() {
                   <Linkedin className="w-5 h-5" />
                 </a>
               )}
-              {siteSettings.socialLinks.twitter && (
+              {settings.socialLinks?.twitter && (
                 <a
-                  href={siteSettings.socialLinks.twitter}
+                  href={settings.socialLinks.twitter}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 rounded-lg bg-neutral-800 flex items-center justify-center hover:bg-primary-600 transition-colors"
@@ -55,19 +102,19 @@ export function Footer() {
             {/* Contact Info */}
             <div className="mt-6 space-y-3">
               <a
-                href={`mailto:${siteSettings.contactEmail}`}
+                href={`mailto:${settings.contactEmail}`}
                 className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors"
               >
                 <Mail className="w-4 h-4" />
-                <span>{siteSettings.contactEmail}</span>
+                <span>{settings.contactEmail}</span>
               </a>
-              {siteSettings.contactPhone && (
+              {settings.contactPhone && (
                 <a
-                  href={`tel:${siteSettings.contactPhone}`}
+                  href={`tel:${settings.contactPhone}`}
                   className="flex items-center gap-3 text-neutral-400 hover:text-white transition-colors"
                 >
                   <Phone className="w-4 h-4" />
-                  <span>{siteSettings.contactPhone}</span>
+                  <span>{settings.contactPhone}</span>
                 </a>
               )}
               <div className="flex items-center gap-3 text-neutral-400">
@@ -84,23 +131,12 @@ export function Footer() {
               <ul className="space-y-3">
                 {column.items.map((item) => (
                   <li key={item._key}>
-                    {item.isExternal ? (
-                      <a
-                        href={item.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-neutral-400 hover:text-white transition-colors"
-                      >
-                        {item.label}
-                      </a>
-                    ) : (
-                      <Link
-                        href={item.href}
-                        className="text-neutral-400 hover:text-white transition-colors"
-                      >
-                        {item.label}
-                      </Link>
-                    )}
+                    <Link
+                      href={item.href}
+                      className="text-neutral-400 hover:text-white transition-colors"
+                    >
+                      {item.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
