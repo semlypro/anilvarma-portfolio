@@ -63,29 +63,29 @@ See `../BACKEND_TASKS.md` for detailed task specifications.
 
 ---
 
-## Phase 3: API Routes
+## Phase 3: API Routes ✅ COMPLETE (except OG images - needs @vercel/og)
 
 ### 3.1-3.9 API Implementation
 - [x] Create `app/api/revalidate/route.ts` (Sanity webhook)
-- [ ] Create `app/api/agents/[agentId]/route.ts` (SEO Agent API)
-- [ ] Create `lib/ai/anthropic.ts`
-- [ ] Create `app/api/download/route.ts` (Email Gate)
-- [ ] Create `app/api/subscribe/route.ts` (Newsletter)
-- [ ] Create `app/api/contact/route.ts` (Contact Form)
-- [ ] Create `app/api/search/route.ts` (Search)
-- [ ] Create `app/api/og/route.tsx` (Dynamic OG Image)
-- [ ] Create `lib/utils/rateLimit.ts`
-- [ ] Create `lib/utils/validation.ts`
+- [x] Create `app/api/agents/[agentId]/route.ts` (SEO Agent API)
+- [x] Create `lib/ai/anthropic.ts`
+- [x] Create `lib/utils/rateLimit.ts`
+- [x] Create `lib/utils/validation.ts`
+- [x] Create `app/api/download/route.ts` (Email Gate)
+- [x] Create `app/api/subscribe/route.ts` (Newsletter)
+- [x] Create `app/api/contact/route.ts` (Contact Form)
+- [x] Create `app/api/search/route.ts` (Search)
+- [x] Create `app/api/og/route.tsx` (Dynamic OG Image - placeholder, needs @vercel/og)
 
 ---
 
-## Phase 4: Email Integration
+## Phase 4: Email Integration ✅ COMPLETE
 
-- [ ] Create `lib/email/resend.ts`
-- [ ] Create `lib/email/templates/welcome.tsx`
-- [ ] Create `lib/email/templates/download.tsx`
-- [ ] Create `lib/email/templates/contact-notification.tsx`
-- [ ] Create `lib/email/templates/contact-confirmation.tsx`
+- [x] Create `lib/email/resend.ts`
+- [x] Create `lib/email/templates/welcome.tsx`
+- [x] Create `lib/email/templates/download.tsx`
+- [x] Create `lib/email/templates/contact-notification.tsx`
+- [x] Create `lib/email/templates/contact-confirmation.tsx`
 
 ---
 
