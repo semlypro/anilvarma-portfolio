@@ -95,24 +95,70 @@ export default defineType({
         },
       ],
     }),
-    // Code Block
+    // Code Block (custom object instead of plugin)
     defineArrayMember({
-      type: 'code',
+      type: 'object',
       name: 'codeBlock',
       title: 'Code Block',
-      options: {
-        language: 'javascript',
-        languageAlternatives: [
-          { title: 'JavaScript', value: 'javascript' },
-          { title: 'TypeScript', value: 'typescript' },
-          { title: 'Python', value: 'python' },
-          { title: 'HTML', value: 'html' },
-          { title: 'CSS', value: 'css' },
-          { title: 'JSON', value: 'json' },
-          { title: 'Bash', value: 'bash' },
-          { title: 'SQL', value: 'sql' },
-        ],
-        withFilename: true,
+      fields: [
+        {
+          name: 'language',
+          type: 'string',
+          title: 'Language',
+          options: {
+            list: [
+              { title: 'JavaScript', value: 'javascript' },
+              { title: 'TypeScript', value: 'typescript' },
+              { title: 'Python', value: 'python' },
+              { title: 'HTML', value: 'html' },
+              { title: 'CSS', value: 'css' },
+              { title: 'JSON', value: 'json' },
+              { title: 'Bash', value: 'bash' },
+              { title: 'SQL', value: 'sql' },
+              { title: 'PHP', value: 'php' },
+              { title: 'Ruby', value: 'ruby' },
+              { title: 'Go', value: 'go' },
+              { title: 'Java', value: 'java' },
+              { title: 'C#', value: 'csharp' },
+              { title: 'YAML', value: 'yaml' },
+              { title: 'XML', value: 'xml' },
+              { title: 'Markdown', value: 'markdown' },
+              { title: 'Plain Text', value: 'text' },
+            ],
+          },
+          initialValue: 'javascript',
+        },
+        {
+          name: 'filename',
+          type: 'string',
+          title: 'Filename',
+          description: 'Optional filename to display (e.g., "index.js")',
+        },
+        {
+          name: 'code',
+          type: 'text',
+          title: 'Code',
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: 'highlightLines',
+          type: 'string',
+          title: 'Highlight Lines',
+          description: 'Line numbers to highlight (e.g., "1,3-5,8")',
+        },
+      ],
+      preview: {
+        select: {
+          language: 'language',
+          filename: 'filename',
+          code: 'code',
+        },
+        prepare({ language, filename, code }) {
+          return {
+            title: filename || `Code Block (${language || 'text'})`,
+            subtitle: code?.substring(0, 50) + (code?.length > 50 ? '...' : ''),
+          }
+        },
       },
     }),
     // Callout Block

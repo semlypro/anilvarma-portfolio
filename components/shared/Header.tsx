@@ -6,9 +6,34 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { mockNavigation } from '@/lib/mocks/data';
 
-export function Header() {
+// Default navigation items (fallback if not passed via props)
+const defaultNavItems = [
+  { _key: '1', label: 'About', href: '/about' },
+  { _key: '2', label: 'Blog', href: '/blog' },
+  { _key: '3', label: 'Templates', href: '/templates' },
+  { _key: '4', label: 'Agents', href: '/agents' },
+  { _key: '5', label: 'Case Studies', href: '/case-studies' },
+  { _key: '6', label: 'Glossary', href: '/glossary' },
+];
+
+interface NavItem {
+  _key: string;
+  label: string;
+  href: string;
+}
+
+interface HeaderProps {
+  navigation?: NavItem[];
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+export function Header({
+  navigation,
+  ctaLabel = 'Book a Call',
+  ctaHref = '/contact'
+}: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
@@ -27,7 +52,7 @@ export function Header() {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  const navItems = mockNavigation.mainNav;
+  const navItems = navigation || defaultNavItems;
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
@@ -69,8 +94,8 @@ export function Header() {
 
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-4">
-              <Link href="/book-call" className="btn-primary text-sm">
-                Book a Call
+              <Link href={ctaHref} className="btn-primary text-sm">
+                {ctaLabel}
               </Link>
             </div>
 
@@ -118,10 +143,10 @@ export function Header() {
                 ))}
                 <div className="border-t border-neutral-200 my-2" />
                 <Link
-                  href="/book-call"
+                  href={ctaHref}
                   className="btn-primary text-sm justify-center"
                 >
-                  Book a Call
+                  {ctaLabel}
                 </Link>
               </div>
             </div>
