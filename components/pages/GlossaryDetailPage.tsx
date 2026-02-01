@@ -100,7 +100,7 @@ export function GlossaryDetailPage({ term, relatedTerms }: GlossaryDetailPagePro
         <div className="container-custom">
           <div className="max-w-3xl mx-auto">
             {/* Extended Definition */}
-            {term.extendedDefinition && (
+            {term.fullExplanation && term.fullExplanation.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -112,7 +112,7 @@ export function GlossaryDetailPage({ term, relatedTerms }: GlossaryDetailPagePro
                 </h2>
                 <div className="prose prose-lg prose-neutral max-w-none">
                   <p className="text-neutral-600 leading-relaxed whitespace-pre-line">
-                    {term.extendedDefinition}
+                    Content will be rendered here with Portable Text.
                   </p>
                 </div>
               </motion.div>

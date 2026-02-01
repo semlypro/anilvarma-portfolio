@@ -165,6 +165,8 @@ export interface Certification {
   name: string;
   issuer: string;
   date: string;
+  dateObtained?: string; // Alias for date
+  expiryDate?: string; // When the certification expires
   logo?: SanityImage;
   credentialUrl?: string;
 }
@@ -207,7 +209,7 @@ export interface Author {
   _type: 'author';
   name: string;
   role: string;
-  image: SanityImage;
+  image: SanityImage & { asset?: { url?: string } };
   bio?: string;
   socialLinks?: {
     linkedin?: string;
@@ -221,17 +223,20 @@ export interface BlogPost {
   title: string;
   slug: SanitySlug;
   excerpt: string;
-  featuredImage: SanityImage;
+  featuredImage: SanityImage & { asset?: { url?: string } };
   author: Author;
   categories: BlogCategory[];
+  category?: string; // Computed: first category title for display
   tags: string[];
   publishedAt: string;
   updatedAt?: string;
   content: PortableTextBlock[];
   readingTime: number;
+  readTime?: number; // Alias for readingTime (used by some components)
   relatedPosts?: BlogPost[];
   faqs?: FAQ[];
   seo: SEO;
+  postType?: 'article' | 'comparison' | 'listicle'; // For polymorphic display
   // AEO Fields
   answerBox?: {
     question: string;
@@ -269,6 +274,13 @@ export interface ComparisonPost {
   _type: 'comparisonPost';
   title: string;
   slug: SanitySlug;
+  excerpt?: string; // Short summary for cards
+  featuredImage?: SanityImage & { asset?: { url?: string } };
+  author?: Author; // Optional author for display
+  category?: string; // Display category
+  tags?: string[]; // Optional tags for display
+  readTime?: number; // Estimated reading time
+  postType?: 'comparison'; // For polymorphic display
   itemA: ComparisonItem;
   itemB: ComparisonItem;
   comparisonTable: ComparisonRow[];
@@ -308,6 +320,13 @@ export interface ListiclePost {
   _type: 'listiclePost';
   title: string;
   slug: SanitySlug;
+  excerpt?: string; // Short summary for cards
+  featuredImage?: SanityImage & { asset?: { url?: string } };
+  author?: Author; // Optional author for display
+  category?: string; // Display category
+  tags?: string[]; // Optional tags for display
+  readTime?: number; // Estimated reading time
+  postType?: 'listicle'; // For polymorphic display
   listCount: number;
   listType: 'numbered' | 'unordered' | 'countdown';
   listItems: ListicleItem[];
@@ -339,9 +358,11 @@ export interface Template {
   title: string;
   slug: SanitySlug;
   shortDescription: string;
+  description?: string; // Alias for shortDescription
   fullDescription: PortableTextBlock[];
-  category: TemplateCategory;
+  category: TemplateCategory | string; // Can be object or computed string
   previewImages: SanityImage[];
+  previewImage?: SanityImage & { asset?: { url?: string } }; // First preview image for cards
   file: {
     asset: {
       _ref: string;
@@ -349,6 +370,7 @@ export interface Template {
     };
   };
   fileFormat: string;
+  format?: string; // Alias for fileFormat
   fileSize: string;
   downloadCount: number;
   useCases: string[];
@@ -356,6 +378,11 @@ export interface Template {
   relatedTemplates?: Template[];
   faqs?: FAQ[];
   seo: SEO;
+  isPremium?: boolean; // Whether this is a premium template
+  rating?: number; // User rating (1-5)
+  reviewCount?: number; // Number of reviews
+  previewUrl?: string; // URL to preview the template
+  includes?: string[]; // What's included in the template
   // Email gate settings
   emailGateEnabled: boolean;
   thankYouMessage?: string;
@@ -398,8 +425,9 @@ export interface SEOAgent {
   slug: SanitySlug;
   icon: string;
   shortDescription: string;
+  description?: string; // Alias for shortDescription (used by some components)
   fullDescription: PortableTextBlock[];
-  category: AgentCategory;
+  category: AgentCategory | string; // Can be object or computed string
   systemPrompt: string; // For Claude API
   inputFields: AgentField[];
   outputFormat: 'markdown' | 'json' | 'structured';
@@ -409,11 +437,15 @@ export interface SEOAgent {
     output: string;
   }[];
   limitations?: string[];
+  features?: string[]; // Feature tags for display
+  useCases?: string[]; // Use case descriptions
   pricingTier: 'free' | 'premium';
   usageLimit: number; // Per day
+  usageCount?: number; // Total usage count
   faqs?: FAQ[];
   seo: SEO;
   isEnabled: boolean;
+  status?: 'active' | 'beta' | 'coming_soon'; // Display status
   createdAt: string;
 }
 
@@ -444,6 +476,7 @@ export interface CaseStudy {
   results: PortableTextBlock[];
   metrics: CaseStudyMetric[];
   timeline: string;
+  services?: string[]; // Services provided for this case study
   testimonial?: {
     quote: string;
     author: string;
@@ -451,7 +484,9 @@ export interface CaseStudy {
     image?: SanityImage;
   };
   keyLearnings: string[];
-  featuredImage: SanityImage;
+  featuredImage: SanityImage & { asset?: { url?: string } };
+  excerpt?: string; // Short summary for cards
+  url?: string; // External case study URL if applicable
   gallery?: SanityImage[];
   relatedCaseStudies?: CaseStudy[];
   faqs?: FAQ[];
@@ -489,9 +524,13 @@ export interface GlossaryTerm {
   slug: SanitySlug;
   definition: string; // Short, quotable definition (max 200 chars)
   fullExplanation: PortableTextBlock[];
+  category?: string; // SEO category (Technical, On-Page, Off-Page, etc.)
   relatedTerms?: GlossaryTerm[];
   relatedPosts?: BlogPost[];
   examples?: string[];
+  whyItMatters?: string; // Why this term matters for SEO
+  bestPractices?: string[]; // Best practices list
+  resources?: { title: string; url: string; }[]; // Related resources
   seo: SEO;
   letter: string; // A-Z for filtering
   createdAt: string;

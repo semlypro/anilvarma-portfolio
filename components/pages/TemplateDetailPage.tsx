@@ -26,7 +26,9 @@ const formatIcons: Record<string, any> = {
 
 export function TemplateDetailPage({ template, relatedTemplates }: TemplateDetailPageProps) {
   const [showEmailModal, setShowEmailModal] = useState(false);
-  const Icon = formatIcons[template.format] || FileText;
+  const formatValue = template.format || 'document';
+  const Icon = formatIcons[formatValue] || FileText;
+  const categoryTitle = typeof template.category === 'object' ? template.category.title : (template.category || '');
 
   return (
     <main className="min-h-screen bg-white">
@@ -46,7 +48,7 @@ export function TemplateDetailPage({ template, relatedTemplates }: TemplateDetai
               Templates
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-neutral-700">{template.category}</span>
+            <span className="text-neutral-700">{categoryTitle}</span>
           </motion.nav>
 
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -61,7 +63,7 @@ export function TemplateDetailPage({ template, relatedTemplates }: TemplateDetai
               >
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-accent-100 text-accent-700">
                   <Icon className="w-4 h-4" />
-                  {template.format.charAt(0).toUpperCase() + template.format.slice(1)}
+                  {formatValue.charAt(0).toUpperCase() + formatValue.slice(1)}
                 </span>
                 {template.isPremium && (
                   <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-medium bg-amber-100 text-amber-700">
@@ -112,7 +114,7 @@ export function TemplateDetailPage({ template, relatedTemplates }: TemplateDetai
                   </span>
                   <span className="text-neutral-500">downloads</span>
                 </div>
-                {template.lastUpdated && (
+                {template.updatedAt && (
                   <div className="flex items-center gap-2">
                     <Clock className="w-5 h-5 text-neutral-400" />
                     <span className="text-neutral-500">Updated recently</span>

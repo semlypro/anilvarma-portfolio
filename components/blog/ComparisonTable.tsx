@@ -9,22 +9,17 @@ interface ComparisonTableProps {
 }
 
 export function ComparisonTable({ post }: ComparisonTableProps) {
-  const { items, comparisonCriteria, winner } = post;
+  const { itemA, itemB, comparisonTable, verdict } = post;
 
-  if (!items || items.length === 0) return null;
+  if (!itemA || !itemB) return null;
 
-  const getFeatureIcon = (value: boolean | string | undefined) => {
-    if (typeof value === 'boolean') {
-      return value ? (
-        <Check className="w-5 h-5 text-green-500" />
-      ) : (
-        <X className="w-5 h-5 text-red-500" />
-      );
-    }
-    if (value === undefined || value === null || value === '') {
+  const items = [itemA, itemB];
+
+  const getWinnerIcon = (winner: 'A' | 'B' | 'Tie') => {
+    if (winner === 'Tie') {
       return <Minus className="w-5 h-5 text-neutral-400" />;
     }
-    return <span className="text-neutral-700">{value}</span>;
+    return <Trophy className="w-4 h-4 text-amber-500" />;
   };
 
   return (
@@ -35,16 +30,16 @@ export function ComparisonTable({ post }: ComparisonTableProps) {
       className="mb-12"
     >
       {/* Winner Banner */}
-      {winner && (
+      {verdict && (
         <div className="mb-8 p-6 bg-gradient-to-r from-amber-50 to-amber-100 rounded-2xl border border-amber-200">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 rounded-xl bg-amber-400 flex items-center justify-center">
               <Trophy className="w-6 h-6 text-white" />
             </div>
             <div>
-              <p className="text-sm font-medium text-amber-700">Our Top Pick</p>
-              <p className="text-xl font-bold text-amber-900">{winner.name}</p>
-              <p className="text-sm text-amber-700 mt-1">{winner.reason}</p>
+              <p className="text-sm font-medium text-amber-700">Our Verdict</p>
+              <p className="text-xl font-bold text-amber-900">{verdict.winner}</p>
+              <p className="text-sm text-amber-700 mt-1">{verdict.summary}</p>
             </div>
           </div>
         </div>
@@ -56,7 +51,7 @@ export function ComparisonTable({ post }: ComparisonTableProps) {
           <div
             key={index}
             className={`p-6 rounded-2xl border-2 ${
-              winner?.name === item.name
+              verdict?.winner === item.name
                 ? 'border-amber-400 bg-amber-50'
                 : 'border-neutral-200 bg-white'
             }`}
@@ -64,11 +59,9 @@ export function ComparisonTable({ post }: ComparisonTableProps) {
             <div className="flex items-start justify-between mb-4">
               <div>
                 <h3 className="text-xl font-bold text-neutral-800">{item.name}</h3>
-                {item.tagline && (
-                  <p className="text-sm text-neutral-500 mt-1">{item.tagline}</p>
-                )}
+                <p className="text-sm text-neutral-500 mt-1">{item.description}</p>
               </div>
-              {winner?.name === item.name && (
+              {verdict?.winner === item.name && (
                 <span className="px-3 py-1 bg-amber-400 text-amber-900 text-xs font-bold rounded-full">
                   WINNER
                 </span>
@@ -83,7 +76,7 @@ export function ComparisonTable({ post }: ComparisonTableProps) {
                     <span
                       key={star}
                       className={`text-lg ${
-                        star <= item.rating!
+                        star <= item.rating
                           ? 'text-amber-400'
                           : 'text-neutral-200'
                       }`}
@@ -138,23 +131,31 @@ export function ComparisonTable({ post }: ComparisonTableProps) {
             </div>
 
             {/* CTA */}
-            {item.link && (
+            {item.website && (
               <a
-                href={item.link}
+                href={item.website}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-primary-600 hover:text-primary-700"
               >
-                Learn More
+                Visit Website
                 <ArrowRight className="w-4 h-4" />
               </a>
             )}
+
+            {/* Best For */}
+            <div className="mt-4 pt-4 border-t border-neutral-200">
+              <p className="text-sm text-neutral-600">
+                <span className="font-medium">Best for: </span>
+                {index === 0 ? verdict?.itemABestFor : verdict?.itemBBestFor}
+              </p>
+            </div>
           </div>
         ))}
       </div>
 
       {/* Detailed Comparison Table */}
-      {comparisonCriteria && comparisonCriteria.length > 0 && (
+      {comparisonTable && comparisonTable.length > 0 && (
         <div className="overflow-x-auto">
           <table className="w-full border-collapse">
             <thead>
@@ -162,32 +163,36 @@ export function ComparisonTable({ post }: ComparisonTableProps) {
                 <th className="py-4 px-6 text-left font-semibold text-neutral-700">
                   Feature
                 </th>
-                {items.map((item, index) => (
-                  <th
-                    key={index}
-                    className="py-4 px-6 text-center font-semibold text-neutral-700"
-                  >
-                    {item.name}
-                  </th>
-                ))}
+                <th className="py-4 px-6 text-center font-semibold text-neutral-700">
+                  {itemA.name}
+                </th>
+                <th className="py-4 px-6 text-center font-semibold text-neutral-700">
+                  {itemB.name}
+                </th>
+                <th className="py-4 px-6 text-center font-semibold text-neutral-700">
+                  Winner
+                </th>
               </tr>
             </thead>
             <tbody>
-              {comparisonCriteria.map((criteria, index) => (
+              {comparisonTable.map((row, index) => (
                 <tr
-                  key={index}
+                  key={row._key || index}
                   className={index % 2 === 0 ? 'bg-neutral-50' : 'bg-white'}
                 >
                   <td className="py-4 px-6 font-medium text-neutral-700">
-                    {criteria}
+                    {row.feature}
                   </td>
-                  {items.map((item, itemIndex) => (
-                    <td key={itemIndex} className="py-4 px-6 text-center">
-                      {getFeatureIcon(
-                        item.features?.[criteria.toLowerCase().replace(/\s/g, '_')]
-                      )}
-                    </td>
-                  ))}
+                  <td className={`py-4 px-6 text-center ${row.winner === 'A' ? 'text-green-600 font-medium' : 'text-neutral-600'}`}>
+                    {row.itemAValue}
+                  </td>
+                  <td className={`py-4 px-6 text-center ${row.winner === 'B' ? 'text-green-600 font-medium' : 'text-neutral-600'}`}>
+                    {row.itemBValue}
+                  </td>
+                  <td className="py-4 px-6 text-center">
+                    {row.winner === 'A' ? itemA.name : row.winner === 'B' ? itemB.name : 'Tie'}
+                    {getWinnerIcon(row.winner)}
+                  </td>
                 </tr>
               ))}
             </tbody>

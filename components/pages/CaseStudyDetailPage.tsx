@@ -79,12 +79,12 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
             >
               <span className="flex items-center gap-2">
                 <Building2 className="w-4 h-4" />
-                {caseStudy.client || 'Confidential Client'}
+                {caseStudy.clientName || 'Confidential Client'}
               </span>
-              {caseStudy.duration && (
+              {caseStudy.timeline && (
                 <span className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  {caseStudy.duration}
+                  {caseStudy.timeline}
                 </span>
               )}
               {caseStudy.services && caseStudy.services.length > 0 && (
@@ -135,7 +135,7 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
                 >
                   <div className="flex items-center justify-center gap-2 mb-2">
                     <TrendingUp className="w-5 h-5 text-accent-300" />
-                    <p className="text-3xl font-bold text-white">{metric.value}</p>
+                    <p className="text-3xl font-bold text-white">{metric.changePercent}</p>
                   </div>
                   <p className="text-primary-100">{metric.label}</p>
                 </div>
@@ -150,7 +150,7 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
         <div className="container-custom">
           <div className="max-w-4xl mx-auto space-y-16">
             {/* Challenge */}
-            {caseStudy.challenge && (
+            {caseStudy.challenge && caseStudy.challenge.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -163,13 +163,15 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
                   <h2 className="text-2xl font-bold text-neutral-800">The Challenge</h2>
                 </div>
                 <div className="prose prose-lg prose-neutral max-w-none">
-                  <p className="text-neutral-600 leading-relaxed">{caseStudy.challenge}</p>
+                  <p className="text-neutral-600 leading-relaxed">
+                    Content will be rendered here with Portable Text.
+                  </p>
                 </div>
               </motion.div>
             )}
 
-            {/* Solution */}
-            {caseStudy.solution && (
+            {/* Strategy */}
+            {caseStudy.strategy && caseStudy.strategy.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -179,31 +181,18 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
                   <div className="w-12 h-12 rounded-2xl bg-primary-100 flex items-center justify-center">
                     <Lightbulb className="w-6 h-6 text-primary-600" />
                   </div>
-                  <h2 className="text-2xl font-bold text-neutral-800">The Solution</h2>
+                  <h2 className="text-2xl font-bold text-neutral-800">The Strategy</h2>
                 </div>
                 <div className="prose prose-lg prose-neutral max-w-none">
-                  <p className="text-neutral-600 leading-relaxed">{caseStudy.solution}</p>
+                  <p className="text-neutral-600 leading-relaxed">
+                    Content will be rendered here with Portable Text.
+                  </p>
                 </div>
-
-                {/* Strategy Points */}
-                {caseStudy.strategies && caseStudy.strategies.length > 0 && (
-                  <div className="mt-8 grid md:grid-cols-2 gap-4">
-                    {caseStudy.strategies.map((strategy, index) => (
-                      <div
-                        key={index}
-                        className="flex items-start gap-3 p-4 bg-neutral-50 rounded-xl"
-                      >
-                        <CheckCircle className="w-5 h-5 text-primary-600 shrink-0 mt-0.5" />
-                        <span className="text-neutral-700">{strategy}</span>
-                      </div>
-                    ))}
-                  </div>
-                )}
               </motion.div>
             )}
 
             {/* Results */}
-            {caseStudy.results && (
+            {caseStudy.results && caseStudy.results.length > 0 && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -216,7 +205,9 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
                   <h2 className="text-2xl font-bold text-neutral-800">The Results</h2>
                 </div>
                 <div className="prose prose-lg prose-neutral max-w-none">
-                  <p className="text-neutral-600 leading-relaxed">{caseStudy.results}</p>
+                  <p className="text-neutral-600 leading-relaxed">
+                    Content will be rendered here with Portable Text.
+                  </p>
                 </div>
               </motion.div>
             )}
@@ -232,25 +223,15 @@ export function CaseStudyDetailPage({ caseStudy, relatedCaseStudies }: CaseStudy
                 <Quote className="absolute top-6 left-6 w-12 h-12 text-primary-200" />
                 <div className="relative z-10 pl-8">
                   <blockquote className="text-xl text-neutral-700 italic mb-6 leading-relaxed">
-                    "{caseStudy.testimonial.quote}"
+                    &quot;{caseStudy.testimonial.quote}&quot;
                   </blockquote>
                   <div className="flex items-center gap-4">
-                    {caseStudy.testimonial.image?.asset?.url && (
-                      <Image
-                        src={caseStudy.testimonial.image.asset.url}
-                        alt={caseStudy.testimonial.name}
-                        width={48}
-                        height={48}
-                        className="rounded-full"
-                      />
-                    )}
                     <div>
                       <p className="font-semibold text-neutral-800">
-                        {caseStudy.testimonial.name}
+                        {caseStudy.testimonial.author}
                       </p>
                       <p className="text-sm text-neutral-500">
                         {caseStudy.testimonial.role}
-                        {caseStudy.testimonial.company && `, ${caseStudy.testimonial.company}`}
                       </p>
                     </div>
                   </div>

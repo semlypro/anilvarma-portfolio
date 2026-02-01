@@ -30,11 +30,14 @@ export function AgentDetailPage({ agent, relatedAgents }: AgentDetailPageProps) 
   const [isProcessing, setIsProcessing] = useState(false);
   const [result, setResult] = useState<string | null>(null);
 
-  const Icon = categoryIcons[agent.category || ''] || Bot;
+  // Get category title from object or string
+  const categoryTitle = typeof agent.category === 'object' ? agent.category.title : (agent.category || '');
+  const Icon = categoryIcons[categoryTitle] || Bot;
+  const agentStatus = agent.status || 'active';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!inputValue.trim() || agent.status === 'coming_soon') return;
+    if (!inputValue.trim() || agentStatus === 'coming_soon') return;
 
     setIsProcessing(true);
     setResult(null);
@@ -91,7 +94,7 @@ Based on Claude's analysis, here are the key findings:
               AI Agents
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-neutral-700">{agent.category}</span>
+            <span className="text-neutral-700">{categoryTitle}</span>
           </motion.nav>
 
           <div className="max-w-4xl">
@@ -107,12 +110,12 @@ Based on Claude's analysis, here are the key findings:
               </div>
 
               <div className="flex flex-wrap gap-2">
-                {agent.status === 'active' ? (
+                {agentStatus === 'active' ? (
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-green-100 text-green-700">
                     <span className="w-2 h-2 rounded-full bg-green-500" />
                     Active
                   </span>
-                ) : agent.status === 'beta' ? (
+                ) : agentStatus === 'beta' ? (
                   <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium bg-amber-100 text-amber-700">
                     <Zap className="w-4 h-4" />
                     Beta
@@ -147,7 +150,7 @@ Based on Claude's analysis, here are the key findings:
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl text-neutral-600 leading-relaxed mb-8"
             >
-              {agent.description}
+              {agent.shortDescription}
             </motion.p>
 
             {/* Stats */}
@@ -197,22 +200,22 @@ Based on Claude's analysis, here are the key findings:
               <form onSubmit={handleSubmit}>
                 <div className="mb-6">
                   <label htmlFor="input" className="block text-sm font-medium text-neutral-700 mb-2">
-                    {agent.inputPlaceholder || 'Enter your input'}
+                    {agent.inputFields?.[0]?.label || 'Enter your input'}
                   </label>
                   <textarea
                     id="input"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
-                    placeholder={agent.inputPlaceholder || 'Enter a keyword, URL, or content to analyze...'}
+                    placeholder={agent.inputFields?.[0]?.placeholder || 'Enter a keyword, URL, or content to analyze...'}
                     rows={4}
-                    disabled={agent.status === 'coming_soon'}
+                    disabled={agentStatus === 'coming_soon'}
                     className="w-full px-4 py-3 rounded-xl border border-neutral-200 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-neutral-800 placeholder:text-neutral-400 disabled:bg-neutral-100 disabled:cursor-not-allowed resize-none"
                   />
                 </div>
 
                 <button
                   type="submit"
-                  disabled={isProcessing || !inputValue.trim() || agent.status === 'coming_soon'}
+                  disabled={isProcessing || !inputValue.trim() || agentStatus === 'coming_soon'}
                   className="w-full py-4 bg-gradient-to-r from-purple-600 to-primary-600 text-white rounded-xl font-semibold hover:from-purple-700 hover:to-primary-700 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? (
@@ -220,7 +223,7 @@ Based on Claude's analysis, here are the key findings:
                       <Loader2 className="w-5 h-5 animate-spin" />
                       Analyzing with Claude...
                     </>
-                  ) : agent.status === 'coming_soon' ? (
+                  ) : agentStatus === 'coming_soon' ? (
                     'Coming Soon'
                   ) : (
                     <>

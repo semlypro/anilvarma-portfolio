@@ -198,7 +198,7 @@ export async function getBlogPostsByTag(
 ): Promise<BlogPost[]> {
   return sanityFetch<BlogPost[]>({
     query: getBlogPostsByTagQuery,
-    params: {tag},
+    params: {tag} as Record<string, string>,
     preview,
     tags: ['blogPost']
   });

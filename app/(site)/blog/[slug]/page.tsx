@@ -23,16 +23,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
+  const authorName = 'author' in post && post.author?.name ? post.author.name : 'Anil Varma';
+  const imageUrl = post.featuredImage?.asset?.url;
+
   return {
     title: `${post.title} | Anil Varma SEO Blog`,
-    description: post.excerpt,
+    description: post.excerpt || post.seo?.metaDescription || '',
     openGraph: {
       title: post.title,
-      description: post.excerpt,
+      description: post.excerpt || '',
       type: 'article',
       publishedTime: post.publishedAt,
-      authors: [post.author?.name || 'Anil Varma'],
-      images: post.featuredImage?.asset?.url ? [post.featuredImage.asset.url] : [],
+      authors: [authorName],
+      images: imageUrl ? [imageUrl] : [],
     },
   };
 }

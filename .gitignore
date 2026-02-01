@@ -42,3 +42,7 @@ Thumbs.db
 
 # Sanity
 .sanity
+
+# Large cache files
+.autoclaude/cache/
+.ralph/logs/

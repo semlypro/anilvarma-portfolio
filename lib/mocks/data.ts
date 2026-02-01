@@ -731,3 +731,187 @@ export const mockAbout: About = {
     metaDescription: 'Learn about Anil Varma - SEO expert who has scaled traffic from 0 to 10M+ users. 15+ years of experience in technical SEO and content strategy.'
   }
 };
+
+// ===========================================
+// COMPARISON POSTS
+// ===========================================
+
+import type { ComparisonPost, ListiclePost } from '@/types';
+
+export const mockComparisonPosts: ComparisonPost[] = [
+  {
+    _id: 'comparison-1',
+    _type: 'comparisonPost',
+    title: 'Ahrefs vs SEMrush: Which SEO Tool is Better in 2026?',
+    slug: { _type: 'slug', current: 'ahrefs-vs-semrush' },
+    excerpt: 'A comprehensive comparison of the two leading SEO tools to help you choose the right one for your needs.',
+    category: 'Tools',
+    readTime: 15,
+    postType: 'comparison',
+    featuredImage: {
+      _type: 'image',
+      asset: { _ref: 'comparison-1', _type: 'reference', url: '' },
+      alt: 'Ahrefs vs SEMrush Comparison'
+    },
+    itemA: {
+      name: 'Ahrefs',
+      description: 'Powerful backlink analysis and keyword research tool',
+      pricing: '$99/month',
+      rating: 4.7,
+      pros: ['Best backlink database', 'Excellent site explorer', 'Great content explorer'],
+      cons: ['Higher price point', 'Steeper learning curve']
+    },
+    itemB: {
+      name: 'SEMrush',
+      description: 'All-in-one marketing toolkit with SEO focus',
+      pricing: '$129/month',
+      rating: 4.6,
+      pros: ['More features', 'Better PPC tools', 'Social media integration'],
+      cons: ['Can be overwhelming', 'Backlink data less accurate']
+    },
+    comparisonTable: [
+      { _key: '1', feature: 'Backlink Analysis', itemAValue: 'Excellent', itemBValue: 'Good', winner: 'A' },
+      { _key: '2', feature: 'Keyword Research', itemAValue: 'Excellent', itemBValue: 'Excellent', winner: 'Tie' },
+      { _key: '3', feature: 'Site Audit', itemAValue: 'Good', itemBValue: 'Excellent', winner: 'B' }
+    ],
+    verdict: {
+      winner: 'Depends on needs',
+      summary: 'Choose Ahrefs for backlinks, SEMrush for all-in-one.',
+      itemABestFor: 'Link building and competitive analysis',
+      itemBBestFor: 'Comprehensive digital marketing'
+    },
+    introduction: [],
+    detailedComparison: [],
+    conclusion: [],
+    seo: {
+      metaTitle: 'Ahrefs vs SEMrush 2026: Complete Comparison',
+      metaDescription: 'Detailed comparison of Ahrefs vs SEMrush. Find out which SEO tool is better for your needs.'
+    },
+    publishedAt: '2026-01-20T10:00:00Z'
+  }
+];
+
+// ===========================================
+// LISTICLE POSTS
+// ===========================================
+
+export const mockListiclePosts: ListiclePost[] = [
+  {
+    _id: 'listicle-1',
+    _type: 'listiclePost',
+    title: '10 Best Free SEO Tools for 2026',
+    slug: { _type: 'slug', current: '10-best-free-seo-tools' },
+    excerpt: 'Discover the top free SEO tools that can help you improve your rankings without breaking the bank.',
+    category: 'Tools',
+    readTime: 10,
+    postType: 'listicle',
+    featuredImage: {
+      _type: 'image',
+      asset: { _ref: 'listicle-1', _type: 'reference', url: '' },
+      alt: 'Best Free SEO Tools'
+    },
+    listCount: 10,
+    listType: 'numbered',
+    listItems: [
+      {
+        _key: '1',
+        title: 'Google Search Console',
+        summary: 'The most essential free SEO tool directly from Google',
+        content: [],
+        rating: 5
+      },
+      {
+        _key: '2',
+        title: 'Google Analytics 4',
+        summary: 'Track your website performance and user behavior',
+        content: [],
+        rating: 5
+      },
+      {
+        _key: '3',
+        title: 'Screaming Frog (Free Version)',
+        summary: 'Crawl up to 500 URLs for free technical SEO audits',
+        content: [],
+        rating: 4.5
+      }
+    ],
+    introduction: [],
+    conclusion: [],
+    quickList: [
+      'Google Search Console - Best overall',
+      'Google Analytics 4 - Best for tracking',
+      'Screaming Frog - Best for technical audits'
+    ],
+    seo: {
+      metaTitle: '10 Best Free SEO Tools for 2026 | Complete List',
+      metaDescription: 'Discover the best free SEO tools for 2026. From keyword research to technical audits.'
+    },
+    publishedAt: '2026-01-18T10:00:00Z'
+  }
+];
+
+// ===========================================
+// ENRICHED BLOG POSTS (with extra fields)
+// ===========================================
+
+// Add computed fields to blog posts for component compatibility
+export const mockEnrichedBlogPosts = mockBlogPosts.map(post => ({
+  ...post,
+  category: post.categories[0]?.title || 'Uncategorized',
+  readTime: post.readingTime,
+  postType: 'article' as const,
+  featuredImage: {
+    ...post.featuredImage,
+    asset: { ...post.featuredImage.asset, url: '' }
+  }
+}));
+
+// ===========================================
+// ENRICHED AGENTS (with extra fields)
+// ===========================================
+
+export const mockEnrichedAgents = mockSEOAgents.map(agent => ({
+  ...agent,
+  description: agent.shortDescription,
+  category: typeof agent.category === 'object' ? agent.category.title : agent.category,
+  status: 'active' as const,
+  features: agent.inputFields.map(f => f.label).slice(0, 3),
+  usageCount: Math.floor(Math.random() * 5000) + 500
+}));
+
+// ===========================================
+// ENRICHED TEMPLATES (with extra fields)
+// ===========================================
+
+export const mockEnrichedTemplates = mockTemplates.map(template => ({
+  ...template,
+  description: template.shortDescription,
+  format: template.fileFormat,
+  previewImage: template.previewImages[0] ? {
+    ...template.previewImages[0],
+    asset: { ...template.previewImages[0].asset, url: '' }
+  } : undefined,
+  category: typeof template.category === 'object' ? template.category.title : template.category
+}));
+
+// ===========================================
+// ENRICHED CASE STUDIES (with extra fields)
+// ===========================================
+
+export const mockEnrichedCaseStudies = mockCaseStudies.map(study => ({
+  ...study,
+  excerpt: `${study.metrics[0]?.changePercent} growth for ${study.clientName}`,
+  featuredImage: {
+    ...study.featuredImage,
+    asset: { ...study.featuredImage.asset, url: '' }
+  }
+}));
+
+// ===========================================
+// ENRICHED GLOSSARY (with extra fields)
+// ===========================================
+
+export const mockEnrichedGlossaryTerms = mockGlossaryTerms.map(term => ({
+  ...term,
+  category: term.letter <= 'M' ? 'Technical SEO' : 'On-Page SEO'
+}));

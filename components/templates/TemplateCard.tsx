@@ -28,8 +28,10 @@ const formatColors: Record<string, string> = {
 
 export function TemplateCard({ template }: TemplateCardProps) {
   const [showEmailModal, setShowEmailModal] = useState(false);
-  const Icon = formatIcons[template.format] || FileText;
-  const formatColor = formatColors[template.format] || 'bg-neutral-100 text-neutral-700';
+  const formatValue = template.format || 'document';
+  const Icon = formatIcons[formatValue] || FileText;
+  const formatColor = formatColors[formatValue] || 'bg-neutral-100 text-neutral-700';
+  const categoryTitle = typeof template.category === 'object' ? template.category.title : (template.category || '');
 
   return (
     <>
@@ -70,7 +72,7 @@ export function TemplateCard({ template }: TemplateCardProps) {
           {/* Format Badge */}
           <div className={`absolute top-3 left-3 px-3 py-1 rounded-full text-xs font-medium ${formatColor} flex items-center gap-1.5`}>
             <Icon className="w-3 h-3" />
-            {template.format.charAt(0).toUpperCase() + template.format.slice(1)}
+            {formatValue.charAt(0).toUpperCase() + formatValue.slice(1)}
           </div>
 
           {/* Premium Badge */}
@@ -85,9 +87,9 @@ export function TemplateCard({ template }: TemplateCardProps) {
         {/* Content */}
         <div className="flex-1 flex flex-col">
           {/* Category */}
-          {template.category && (
+          {categoryTitle && (
             <span className="text-sm font-medium text-accent-600 mb-2">
-              {template.category}
+              {categoryTitle}
             </span>
           )}
 

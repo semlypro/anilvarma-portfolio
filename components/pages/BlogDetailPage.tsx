@@ -220,9 +220,9 @@ export function BlogDetailPage({ post, relatedPosts }: BlogDetailPageProps) {
               )}
 
               {/* Listicle Items */}
-              {isListicle && 'items' in post && (
+              {isListicle && 'listItems' in post && (
                 <div className="space-y-8 mb-12">
-                  {(post as ListiclePost).items?.map((item, index) => (
+                  {(post as ListiclePost).listItems?.map((item, index) => (
                     <motion.div
                       key={index}
                       initial={{ opacity: 0, y: 20 }}
@@ -237,7 +237,7 @@ export function BlogDetailPage({ post, relatedPosts }: BlogDetailPageProps) {
                         <h3 className="text-xl font-semibold text-neutral-800 mb-2">
                           {item.title}
                         </h3>
-                        <p className="text-neutral-600">{item.description}</p>
+                        <p className="text-neutral-600">{item.summary}</p>
                       </div>
                     </motion.div>
                   ))}

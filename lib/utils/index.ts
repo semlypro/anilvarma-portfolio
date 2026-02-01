@@ -31,6 +31,13 @@ export function formatDateShort(date: string | Date): string {
 }
 
 /**
+ * Format date to long string (alias for formatDate)
+ */
+export function formatDateLong(date: string | Date): string {
+  return formatDate(date);
+}
+
+/**
  * Calculate reading time from text
  */
 export function calculateReadingTime(text: string): number {

@@ -1,14 +1,14 @@
-import {NextRequest, NextResponse} from 'next/server';
+import { ImageResponse } from '@vercel/og';
+import { NextRequest } from 'next/server';
 
 /**
  * Dynamic OG Image Generator
  * GET /api/og?title=Title&description=Description
  *
  * Generates Open Graph images with Anil's branding
- *
- * TODO: Install @vercel/og package to enable image generation
- * Run: npm install @vercel/og
  */
+
+export const runtime = 'edge';
 
 export async function GET(request: NextRequest) {
   try {
@@ -17,31 +17,6 @@ export async function GET(request: NextRequest) {
     const description =
       searchParams.get('description') ||
       'International SEO & Technical SEO Consulting';
-
-    // TODO: Implement OG image generation once @vercel/og is installed
-    // For now, return a placeholder response
-
-    return NextResponse.json(
-      {
-        error: 'OG image generation not yet implemented',
-        message:
-          'Install @vercel/og package and implement ImageResponse generation',
-        requestedTitle: title,
-        requestedDescription: description,
-        todo: [
-          'npm install @vercel/og',
-          'Import ImageResponse from @vercel/og',
-          'Create JSX template with brand colors',
-          'Return ImageResponse with PNG format'
-        ]
-      },
-      {status: 501}
-    );
-
-    /*
-    // Implementation template for after @vercel/og is installed:
-
-    import { ImageResponse } from '@vercel/og';
 
     return new ImageResponse(
       (
@@ -54,7 +29,7 @@ export async function GET(request: NextRequest) {
             alignItems: 'flex-start',
             justifyContent: 'space-between',
             padding: '80px',
-            backgroundColor: '#f8fafc', // neutral-50
+            backgroundColor: '#f8fafc',
             backgroundImage: 'linear-gradient(135deg, #eff6ff 0%, #f8fafc 100%)',
           }}
         >
@@ -63,9 +38,10 @@ export async function GET(request: NextRequest) {
               style={{
                 fontSize: '72px',
                 fontWeight: 'bold',
-                color: '#0f172a', // neutral-900
+                color: '#0f172a',
                 lineHeight: 1.1,
                 margin: 0,
+                maxWidth: '1000px',
               }}
             >
               {title}
@@ -74,8 +50,9 @@ export async function GET(request: NextRequest) {
               <p
                 style={{
                   fontSize: '32px',
-                  color: '#64748b', // neutral-500
+                  color: '#64748b',
                   margin: 0,
+                  maxWidth: '900px',
                 }}
               >
                 {description}
@@ -88,7 +65,7 @@ export async function GET(request: NextRequest) {
               display: 'flex',
               alignItems: 'center',
               gap: '16px',
-              color: '#3b82f6', // primary-500
+              color: '#3b82f6',
               fontSize: '28px',
               fontWeight: '600',
             }}
@@ -104,15 +81,8 @@ export async function GET(request: NextRequest) {
         height: 630,
       }
     );
-    */
   } catch (error) {
     console.error('OG Image API Error:', error);
-    return NextResponse.json(
-      {
-        error: 'Failed to generate OG image',
-        message: error instanceof Error ? error.message : 'Unknown error'
-      },
-      {status: 500}
-    );
+    return new Response('Failed to generate OG image', { status: 500 });
   }
 }

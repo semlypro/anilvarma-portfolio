@@ -26,7 +26,7 @@ export function EmailGateModal({ isOpen, onClose, template }: EmailGateModalProp
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const Icon = formatIcons[template.format] || FileText;
+  const Icon = template.format ? formatIcons[template.format] || FileText : FileText;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

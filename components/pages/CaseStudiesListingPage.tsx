@@ -23,7 +23,7 @@ export function CaseStudiesListingPage({
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
         const matchesTitle = caseStudy.title.toLowerCase().includes(query);
-        const matchesClient = caseStudy.client?.toLowerCase().includes(query);
+        const matchesClient = caseStudy.clientName?.toLowerCase().includes(query);
         if (!matchesTitle && !matchesClient) return false;
       }
 
@@ -38,7 +38,7 @@ export function CaseStudiesListingPage({
   // Calculate aggregate stats
   const avgTrafficIncrease = caseStudies.reduce((sum, cs) => {
     const metric = cs.metrics?.find(m => m.label?.toLowerCase().includes('traffic'));
-    return sum + (parseInt(metric?.value || '0') || 0);
+    return sum + (parseInt(metric?.changePercent || '0') || 0);
   }, 0) / caseStudies.length;
 
   return (

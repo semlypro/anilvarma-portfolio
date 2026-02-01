@@ -129,9 +129,9 @@ export function generateSoftwareApplicationSchema(agent: SEOAgent) {
     '@type': 'SoftwareApplication',
     '@id': `${baseUrl}/agents/${agent.slug.current}`,
     'name': agent.name,
-    'description': agent.longDescription ?
-      agent.longDescription[0]?.children?.[0]?.text :
-      agent.name,
+    'description': agent.fullDescription ?
+      (agent.fullDescription[0] as any)?.children?.[0]?.text :
+      agent.shortDescription || agent.name,
     'applicationCategory': 'WebApplication',
     'offers': {
       '@type': 'Offer',
@@ -155,19 +155,19 @@ export function generateHowToSchema(template: Template) {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     '@id': `${baseUrl}/templates/${template.slug.current}`,
-    'name': template.name,
+    'name': template.title,
     'description': template.shortDescription,
     'image': template.previewImages?.[0] ?
       `${baseUrl}/images/templates/${template.slug.current}.jpg` :
       undefined,
     'tool': {
       '@type': 'HowToTool',
-      'name': template.name
+      'name': template.title
     },
     'totalTime': 'PT30M', // Estimated 30 minutes
     'supply': {
       '@type': 'HowToSupply',
-      'name': template.name
+      'name': template.title
     }
   };
 }
@@ -181,7 +181,7 @@ export function generateCaseStudySchema(caseStudy: CaseStudy) {
     '@type': 'Article',
     '@id': `${baseUrl}/case-studies/${caseStudy.slug.current}`,
     'headline': caseStudy.title,
-    'description': `${caseStudy.client} - ${caseStudy.industry}`,
+    'description': `${caseStudy.clientName} - ${caseStudy.industry}`,
     'datePublished': caseStudy.publishedAt,
     'author': {
       '@type': 'Person',
@@ -193,7 +193,7 @@ export function generateCaseStudySchema(caseStudy: CaseStudy) {
     },
     'about': {
       '@type': 'Thing',
-      'name': caseStudy.client
+      'name': caseStudy.clientName
     }
   };
 }
@@ -207,7 +207,7 @@ export function generateDefinedTermSchema(term: GlossaryTerm) {
     '@type': 'DefinedTerm',
     '@id': `${baseUrl}/glossary/${term.slug.current}`,
     'name': term.term,
-    'description': term.shortDefinition,
+    'description': term.definition,
     'inDefinedTermSet': `${baseUrl}/glossary`
   };
 }

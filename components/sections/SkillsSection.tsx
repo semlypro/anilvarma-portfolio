@@ -83,12 +83,12 @@ export function SkillsSection({ skills }: SkillsSectionProps) {
                   <div key={skill._key || index}>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-neutral-700 font-medium">{skill.name}</span>
-                      <span className="text-sm text-neutral-500">{skill.level}%</span>
+                      <span className="text-sm text-neutral-500">{skill.proficiency}%</span>
                     </div>
                     <div className="h-2 bg-neutral-200 rounded-full overflow-hidden">
                       <motion.div
                         initial={{ width: 0 }}
-                        animate={isInView ? { width: `${skill.level}%` } : {}}
+                        animate={isInView ? { width: `${skill.proficiency}%` } : {}}
                         transition={{ duration: 1, delay: 0.3 + index * 0.1, ease: 'easeOut' }}
                         className={`h-full bg-gradient-to-r ${categoryColors[category] || 'from-primary-500 to-primary-600'} rounded-full`}
                       />

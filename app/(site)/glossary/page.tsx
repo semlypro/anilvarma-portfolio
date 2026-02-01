@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { GlossaryListingPage } from '@/components/pages/GlossaryListingPage';
+import { getAllGlossaryTerms } from '@/lib/sanity/fetch';
 import { mockGlossaryTerms } from '@/lib/mocks/data';
 
 export const metadata: Metadata = {
@@ -12,23 +13,31 @@ export const metadata: Metadata = {
   },
 };
 
-// Group terms by first letter
-const termsByLetter = mockGlossaryTerms.reduce((acc, term) => {
-  const letter = term.term.charAt(0).toUpperCase();
-  if (!acc[letter]) {
-    acc[letter] = [];
-  }
-  acc[letter].push(term);
-  return acc;
-}, {} as Record<string, typeof mockGlossaryTerms>);
+export const revalidate = 60;
 
-// Get unique categories
-const categories = Array.from(new Set(mockGlossaryTerms.map(t => t.category))).filter(Boolean);
+export default async function GlossaryPage() {
+  // Fetch from Sanity
+  const glossaryTerms = await getAllGlossaryTerms().catch(() => []);
 
-export default function GlossaryPage() {
+  // Use Sanity data if available, otherwise fall back to mock data
+  const useTerms = glossaryTerms.length > 0 ? glossaryTerms : mockGlossaryTerms;
+
+  // Group terms by first letter
+  const termsByLetter = useTerms.reduce((acc, term) => {
+    const letter = term.term.charAt(0).toUpperCase();
+    if (!acc[letter]) {
+      acc[letter] = [];
+    }
+    acc[letter].push(term);
+    return acc;
+  }, {} as Record<string, typeof useTerms>);
+
+  // Get unique categories
+  const categories = Array.from(new Set(useTerms.map(t => t.category))).filter(Boolean);
+
   return (
     <GlossaryListingPage
-      terms={mockGlossaryTerms}
+      terms={useTerms}
       termsByLetter={termsByLetter}
       categories={categories as string[]}
     />

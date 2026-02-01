@@ -101,11 +101,11 @@ export function getClientIp(headers: Headers): string {
  */
 export function cleanupRateLimits(): void {
   const now = Date.now();
-  for (const [key, value] of rateLimitStore.entries()) {
+  Array.from(rateLimitStore.entries()).forEach(([key, value]) => {
     if (now > value.resetAt) {
       rateLimitStore.delete(key);
     }
-  }
+  });
 }
 
 // Run cleanup every 5 minutes

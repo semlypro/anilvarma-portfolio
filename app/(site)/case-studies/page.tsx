@@ -1,5 +1,6 @@
 import { Metadata } from 'next';
 import { CaseStudiesListingPage } from '@/components/pages/CaseStudiesListingPage';
+import { getAllCaseStudies } from '@/lib/sanity/fetch';
 import { mockCaseStudies } from '@/lib/mocks/data';
 
 export const metadata: Metadata = {
@@ -12,13 +13,21 @@ export const metadata: Metadata = {
   },
 };
 
-// Extract unique industries
-const industries = Array.from(new Set(mockCaseStudies.map(cs => cs.industry))).filter(Boolean);
+export const revalidate = 60;
 
-export default function CaseStudiesPage() {
+export default async function CaseStudiesPage() {
+  // Fetch from Sanity
+  const caseStudies = await getAllCaseStudies().catch(() => []);
+
+  // Use Sanity data if available, otherwise fall back to mock data
+  const useCaseStudies = caseStudies.length > 0 ? caseStudies : mockCaseStudies;
+
+  // Extract unique industries
+  const industries = Array.from(new Set(useCaseStudies.map(cs => cs.industry))).filter(Boolean);
+
   return (
     <CaseStudiesListingPage
-      caseStudies={mockCaseStudies}
+      caseStudies={useCaseStudies}
       industries={industries as string[]}
     />
   );

@@ -155,14 +155,17 @@ export async function POST(
 
           for await (const chunk of generator) {
             // Check if chunk is the final token usage
-            if (typeof chunk === 'object' && 'inputTokens' in chunk) {
-              totalInputTokens = chunk.inputTokens;
-              totalOutputTokens = chunk.outputTokens;
+            if (typeof chunk === 'object' && chunk !== null && 'inputTokens' in chunk) {
+              const usage = chunk as { inputTokens: number; outputTokens: number };
+              totalInputTokens = usage.inputTokens;
+              totalOutputTokens = usage.outputTokens;
               break;
             }
 
             // Stream text chunk
-            controller.enqueue(encoder.encode(chunk));
+            if (typeof chunk === 'string') {
+              controller.enqueue(encoder.encode(chunk));
+            }
           }
 
           // Send usage metadata at the end

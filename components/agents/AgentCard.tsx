@@ -30,8 +30,10 @@ const categoryGradients: Record<string, string> = {
 };
 
 export function AgentCard({ agent }: AgentCardProps) {
-  const Icon = categoryIcons[agent.category || ''] || Bot;
-  const gradient = categoryGradients[agent.category || ''] || 'from-primary-500 to-primary-600';
+  // Get category title string from object or string
+  const categoryTitle = typeof agent.category === 'object' ? agent.category.title : (agent.category || '');
+  const Icon = categoryIcons[categoryTitle] || Bot;
+  const gradient = categoryGradients[categoryTitle] || 'from-primary-500 to-primary-600';
 
   return (
     <Link
@@ -68,7 +70,7 @@ export function AgentCard({ agent }: AgentCardProps) {
         <div className="flex-1">
           {/* Category */}
           <span className="text-sm font-medium text-purple-600 mb-2 block">
-            {agent.category}
+            {categoryTitle}
           </span>
 
           {/* Title */}
@@ -78,7 +80,7 @@ export function AgentCard({ agent }: AgentCardProps) {
 
           {/* Description */}
           <p className="text-neutral-600 text-sm mb-4 line-clamp-2">
-            {agent.description}
+            {agent.shortDescription}
           </p>
 
           {/* Features */}

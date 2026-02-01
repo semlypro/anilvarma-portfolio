@@ -48,12 +48,12 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
           {/* Client Info */}
           <div className="flex items-center gap-2 text-sm text-neutral-500 mb-3">
             <Building2 className="w-4 h-4" />
-            <span>{caseStudy.client || 'Confidential Client'}</span>
-            {caseStudy.duration && (
+            <span>{caseStudy.clientName || 'Confidential Client'}</span>
+            {caseStudy.timeline && (
               <>
                 <span className="text-neutral-300">•</span>
                 <Calendar className="w-4 h-4" />
-                <span>{caseStudy.duration}</span>
+                <span>{caseStudy.timeline}</span>
               </>
             )}
           </div>
@@ -65,15 +65,17 @@ export function CaseStudyCard({ caseStudy }: CaseStudyCardProps) {
 
           {/* Excerpt */}
           <p className="text-neutral-600 text-sm mb-6 line-clamp-2 flex-1">
-            {caseStudy.excerpt}
+            {caseStudy.excerpt || caseStudy.seo?.metaDescription || `${caseStudy.clientName} case study`}
           </p>
 
           {/* Key Metrics */}
           {keyMetrics.length > 0 && (
             <div className="grid grid-cols-3 gap-4 py-4 border-t border-neutral-100">
               {keyMetrics.map((metric, index) => (
-                <div key={index} className="text-center">
-                  <p className="text-lg font-bold text-primary-600">{metric.value}</p>
+                <div key={metric._key || index} className="text-center">
+                  <p className={`text-lg font-bold ${metric.isPositive ? 'text-green-600' : 'text-red-600'}`}>
+                    {metric.changePercent}
+                  </p>
                   <p className="text-xs text-neutral-500">{metric.label}</p>
                 </div>
               ))}

@@ -18,12 +18,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: `${agent.name} | AI SEO Agent | Anil Varma`,
-    description: agent.description,
+    description: agent.shortDescription,
     openGraph: {
       title: agent.name,
-      description: agent.description,
+      description: agent.shortDescription,
       type: 'website',
-      images: agent.icon?.asset?.url ? [agent.icon.asset.url] : [],
     },
   };
 }
@@ -42,8 +41,12 @@ export default function AgentDetailsPage({ params }: Props) {
   }
 
   // Get related agents (same category, excluding current)
+  const agentCategoryId = typeof agent.category === 'object' ? agent.category._id : agent.category;
   const relatedAgents = mockSEOAgents
-    .filter(a => a.category === agent.category && a.slug?.current !== agent.slug?.current)
+    .filter(a => {
+      const aCategoryId = typeof a.category === 'object' ? a.category._id : a.category;
+      return aCategoryId === agentCategoryId && a.slug?.current !== agent.slug?.current;
+    })
     .slice(0, 3);
 
   return <AgentDetailPage agent={agent} relatedAgents={relatedAgents} />;

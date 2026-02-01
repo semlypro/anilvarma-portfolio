@@ -62,7 +62,7 @@ export function CertificationsSection({ certifications }: CertificationsSectionP
                   <div className="flex items-center gap-2 text-sm text-neutral-500">
                     <Calendar className="w-4 h-4" />
                     <span>
-                      Issued {formatDateShort(cert.dateObtained)}
+                      Issued {formatDateShort(cert.dateObtained || cert.date)}
                       {cert.expiryDate && ` • Expires ${formatDateShort(cert.expiryDate)}`}
                     </span>
                   </div>
