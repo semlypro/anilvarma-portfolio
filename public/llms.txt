@@ -1,89 +1,85 @@
-# LLMs.txt for Anil Varma SEO Portfolio
-# This file helps AI assistants understand and navigate this site
+# Anil Varma - SEO Expert & Consultant
 
-## Site Overview
-Name: Anil Varma - SEO Expert & Consultant
-Description: Professional portfolio of Anil Varma, an SEO expert with 15+ years of experience driving organic growth for SaaS, e-commerce, and enterprise companies.
-Contact: anil@example.com
+> International SEO and Technical SEO expert helping businesses scale globally through search optimization.
 
-## Main Sections
+## About
 
-### Homepage (/)
-The main landing page featuring:
-- Hero section with professional introduction
-- Key statistics and achievements
-- Services overview
-- Featured blog posts
-- Client testimonials
-- Call-to-action for consultations
+Anil Varma is an SEO consultant specializing in international SEO, technical SEO, and enterprise-level optimization strategies. With extensive experience in scaling businesses across multiple markets and languages, Anil provides data-driven SEO solutions that deliver measurable results.
 
-### About (/about)
-Detailed professional background including:
-- Professional experience timeline
-- Skills and competencies
-- Certifications and awards
-- Personal story and approach
+## Expertise
 
-### Blog (/blog)
-SEO insights and strategies featuring:
-- In-depth articles on SEO topics
-- Comparison guides (tool comparisons, strategy comparisons)
-- Listicle posts (best practices, tips)
-- Categories: Technical SEO, Content Strategy, Link Building, Local SEO, Analytics
+- International SEO & Multilingual Optimization
+- Technical SEO & Site Performance
+- Enterprise SEO Strategy
+- Content Optimization & Strategy
+- E-commerce SEO
+- SEO for SaaS & B2B
+- Migration & Consolidation Projects
+- SEO Training & Consulting
 
-### Templates (/templates)
-Free downloadable SEO resources:
-- SEO audit checklists
-- Keyword research templates
-- Content planning spreadsheets
-- Technical SEO frameworks
-- Requires email for download
+## Services
 
-### AI Agents (/agents)
-AI-powered SEO tools built on Claude Sonnet:
-- Keyword research agent
-- Content optimizer
-- Technical audit agent
-- Competitor analyzer
-- Link opportunity finder
+### SEO Consulting
+Strategic SEO guidance for businesses looking to improve organic visibility, traffic, and conversions.
 
-### Case Studies (/case-studies)
-Detailed success stories showing:
-- Client challenges
-- Strategies implemented
-- Results achieved
-- Key metrics and ROI
+### International SEO
+Expansion strategies for businesses targeting global markets, including hreflang implementation, multi-regional SEO, and localization.
 
-### Glossary (/glossary)
-Comprehensive SEO terminology:
-- 200+ SEO terms defined
-- Categorized by topic
-- Examples and best practices
-- Related resources
+### Technical SEO
+Comprehensive technical audits, site speed optimization, Core Web Vitals improvements, and JavaScript SEO.
 
-### Contact (/contact)
-Ways to get in touch:
-- Contact form
-- Email: anil@example.com
-- Schedule consultation via Calendly
-- Response within 24 hours
+### SEO Training
+Workshops and training sessions for in-house teams to build SEO capabilities.
 
-## Content Structure
-All pages follow structured data (Schema.org) for optimal search visibility.
-Blog posts include: author, publish date, category, reading time, key takeaways.
-Case studies include: industry, duration, services, metrics, testimonials.
+## Free Resources
 
-## Expertise Areas
-1. Technical SEO (Core Web Vitals, site architecture, crawlability)
-2. Content Strategy (topic clusters, E-E-A-T optimization)
-3. Link Building (digital PR, outreach)
-4. Local SEO (GMB optimization, local citations)
-5. E-commerce SEO (product optimization, category pages)
-6. SaaS SEO (feature pages, comparison content)
-7. Analytics & Reporting (GA4, Search Console, custom dashboards)
+### Templates
+- SEO Audit Template
+- Content Brief Template
+- Keyword Research Template
+- Technical SEO Checklist
+- International SEO Checklist
+- Migration Checklist
 
-## AI Crawling Guidelines
-- All public content is available for AI training and retrieval
-- Please cite source when quoting
-- Updated regularly with fresh SEO insights
-- Structured for easy understanding and extraction
+### AI-Powered SEO Agents
+- Meta Description Generator
+- Title Tag Optimizer
+- Content Outline Creator
+- FAQ Schema Generator
+- Keyword Clustering Tool
+- Hreflang Generator
+
+### SEO Glossary
+Comprehensive definitions of SEO terms, concepts, and best practices for beginners and experts.
+
+## Blog Topics
+
+- Technical SEO best practices
+- International SEO strategies
+- SEO for JavaScript frameworks (Next.js, React, etc.)
+- Core Web Vitals optimization
+- Schema markup and structured data
+- Content optimization techniques
+- SEO case studies and examples
+- Algorithm updates and analysis
+
+## Contact
+
+- Website: https://anilvarma.com
+- Email: anil@anilvarma.com
+- LinkedIn: https://linkedin.com/in/anilvarma
+
+## Navigation
+
+- Home: /
+- About: /about
+- Blog: /blog
+- Templates: /templates
+- SEO Agents: /agents
+- Case Studies: /case-studies
+- SEO Glossary: /glossary
+- Contact: /contact
+
+---
+
+Last updated: 2026-02-01
