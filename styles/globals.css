@@ -127,55 +127,62 @@
 
   /* Gradient Backgrounds */
   .gradient-bg {
-    @apply bg-gradient-to-br from-neutral-50 via-white to-primary-50/20;
+    @apply bg-gradient-to-br from-neutral-50 via-white to-primary-50/10;
   }
 
   .gradient-mesh {
     background:
-      radial-gradient(at 40% 20%, rgba(59, 130, 246, 0.1) 0px, transparent 50%),
-      radial-gradient(at 80% 0%, rgba(20, 184, 166, 0.1) 0px, transparent 50%),
-      radial-gradient(at 0% 50%, rgba(59, 130, 246, 0.05) 0px, transparent 50%);
+      radial-gradient(at 40% 20%, rgba(168, 85, 247, 0.06) 0px, transparent 50%),
+      radial-gradient(at 80% 0%, rgba(255, 87, 87, 0.04) 0px, transparent 50%),
+      radial-gradient(at 0% 50%, rgba(168, 85, 247, 0.03) 0px, transparent 50%);
   }
 
-  /* Gradient Orbs */
+  /* Gradient Orbs - Subtle */
   .gradient-orb {
-    @apply absolute rounded-full blur-3xl;
+    @apply absolute rounded-full blur-3xl opacity-30;
   }
 
   .gradient-orb-primary {
-    @apply gradient-orb bg-primary-200/50;
+    @apply gradient-orb bg-primary-300/40;
   }
 
   .gradient-orb-accent {
-    @apply gradient-orb bg-accent-400/30;
+    @apply gradient-orb bg-accent-300/30;
   }
 
   /* Typography */
   .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-500 to-accent-500;
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-accent-500;
   }
 
   .overline {
-    @apply text-xs uppercase tracking-wider text-primary-500 font-medium;
+    @apply text-xs uppercase tracking-wider text-primary-600 font-semibold;
   }
 
-  /* Buttons */
+  /* Buttons - Modern rounded pill style */
   .btn-primary {
-    @apply bg-primary-500 text-white px-6 py-3 rounded-xl font-medium
-           hover:bg-primary-600 shadow-sm hover:shadow-md
+    @apply bg-neutral-900 text-white px-7 py-3.5 rounded-full font-medium
+           hover:bg-neutral-800 shadow-soft-sm hover:shadow-soft-md
            transition-all duration-200 inline-flex items-center gap-2;
   }
 
   .btn-secondary {
-    @apply bg-white/70 backdrop-blur-sm border border-neutral-200
-           px-6 py-3 rounded-xl font-medium text-neutral-700
-           hover:bg-white hover:shadow-glass transition-all duration-200
+    @apply bg-white border border-neutral-200
+           px-7 py-3.5 rounded-full font-medium text-neutral-700
+           hover:border-neutral-300 hover:shadow-soft transition-all duration-200
            inline-flex items-center gap-2;
   }
 
+  .btn-accent {
+    @apply bg-gradient-to-r from-primary-600 to-accent-500 text-white
+           px-7 py-3.5 rounded-full font-medium
+           hover:opacity-90 shadow-soft-sm hover:shadow-soft-md
+           transition-all duration-200 inline-flex items-center gap-2;
+  }
+
   .btn-ghost {
-    @apply text-primary-500 font-medium hover:bg-primary-50
-           px-4 py-2 rounded-lg transition-colors duration-200
+    @apply text-neutral-600 font-medium hover:text-neutral-900 hover:bg-neutral-100
+           px-4 py-2 rounded-full transition-colors duration-200
            inline-flex items-center gap-2;
   }
 

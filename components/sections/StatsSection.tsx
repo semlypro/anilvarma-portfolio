@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
 import {
   Calendar,
@@ -27,7 +27,7 @@ export function StatsSection({ stats }: StatsSectionProps) {
   const isInView = useInView(ref, { once: true, margin: '-100px' });
 
   return (
-    <section ref={ref} className="section-sm bg-white">
+    <section ref={ref} className="py-16 bg-neutral-50 border-y border-neutral-200/60">
       <div className="container-custom">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {stats.map((stat, index) => {
@@ -41,9 +41,6 @@ export function StatsSection({ stats }: StatsSectionProps) {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="w-12 h-12 mx-auto mb-4 rounded-xl bg-primary-50 flex items-center justify-center">
-                  <Icon className="w-6 h-6 text-primary-500" />
-                </div>
                 <div className="flex items-baseline justify-center gap-1">
                   <AnimatedNumber
                     value={stat.value}
@@ -56,7 +53,7 @@ export function StatsSection({ stats }: StatsSectionProps) {
                     </span>
                   )}
                 </div>
-                <p className="mt-2 text-neutral-600 text-sm md:text-base">
+                <p className="mt-2 text-neutral-500 text-sm md:text-base font-medium">
                   {stat.label}
                 </p>
               </motion.div>
@@ -82,7 +79,7 @@ function AnimatedNumber({ value, isInView, delay }: AnimatedNumberProps) {
       initial={{ opacity: 0 }}
       animate={isInView ? { opacity: 1 } : {}}
       transition={{ duration: 0.5, delay }}
-      className="text-4xl md:text-5xl font-bold text-neutral-800"
+      className="text-4xl md:text-5xl font-bold text-neutral-900"
     >
       {isInView ? (
         <CountUp end={numericValue} duration={2} delay={delay} />
@@ -104,7 +101,6 @@ function CountUp({ end, duration, delay }: CountUpProps) {
 
   useEffect(() => {
     const startTime = Date.now() + delay * 1000;
-    const endTime = startTime + duration * 1000;
 
     const tick = () => {
       const now = Date.now();
@@ -127,5 +123,3 @@ function CountUp({ end, duration, delay }: CountUpProps) {
 
   return <>{count}</>;
 }
-
-import { useState, useEffect } from 'react';

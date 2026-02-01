@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
 import type { Testimonial } from '@/types';
 
 interface TestimonialsSectionProps {
@@ -31,7 +31,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
   const currentTestimonial = testimonials[currentIndex];
 
   return (
-    <section ref={ref} className="section gradient-bg overflow-hidden">
+    <section ref={ref} className="section bg-white overflow-hidden">
       <div className="container-custom">
         {/* Header */}
         <motion.div
@@ -40,9 +40,12 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
           transition={{ duration: 0.5 }}
           className="text-center max-w-2xl mx-auto mb-16"
         >
-          <span className="overline">Testimonials</span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-bold text-neutral-800">
-            Trusted by Industry Leaders
+          <span className="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-sm font-medium mb-4">
+            <Star className="w-3.5 h-3.5" />
+            Testimonials
+          </span>
+          <h2 className="text-heading-xl md:text-display font-bold text-neutral-900">
+            Trusted by <span className="text-gradient">Industry Leaders</span>
           </h2>
         </motion.div>
 
@@ -53,29 +56,29 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
           transition={{ duration: 0.5, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
-          <div className="glass-card p-8 md:p-12 relative">
+          <div className="bg-neutral-50 rounded-3xl p-8 md:p-12 relative border border-neutral-200/60">
             {/* Quote Icon */}
-            <div className="absolute top-6 left-6 md:top-8 md:left-8">
-              <Quote className="w-10 h-10 text-primary-200" />
+            <div className="absolute top-8 left-8">
+              <Quote className="w-12 h-12 text-primary-200" />
             </div>
 
             {/* Content */}
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.3 }}
-                className="pt-8 md:pt-6"
+                className="pt-10 md:pt-8"
               >
-                <blockquote className="text-xl md:text-2xl text-neutral-700 leading-relaxed mb-8 text-center">
+                <blockquote className="text-xl md:text-2xl text-neutral-700 leading-relaxed mb-10 text-center font-medium">
                   &ldquo;{currentTestimonial.quote}&rdquo;
                 </blockquote>
 
                 <div className="flex flex-col items-center">
                   {/* Avatar */}
-                  <div className="w-16 h-16 rounded-full bg-gradient-to-br from-primary-400 to-accent-400 flex items-center justify-center text-white font-bold text-xl mb-4">
+                  <div className="w-16 h-16 rounded-full bg-neutral-900 flex items-center justify-center text-white font-bold text-xl mb-4">
                     {currentTestimonial.name
                       .split(' ')
                       .map((n) => n[0])
@@ -84,14 +87,15 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
 
                   {/* Name & Role */}
                   <div className="text-center">
-                    <h4 className="font-semibold text-neutral-800">
+                    <h4 className="font-semibold text-neutral-900 text-lg">
                       {currentTestimonial.name}
                     </h4>
                     <p className="text-neutral-500">
                       {currentTestimonial.role} at {currentTestimonial.company}
                     </p>
                     {currentTestimonial.resultAchieved && (
-                      <span className="badge-accent mt-2 text-xs">
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-50 text-primary-600 rounded-full text-sm font-medium mt-3">
+                        <TrendingUpIcon className="w-3.5 h-3.5" />
                         {currentTestimonial.resultAchieved}
                       </span>
                     )}
@@ -102,10 +106,10 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
 
             {/* Navigation */}
             {testimonials.length > 1 && (
-              <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="flex items-center justify-center gap-4 mt-10">
                 <button
                   onClick={goToPrevious}
-                  className="w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full bg-white border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 flex items-center justify-center transition-colors"
                   aria-label="Previous testimonial"
                 >
                   <ChevronLeft className="w-5 h-5 text-neutral-600" />
@@ -117,10 +121,10 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
                     <button
                       key={index}
                       onClick={() => setCurrentIndex(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${
+                      className={`h-2 rounded-full transition-all ${
                         index === currentIndex
-                          ? 'w-6 bg-primary-500'
-                          : 'bg-neutral-300 hover:bg-neutral-400'
+                          ? 'w-8 bg-neutral-900'
+                          : 'w-2 bg-neutral-300 hover:bg-neutral-400'
                       }`}
                       aria-label={`Go to testimonial ${index + 1}`}
                     />
@@ -129,7 +133,7 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
 
                 <button
                   onClick={goToNext}
-                  className="w-10 h-10 rounded-full bg-neutral-100 hover:bg-neutral-200 flex items-center justify-center transition-colors"
+                  className="w-10 h-10 rounded-full bg-white border border-neutral-200 hover:border-neutral-300 hover:bg-neutral-50 flex items-center justify-center transition-colors"
                   aria-label="Next testimonial"
                 >
                   <ChevronRight className="w-5 h-5 text-neutral-600" />
@@ -140,5 +144,23 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
         </motion.div>
       </div>
     </section>
+  );
+}
+
+// Small trending up icon for results
+function TrendingUpIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+      <polyline points="17 6 23 6 23 12" />
+    </svg>
   );
 }
