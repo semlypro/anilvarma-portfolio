@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 
 /**
  * Dynamic OG Image Generator
@@ -32,10 +32,10 @@ export async function GET(request: NextRequest) {
           'npm install @vercel/og',
           'Import ImageResponse from @vercel/og',
           'Create JSX template with brand colors',
-          'Return ImageResponse with PNG format',
-        ],
+          'Return ImageResponse with PNG format'
+        ]
       },
-      { status: 501 }
+      {status: 501}
     );
 
     /*
@@ -110,9 +110,9 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         error: 'Failed to generate OG image',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }

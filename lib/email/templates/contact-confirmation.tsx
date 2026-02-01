@@ -13,7 +13,7 @@ interface ContactConfirmationEmailProps {
 
 export function ContactConfirmationEmail({
   name,
-  message,
+  message
 }: ContactConfirmationEmailProps) {
   return (
     <html>
@@ -158,21 +158,21 @@ export function ContactConfirmationEmail({
               </a>
             </div>
 
-            <p style={{ marginTop: '32px', fontSize: '14px', color: '#64748b' }}>
+            <p style={{marginTop: '32px', fontSize: '14px', color: '#64748b'}}>
               If you need urgent assistance or have additional questions, feel
               free to send another message or connect with me on{' '}
-              <a href="https://linkedin.com/in/anilvarma" style={{ color: '#3b82f6' }}>
+              <a href="https://linkedin.com/in/anilvarma" style={{color: '#3b82f6'}}>
                 LinkedIn
               </a>
               .
             </p>
 
-            <p style={{ marginTop: '24px' }}>
+            <p style={{marginTop: '24px'}}>
               Best regards,
               <br />
               <strong>Anil Varma</strong>
               <br />
-              <span style={{ color: '#64748b', fontSize: '14px' }}>
+              <span style={{color: '#64748b', fontSize: '14px'}}>
                 International SEO & Technical SEO Expert
               </span>
             </p>
@@ -184,7 +184,7 @@ export function ContactConfirmationEmail({
               <a href="https://anilvarma.com/blog">Blog</a> |{' '}
               <a href="https://anilvarma.com/case-studies">Case Studies</a>
             </p>
-            <p style={{ marginTop: '8px' }}>
+            <p style={{marginTop: '8px'}}>
               © {new Date().getFullYear()} Anil Varma. All rights reserved.
             </p>
           </div>

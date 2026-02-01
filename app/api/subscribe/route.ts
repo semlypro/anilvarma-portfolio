@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { client } from '@/lib/sanity/client';
-import { subscribeRequestSchema } from '@/lib/utils/validation';
-import { sendEmail } from '@/lib/email/resend';
-import { WelcomeEmail } from '@/lib/email/templates/welcome';
-import { groq } from 'next-sanity';
+import {NextRequest, NextResponse} from 'next/server';
+import {client} from '@/lib/sanity/client';
+import {subscribeRequestSchema} from '@/lib/utils/validation';
+import {sendEmail} from '@/lib/email/resend';
+import {WelcomeEmail} from '@/lib/email/templates/welcome';
+import {groq} from 'next-sanity';
 
 /**
  * Newsletter Subscribe API Route
@@ -27,13 +27,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Invalid request data',
-          details: validation.error.errors.map((err) => err.message),
+          details: validation.error.errors.map(err => err.message)
         },
-        { status: 400 }
+        {status: 400}
       );
     }
 
-    const { email, source = 'newsletter', tags = [] } = validation.data;
+    const {email, source = 'newsletter', tags = []} = validation.data;
 
     // Check if email already exists in contacts
     const existingContact = await client.fetch(
@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
         source,
         tags
       }`,
-      { email }
+      {email}
     );
 
     if (existingContact) {
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({
           success: true,
           message: 'You are already subscribed to the newsletter',
-          alreadySubscribed: true,
+          alreadySubscribed: true
         });
       }
 
@@ -64,21 +64,21 @@ export async function POST(request: NextRequest) {
       await client
         .patch(existingContact._id)
         .set({
-          tags: [...(existingContact.tags || []), 'newsletter', ...tags],
+          tags: [...(existingContact.tags || []), 'newsletter', ...tags]
         })
         .commit();
 
       // Send welcome email
       await sendEmail({
         to: email,
-        subject: "Welcome to Anil Varma's Newsletter!",
-        react: WelcomeEmail({}),
+        subject: 'Welcome to Anil Varma\'s Newsletter!',
+        react: WelcomeEmail({})
       });
 
       return NextResponse.json({
         success: true,
         message: 'Successfully subscribed to newsletter',
-        alreadySubscribed: false,
+        alreadySubscribed: false
       });
     }
 
@@ -91,30 +91,30 @@ export async function POST(request: NextRequest) {
       createdAt: new Date().toISOString(),
       metadata: {
         subscribedAt: new Date().toISOString(),
-        subscriptionSource: source,
-      },
+        subscriptionSource: source
+      }
     });
 
     // Send welcome email
     await sendEmail({
       to: email,
-      subject: "Welcome to Anil Varma's Newsletter!",
-      react: WelcomeEmail({}),
+      subject: 'Welcome to Anil Varma\'s Newsletter!',
+      react: WelcomeEmail({})
     });
 
     return NextResponse.json({
       success: true,
       message: 'Successfully subscribed to newsletter',
-      alreadySubscribed: false,
+      alreadySubscribed: false
     });
   } catch (error) {
     console.error('Subscribe API Error:', error);
     return NextResponse.json(
       {
         error: 'Failed to process subscription',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }

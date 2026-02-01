@@ -1,5 +1,5 @@
-import { type ClassValue, clsx } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import {type ClassValue, clsx} from 'clsx';
+import {twMerge} from 'tailwind-merge';
 
 /**
  * Combines class names using clsx and tailwind-merge
@@ -15,7 +15,7 @@ export function formatDate(date: string | Date): string {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-    day: 'numeric',
+    day: 'numeric'
   });
 }
 
@@ -26,7 +26,7 @@ export function formatDateShort(date: string | Date): string {
   return new Date(date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
-    day: 'numeric',
+    day: 'numeric'
   });
 }
 
@@ -43,7 +43,9 @@ export function calculateReadingTime(text: string): number {
  * Truncate text with ellipsis
  */
 export function truncate(text: string, maxLength: number): string {
-  if (text.length <= maxLength) return text;
+  if (text.length <= maxLength) {
+    return text;
+  }
   return text.slice(0, maxLength).trim() + '...';
 }
 
@@ -72,7 +74,7 @@ export function formatNumber(num: number): string {
 export function formatCompactNumber(num: number): string {
   return new Intl.NumberFormat('en-US', {
     notation: 'compact',
-    compactDisplay: 'short',
+    compactDisplay: 'short'
   }).format(num);
 }
 
@@ -82,7 +84,7 @@ export function formatCompactNumber(num: number): string {
 export function getInitials(name: string): string {
   return name
     .split(' ')
-    .map((n) => n[0])
+    .map(n => n[0])
     .join('')
     .toUpperCase()
     .slice(0, 2);
@@ -116,9 +118,9 @@ export function generateExcerpt(
   maxLength = 160
 ): string {
   const text = blocks
-    .filter((block) => block.children)
-    .map((block) =>
-      block.children?.map((child) => child.text || '').join('') || ''
+    .filter(block => block.children)
+    .map(block =>
+      block.children?.map(child => child.text || '').join('') || ''
     )
     .join(' ');
 
@@ -133,10 +135,18 @@ export function getRelativeTime(date: string | Date): string {
   const then = new Date(date);
   const diffInSeconds = Math.floor((now.getTime() - then.getTime()) / 1000);
 
-  if (diffInSeconds < 60) return 'just now';
-  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} min ago`;
-  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hours ago`;
-  if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+  if (diffInSeconds < 60) {
+    return 'just now';
+  }
+  if (diffInSeconds < 3600) {
+    return `${Math.floor(diffInSeconds / 60)} min ago`;
+  }
+  if (diffInSeconds < 86400) {
+    return `${Math.floor(diffInSeconds / 3600)} hours ago`;
+  }
+  if (diffInSeconds < 604800) {
+    return `${Math.floor(diffInSeconds / 86400)} days ago`;
+  }
 
   return formatDateShort(date);
 }
@@ -144,14 +154,16 @@ export function getRelativeTime(date: string | Date): string {
 /**
  * Debounce function
  */
-export function debounce<T extends (...args: unknown[]) => unknown>(
+export function debounce<T extends(...args: unknown[]) => unknown>(
   func: T,
   wait: number
 ): (...args: Parameters<T>) => void {
   let timeout: NodeJS.Timeout | null = null;
 
   return (...args: Parameters<T>) => {
-    if (timeout) clearTimeout(timeout);
+    if (timeout) {
+      clearTimeout(timeout);
+    }
     timeout = setTimeout(() => func(...args), wait);
   };
 }
@@ -174,7 +186,9 @@ export function getFileExtension(filename: string): string {
  * Format file size
  */
 export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 Bytes';
+  if (bytes === 0) {
+    return '0 Bytes';
+  }
 
   const k = 1024;
   const sizes = ['Bytes', 'KB', 'MB', 'GB'];
@@ -190,12 +204,12 @@ export function extractHeadings(
   blocks: Array<{ style?: string; children?: Array<{ text?: string }> }>
 ): Array<{ id: string; text: string; level: number }> {
   return blocks
-    .filter((block) => block.style?.match(/^h[2-4]$/))
-    .map((block) => {
-      const text = block.children?.map((child) => child.text || '').join('') || '';
+    .filter(block => block.style?.match(/^h[2-4]$/))
+    .map(block => {
+      const text = block.children?.map(child => child.text || '').join('') || '';
       const level = parseInt(block.style?.charAt(1) || '2');
       const id = slugify(text);
-      return { id, text, level };
+      return {id, text, level};
     });
 }
 
@@ -206,7 +220,7 @@ export function scrollToElement(id: string, offset = 100): void {
   const element = document.getElementById(id);
   if (element) {
     const top = element.getBoundingClientRect().top + window.scrollY - offset;
-    window.scrollTo({ top, behavior: 'smooth' });
+    window.scrollTo({top, behavior: 'smooth'});
   }
 }
 

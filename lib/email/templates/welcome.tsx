@@ -10,7 +10,7 @@ interface WelcomeEmailProps {
   firstName?: string;
 }
 
-export function WelcomeEmail({ firstName }: WelcomeEmailProps) {
+export function WelcomeEmail({firstName}: WelcomeEmailProps) {
   return (
     <html>
       <head>
@@ -106,7 +106,7 @@ export function WelcomeEmail({ firstName }: WelcomeEmailProps) {
             </p>
 
             <div className="benefits">
-              <p style={{ fontWeight: 600, color: '#0f172a', marginBottom: '12px' }}>
+              <p style={{fontWeight: 600, color: '#0f172a', marginBottom: '12px'}}>
                 Here's what you can expect:
               </p>
               <ul>
@@ -129,17 +129,17 @@ export function WelcomeEmail({ firstName }: WelcomeEmailProps) {
               </a>
             </center>
 
-            <p style={{ marginTop: '32px', fontSize: '14px', color: '#64748b' }}>
+            <p style={{marginTop: '32px', fontSize: '14px', color: '#64748b'}}>
               Have questions or topics you'd like me to cover? Just reply to
               this email – I read every response!
             </p>
 
-            <p style={{ marginTop: '24px' }}>
+            <p style={{marginTop: '24px'}}>
               Cheers,
               <br />
               <strong>Anil Varma</strong>
               <br />
-              <span style={{ color: '#64748b', fontSize: '14px' }}>
+              <span style={{color: '#64748b', fontSize: '14px'}}>
                 International SEO & Technical SEO Expert
               </span>
             </p>
@@ -150,7 +150,7 @@ export function WelcomeEmail({ firstName }: WelcomeEmailProps) {
               <a href="https://anilvarma.com">anilvarma.com</a> |{' '}
               <a href="https://anilvarma.com/unsubscribe">Unsubscribe</a>
             </p>
-            <p style={{ marginTop: '8px' }}>
+            <p style={{marginTop: '8px'}}>
               © {new Date().getFullYear()} Anil Varma. All rights reserved.
             </p>
           </div>

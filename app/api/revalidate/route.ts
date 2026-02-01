@@ -1,6 +1,6 @@
-import { revalidatePath, revalidateTag } from 'next/cache';
-import { NextRequest, NextResponse } from 'next/server';
-import { createHmac } from 'crypto';
+import {revalidatePath, revalidateTag} from 'next/cache';
+import {NextRequest, NextResponse} from 'next/server';
+import {createHmac} from 'crypto';
 
 /**
  * Sanity Webhook Handler for On-Demand Revalidation
@@ -27,7 +27,9 @@ function verifySignature(
   signature: string | null,
   secret: string
 ): boolean {
-  if (!signature) return false;
+  if (!signature) {
+    return false;
+  }
 
   const hash = createHmac('sha256', secret)
     .update(body)
@@ -40,7 +42,7 @@ function verifySignature(
  * Determine which paths to revalidate based on document type
  */
 function getRevalidationPaths(document: SanityWebhookPayload): string[] {
-  const { _type, slug } = document;
+  const {_type, slug} = document;
   const paths: string[] = [];
 
   switch (_type) {
@@ -158,8 +160,8 @@ export async function POST(request: NextRequest) {
     if (!webhookSecret) {
       console.error('SANITY_WEBHOOK_SECRET is not configured');
       return NextResponse.json(
-        { error: 'Webhook not configured' },
-        { status: 500 }
+        {error: 'Webhook not configured'},
+        {status: 500}
       );
     }
 
@@ -171,8 +173,8 @@ export async function POST(request: NextRequest) {
     if (!verifySignature(body, signature, webhookSecret)) {
       console.error('Invalid webhook signature');
       return NextResponse.json(
-        { error: 'Invalid signature' },
-        { status: 401 }
+        {error: 'Invalid signature'},
+        {status: 401}
       );
     }
 
@@ -196,9 +198,8 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({
       success: true,
       revalidated: paths,
-      timestamp: new Date().toISOString(),
+      timestamp: new Date().toISOString()
     });
-
   } catch (error) {
     console.error('Revalidation error:', error);
     return NextResponse.json(
@@ -206,7 +207,7 @@ export async function POST(request: NextRequest) {
         error: 'Revalidation failed',
         message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }
@@ -214,7 +215,7 @@ export async function POST(request: NextRequest) {
 // Only allow POST requests
 export async function GET() {
   return NextResponse.json(
-    { error: 'Method not allowed. Use POST.' },
-    { status: 405 }
+    {error: 'Method not allowed. Use POST.'},
+    {status: 405}
   );
 }

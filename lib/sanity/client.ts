@@ -1,5 +1,5 @@
-import { createClient, type QueryParams } from 'next-sanity'
-import { apiVersion, dataset, projectId, readToken } from '@/sanity/env'
+import {createClient, type QueryParams} from 'next-sanity';
+import {apiVersion, dataset, projectId, readToken} from '@/sanity/env';
 
 /**
  * Sanity client for fetching data with CDN enabled
@@ -13,9 +13,9 @@ export const client = createClient({
   perspective: 'published', // Only published documents
   stega: {
     enabled: false,
-    studioUrl: '/studio',
-  },
-})
+    studioUrl: '/studio'
+  }
+});
 
 /**
  * Sanity client for fetching preview/draft content
@@ -30,9 +30,9 @@ export const previewClient = createClient({
   perspective: 'previewDrafts', // Include draft documents
   stega: {
     enabled: true,
-    studioUrl: '/studio',
-  },
-})
+    studioUrl: '/studio'
+  }
+});
 
 /**
  * Get the appropriate client based on preview mode
@@ -40,7 +40,7 @@ export const previewClient = createClient({
  * @returns Sanity client instance
  */
 export function getClient(preview?: boolean) {
-  return preview ? previewClient : client
+  return preview ? previewClient : client;
 }
 
 /**
@@ -56,22 +56,22 @@ export async function sanityFetch<T = unknown>({
   query,
   params = {},
   preview = false,
-  tags = [],
+  tags = []
 }: {
   query: string
   params?: QueryParams
   preview?: boolean
   tags?: string[]
 }): Promise<T> {
-  const isDraftMode = preview
+  const isDraftMode = preview;
 
   // Use preview client if in draft mode, otherwise use production client
-  const sanityClient = isDraftMode ? previewClient : client
+  const sanityClient = isDraftMode ? previewClient : client;
 
   // For draft mode, always fetch fresh data
   // For production, use Next.js cache with revalidation
   if (isDraftMode) {
-    return sanityClient.fetch<T>(query, params)
+    return sanityClient.fetch<T>(query, params);
   }
 
   // In production mode, fetch with caching options
@@ -80,7 +80,7 @@ export async function sanityFetch<T = unknown>({
     cache: 'force-cache',
     next: {
       tags,
-      revalidate: 60, // Revalidate every 60 seconds
-    },
-  } as any) // Type cast needed due to Sanity client type limitations
+      revalidate: 60 // Revalidate every 60 seconds
+    }
+  } as any); // Type cast needed due to Sanity client type limitations
 }

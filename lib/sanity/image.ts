@@ -1,7 +1,7 @@
-import imageUrlBuilder from '@sanity/image-url'
-import type { Image } from 'sanity'
-import { dataset, projectId } from '@/sanity/env'
-import type { SanityImage } from '@/types'
+import imageUrlBuilder from '@sanity/image-url';
+import type {Image} from 'sanity';
+import {dataset, projectId} from '@/sanity/env';
+import type {SanityImage} from '@/types';
 
 /**
  * Sanity image URL builder instance
@@ -9,8 +9,8 @@ import type { SanityImage } from '@/types'
  */
 const imageBuilder = imageUrlBuilder({
   projectId: projectId || '',
-  dataset: dataset || '',
-})
+  dataset: dataset || ''
+});
 
 /**
  * Generate optimized image URL from Sanity image reference
@@ -33,11 +33,11 @@ const imageBuilder = imageUrlBuilder({
  */
 export const urlForImage = (source: SanityImage | Image) => {
   if (!source || !source.asset) {
-    throw new Error('Invalid image source: missing asset reference')
+    throw new Error('Invalid image source: missing asset reference');
   }
 
-  return imageBuilder.image(source).auto('format').fit('max')
-}
+  return imageBuilder.image(source).auto('format').fit('max');
+};
 
 /**
  * Get optimized image URL with specific dimensions
@@ -51,17 +51,17 @@ export function getImageUrl(
   width?: number,
   height?: number
 ): string {
-  const builder = urlForImage(source)
+  const builder = urlForImage(source);
 
   if (width) {
-    builder.width(width)
+    builder.width(width);
   }
 
   if (height) {
-    builder.height(height)
+    builder.height(height);
   }
 
-  return builder.url()
+  return builder.url();
 }
 
 /**
@@ -75,29 +75,29 @@ export function getImageDimensions(source: SanityImage | Image): {
   aspectRatio: number
 } {
   if (!source || !source.asset || !source.asset._ref) {
-    throw new Error('Invalid image source: missing asset reference')
+    throw new Error('Invalid image source: missing asset reference');
   }
 
   // Parse dimensions from Sanity asset reference
   // Format: image-{assetId}-{width}x{height}-{format}
-  const ref = source.asset._ref
-  const dimensions = ref.split('-')[2]
+  const ref = source.asset._ref;
+  const dimensions = ref.split('-')[2];
 
   if (!dimensions) {
-    throw new Error('Could not parse image dimensions from asset reference')
+    throw new Error('Could not parse image dimensions from asset reference');
   }
 
-  const [width, height] = dimensions.split('x').map(Number)
+  const [width, height] = dimensions.split('x').map(Number);
 
   if (!width || !height) {
-    throw new Error('Invalid image dimensions in asset reference')
+    throw new Error('Invalid image dimensions in asset reference');
   }
 
   return {
     width,
     height,
-    aspectRatio: width / height,
-  }
+    aspectRatio: width / height
+  };
 }
 
 /**
@@ -111,11 +111,11 @@ export function getImageSrcSet(
   widths: number[] = [320, 640, 768, 1024, 1280, 1536]
 ): string {
   return widths
-    .map((width) => {
-      const url = urlForImage(source).width(width).url()
-      return `${url} ${width}w`
+    .map(width => {
+      const url = urlForImage(source).width(width).url();
+      return `${url} ${width}w`;
     })
-    .join(', ')
+    .join(', ');
 }
 
 /**
@@ -124,5 +124,5 @@ export function getImageSrcSet(
  * @returns Base64 encoded blur data URL
  */
 export function getImageBlurDataUrl(source: SanityImage | Image): string {
-  return urlForImage(source).width(20).quality(20).blur(10).url()
+  return urlForImage(source).width(20).quality(20).blur(10).url();
 }

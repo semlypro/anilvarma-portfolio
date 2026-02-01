@@ -8,7 +8,7 @@ import Anthropic from '@anthropic-ai/sdk';
 
 // Initialize Anthropic client
 const anthropic = new Anthropic({
-  apiKey: process.env.ANTHROPIC_API_KEY || '',
+  apiKey: process.env.ANTHROPIC_API_KEY || ''
 });
 
 export const CLAUDE_MODEL = 'claude-sonnet-4-20250514' as const;
@@ -32,14 +32,14 @@ export interface TokenUsage {
  * @param options - Streaming configuration
  * @returns Async iterable of text chunks
  */
-export async function* streamClaude(
+export async function * streamClaude(
   options: StreamingOptions
 ): AsyncGenerator<string, TokenUsage, undefined> {
   const {
     systemPrompt,
     userMessage,
     maxTokens = MAX_TOKENS,
-    temperature = 1.0,
+    temperature = 1.0
   } = options;
 
   let inputTokens = 0;
@@ -54,9 +54,9 @@ export async function* streamClaude(
       messages: [
         {
           role: 'user',
-          content: userMessage,
-        },
-      ],
+          content: userMessage
+        }
+      ]
     });
 
     // Stream text chunks
@@ -83,9 +83,8 @@ export async function* streamClaude(
     // Return token usage at the end
     return {
       inputTokens,
-      outputTokens,
+      outputTokens
     };
-
   } catch (error) {
     console.error('Anthropic API error:', error);
     throw new Error(
@@ -107,7 +106,7 @@ export async function callClaude(
     systemPrompt,
     userMessage,
     maxTokens = MAX_TOKENS,
-    temperature = 1.0,
+    temperature = 1.0
   } = options;
 
   try {
@@ -119,22 +118,21 @@ export async function callClaude(
       messages: [
         {
           role: 'user',
-          content: userMessage,
-        },
-      ],
+          content: userMessage
+        }
+      ]
     });
 
-    const textContent = response.content.find((block) => block.type === 'text');
+    const textContent = response.content.find(block => block.type === 'text');
     const text = textContent && textContent.type === 'text' ? textContent.text : '';
 
     return {
       text,
       usage: {
         inputTokens: response.usage.input_tokens,
-        outputTokens: response.usage.output_tokens,
-      },
+        outputTokens: response.usage.output_tokens
+      }
     };
-
   } catch (error) {
     console.error('Anthropic API error:', error);
     throw new Error(
@@ -159,7 +157,7 @@ export function estimateTokens(text: string): number {
  * Check if API key is configured
  */
 export function isAnthropicConfigured(): boolean {
-  return !!process.env.ANTHROPIC_API_KEY;
+  return Boolean(process.env.ANTHROPIC_API_KEY);
 }
 
 export default anthropic;

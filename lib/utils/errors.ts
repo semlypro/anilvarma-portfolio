@@ -100,20 +100,20 @@ export function formatErrorResponse(error: unknown) {
     return {
       error: error.message,
       statusCode: error.statusCode,
-      details: error.details,
+      details: error.details
     };
   }
 
   if (error instanceof Error) {
     return {
       error: error.message,
-      statusCode: 500,
+      statusCode: 500
     };
   }
 
   return {
     error: 'An unexpected error occurred',
-    statusCode: 500,
+    statusCode: 500
   };
 }
 
@@ -138,13 +138,13 @@ export function logError(
     timestamp,
     context,
     error:
-      error instanceof Error
-        ? {
-            name: error.name,
-            message: error.message,
-            stack: error.stack,
-          }
-        : error,
+      error instanceof Error ?
+        {
+          name: error.name,
+          message: error.message,
+          stack: error.stack
+        } :
+        error
   };
 
   // In production, use a proper logging service (e.g., Sentry, LogRocket)
@@ -161,7 +161,7 @@ export function logError(
  *
  * Wraps async functions to catch and handle errors
  */
-export function asyncErrorHandler<T extends (...args: any[]) => Promise<any>>(
+export function asyncErrorHandler<T extends(...args: any[]) => Promise<any>>(
   fn: T
 ): T {
   return (async (...args: Parameters<T>) => {
@@ -170,7 +170,7 @@ export function asyncErrorHandler<T extends (...args: any[]) => Promise<any>>(
     } catch (error) {
       logError(error, {
         function: fn.name,
-        args: args.length,
+        args: args.length
       });
       throw error;
     }

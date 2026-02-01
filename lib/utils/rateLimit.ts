@@ -30,7 +30,7 @@ const rateLimitStore = new Map<string, { count: number; resetAt: number }>();
 export async function checkRateLimit(
   config: RateLimitConfig
 ): Promise<RateLimitResult> {
-  const { uniqueId, limit, window } = config;
+  const {uniqueId, limit, window} = config;
   const key = `ratelimit:${uniqueId}`;
   const now = Date.now();
   const resetAt = now + window * 1000;
@@ -41,11 +41,11 @@ export async function checkRateLimit(
 
   if (!stored || now > stored.resetAt) {
     // First request or window expired - reset
-    rateLimitStore.set(key, { count: 1, resetAt });
+    rateLimitStore.set(key, {count: 1, resetAt});
     return {
       success: true,
       remaining: limit - 1,
-      reset: resetAt,
+      reset: resetAt
     };
   }
 
@@ -54,7 +54,7 @@ export async function checkRateLimit(
     return {
       success: false,
       remaining: 0,
-      reset: stored.resetAt,
+      reset: stored.resetAt
     };
   }
 
@@ -65,7 +65,7 @@ export async function checkRateLimit(
   return {
     success: true,
     remaining: limit - stored.count,
-    reset: stored.resetAt,
+    reset: stored.resetAt
   };
 }
 

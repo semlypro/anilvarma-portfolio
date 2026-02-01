@@ -1,4 +1,4 @@
-import { sanityFetch } from './client'
+import {sanityFetch} from './client';
 import {
   // Site Settings & Navigation
   getSiteSettingsQuery,
@@ -78,8 +78,8 @@ import {
 
   // Contacts
   getAllContactsQuery,
-  getContactsBySourceQuery,
-} from './queries'
+  getContactsBySourceQuery
+} from './queries';
 
 import type {
   SiteSettings,
@@ -101,8 +101,8 @@ import type {
   NewsletterIssue,
   SpeakingEvent,
   SearchResult,
-  Contact,
-} from '@/types'
+  Contact
+} from '@/types';
 
 // ===========================================
 // SITE SETTINGS & NAVIGATION
@@ -112,16 +112,16 @@ export async function getSiteSettings(preview = false): Promise<SiteSettings | n
   return sanityFetch<SiteSettings>({
     query: getSiteSettingsQuery,
     preview,
-    tags: ['siteSettings'],
-  })
+    tags: ['siteSettings']
+  });
 }
 
 export async function getNavigation(preview = false): Promise<Navigation | null> {
   return sanityFetch<Navigation>({
     query: getNavigationQuery,
     preview,
-    tags: ['navigation'],
-  })
+    tags: ['navigation']
+  });
 }
 
 // ===========================================
@@ -132,8 +132,8 @@ export async function getHomepage(preview = false): Promise<Homepage | null> {
   return sanityFetch<Homepage>({
     query: getHomepageQuery,
     preview,
-    tags: ['homepage', 'blogPost', 'template', 'testimonial'],
-  })
+    tags: ['homepage', 'blogPost', 'template', 'testimonial']
+  });
 }
 
 // ===========================================
@@ -144,8 +144,8 @@ export async function getAbout(preview = false): Promise<About | null> {
   return sanityFetch<About>({
     query: getAboutQuery,
     preview,
-    tags: ['about'],
-  })
+    tags: ['about']
+  });
 }
 
 // ===========================================
@@ -156,8 +156,8 @@ export async function getAllBlogPosts(preview = false): Promise<BlogPost[]> {
   return sanityFetch<BlogPost[]>({
     query: getAllBlogPostsQuery,
     preview,
-    tags: ['blogPost'],
-  })
+    tags: ['blogPost']
+  });
 }
 
 export async function getBlogPostBySlug(
@@ -166,18 +166,18 @@ export async function getBlogPostBySlug(
 ): Promise<BlogPost | null> {
   return sanityFetch<BlogPost>({
     query: getBlogPostBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['blogPost', `blogPost:${slug}`],
-  })
+    tags: ['blogPost', `blogPost:${slug}`]
+  });
 }
 
 export async function getBlogCategories(preview = false): Promise<BlogCategory[]> {
   return sanityFetch<BlogCategory[]>({
     query: getBlogCategoriesQuery,
     preview,
-    tags: ['blogCategory'],
-  })
+    tags: ['blogCategory']
+  });
 }
 
 export async function getBlogPostsByCategory(
@@ -186,10 +186,10 @@ export async function getBlogPostsByCategory(
 ): Promise<BlogPost[]> {
   return sanityFetch<BlogPost[]>({
     query: getBlogPostsByCategoryQuery,
-    params: { categoryId },
+    params: {categoryId},
     preview,
-    tags: ['blogPost', `blogCategory:${categoryId}`],
-  })
+    tags: ['blogPost', `blogCategory:${categoryId}`]
+  });
 }
 
 export async function getBlogPostsByTag(
@@ -198,18 +198,18 @@ export async function getBlogPostsByTag(
 ): Promise<BlogPost[]> {
   return sanityFetch<BlogPost[]>({
     query: getBlogPostsByTagQuery,
-    params: { tag },
+    params: {tag},
     preview,
-    tags: ['blogPost'],
-  })
+    tags: ['blogPost']
+  });
 }
 
 export async function getRecentBlogPosts(preview = false): Promise<BlogPost[]> {
   return sanityFetch<BlogPost[]>({
     query: getRecentBlogPostsQuery,
     preview,
-    tags: ['blogPost'],
-  })
+    tags: ['blogPost']
+  });
 }
 
 // ===========================================
@@ -220,8 +220,8 @@ export async function getAllComparisonPosts(preview = false): Promise<Comparison
   return sanityFetch<ComparisonPost[]>({
     query: getAllComparisonPostsQuery,
     preview,
-    tags: ['comparisonPost'],
-  })
+    tags: ['comparisonPost']
+  });
 }
 
 export async function getComparisonPostBySlug(
@@ -230,10 +230,10 @@ export async function getComparisonPostBySlug(
 ): Promise<ComparisonPost | null> {
   return sanityFetch<ComparisonPost>({
     query: getComparisonPostBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['comparisonPost', `comparisonPost:${slug}`],
-  })
+    tags: ['comparisonPost', `comparisonPost:${slug}`]
+  });
 }
 
 // ===========================================
@@ -244,8 +244,8 @@ export async function getAllListiclePosts(preview = false): Promise<ListiclePost
   return sanityFetch<ListiclePost[]>({
     query: getAllListiclePostsQuery,
     preview,
-    tags: ['listiclePost'],
-  })
+    tags: ['listiclePost']
+  });
 }
 
 export async function getListiclePostBySlug(
@@ -254,10 +254,10 @@ export async function getListiclePostBySlug(
 ): Promise<ListiclePost | null> {
   return sanityFetch<ListiclePost>({
     query: getListiclePostBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['listiclePost', `listiclePost:${slug}`],
-  })
+    tags: ['listiclePost', `listiclePost:${slug}`]
+  });
 }
 
 // ===========================================
@@ -268,8 +268,8 @@ export async function getAllTemplates(preview = false): Promise<Template[]> {
   return sanityFetch<Template[]>({
     query: getAllTemplatesQuery,
     preview,
-    tags: ['template'],
-  })
+    tags: ['template']
+  });
 }
 
 export async function getTemplateBySlug(
@@ -278,18 +278,18 @@ export async function getTemplateBySlug(
 ): Promise<Template | null> {
   return sanityFetch<Template>({
     query: getTemplateBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['template', `template:${slug}`],
-  })
+    tags: ['template', `template:${slug}`]
+  });
 }
 
 export async function getTemplateCategories(preview = false): Promise<TemplateCategory[]> {
   return sanityFetch<TemplateCategory[]>({
     query: getTemplateCategoriesQuery,
     preview,
-    tags: ['templateCategory'],
-  })
+    tags: ['templateCategory']
+  });
 }
 
 export async function getTemplatesByCategory(
@@ -298,18 +298,18 @@ export async function getTemplatesByCategory(
 ): Promise<Template[]> {
   return sanityFetch<Template[]>({
     query: getTemplatesByCategoryQuery,
-    params: { categoryId },
+    params: {categoryId},
     preview,
-    tags: ['template', `templateCategory:${categoryId}`],
-  })
+    tags: ['template', `templateCategory:${categoryId}`]
+  });
 }
 
 export async function getFeaturedTemplates(preview = false): Promise<Template[]> {
   return sanityFetch<Template[]>({
     query: getFeaturedTemplatesQuery,
     preview,
-    tags: ['template'],
-  })
+    tags: ['template']
+  });
 }
 
 // ===========================================
@@ -320,8 +320,8 @@ export async function getAllAgents(preview = false): Promise<SEOAgent[]> {
   return sanityFetch<SEOAgent[]>({
     query: getAllAgentsQuery,
     preview,
-    tags: ['seoAgent'],
-  })
+    tags: ['seoAgent']
+  });
 }
 
 export async function getAgentBySlug(
@@ -330,10 +330,10 @@ export async function getAgentBySlug(
 ): Promise<SEOAgent | null> {
   return sanityFetch<SEOAgent>({
     query: getAgentBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['seoAgent', `seoAgent:${slug}`],
-  })
+    tags: ['seoAgent', `seoAgent:${slug}`]
+  });
 }
 
 export async function getAgentById(
@@ -342,18 +342,18 @@ export async function getAgentById(
 ): Promise<SEOAgent | null> {
   return sanityFetch<SEOAgent>({
     query: getAgentByIdQuery,
-    params: { agentId },
+    params: {agentId},
     preview,
-    tags: ['seoAgent', `seoAgent:${agentId}`],
-  })
+    tags: ['seoAgent', `seoAgent:${agentId}`]
+  });
 }
 
 export async function getAgentCategories(preview = false): Promise<AgentCategory[]> {
   return sanityFetch<AgentCategory[]>({
     query: getAgentCategoriesQuery,
     preview,
-    tags: ['agentCategory'],
-  })
+    tags: ['agentCategory']
+  });
 }
 
 export async function getAgentsByCategory(
@@ -362,18 +362,18 @@ export async function getAgentsByCategory(
 ): Promise<SEOAgent[]> {
   return sanityFetch<SEOAgent[]>({
     query: getAgentsByCategoryQuery,
-    params: { categoryId },
+    params: {categoryId},
     preview,
-    tags: ['seoAgent', `agentCategory:${categoryId}`],
-  })
+    tags: ['seoAgent', `agentCategory:${categoryId}`]
+  });
 }
 
 export async function getFeaturedAgents(preview = false): Promise<SEOAgent[]> {
   return sanityFetch<SEOAgent[]>({
     query: getFeaturedAgentsQuery,
     preview,
-    tags: ['seoAgent'],
-  })
+    tags: ['seoAgent']
+  });
 }
 
 // ===========================================
@@ -384,8 +384,8 @@ export async function getAllCaseStudies(preview = false): Promise<CaseStudy[]> {
   return sanityFetch<CaseStudy[]>({
     query: getAllCaseStudiesQuery,
     preview,
-    tags: ['caseStudy'],
-  })
+    tags: ['caseStudy']
+  });
 }
 
 export async function getCaseStudyBySlug(
@@ -394,18 +394,18 @@ export async function getCaseStudyBySlug(
 ): Promise<CaseStudy | null> {
   return sanityFetch<CaseStudy>({
     query: getCaseStudyBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['caseStudy', `caseStudy:${slug}`],
-  })
+    tags: ['caseStudy', `caseStudy:${slug}`]
+  });
 }
 
 export async function getFeaturedCaseStudies(preview = false): Promise<CaseStudy[]> {
   return sanityFetch<CaseStudy[]>({
     query: getFeaturedCaseStudiesQuery,
     preview,
-    tags: ['caseStudy'],
-  })
+    tags: ['caseStudy']
+  });
 }
 
 // ===========================================
@@ -416,8 +416,8 @@ export async function getAllGlossaryTerms(preview = false): Promise<GlossaryTerm
   return sanityFetch<GlossaryTerm[]>({
     query: getAllGlossaryTermsQuery,
     preview,
-    tags: ['glossaryTerm'],
-  })
+    tags: ['glossaryTerm']
+  });
 }
 
 export async function getGlossaryTermBySlug(
@@ -426,10 +426,10 @@ export async function getGlossaryTermBySlug(
 ): Promise<GlossaryTerm | null> {
   return sanityFetch<GlossaryTerm>({
     query: getGlossaryTermBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['glossaryTerm', `glossaryTerm:${slug}`],
-  })
+    tags: ['glossaryTerm', `glossaryTerm:${slug}`]
+  });
 }
 
 export async function getGlossaryTermsByLetter(
@@ -438,18 +438,18 @@ export async function getGlossaryTermsByLetter(
 ): Promise<GlossaryTerm[]> {
   return sanityFetch<GlossaryTerm[]>({
     query: getGlossaryTermsByLetterQuery,
-    params: { letter },
+    params: {letter},
     preview,
-    tags: ['glossaryTerm'],
-  })
+    tags: ['glossaryTerm']
+  });
 }
 
 export async function getGlossaryLetters(preview = false): Promise<{ letter: string }[]> {
   return sanityFetch<{ letter: string }[]>({
     query: getGlossaryLettersQuery,
     preview,
-    tags: ['glossaryTerm'],
-  })
+    tags: ['glossaryTerm']
+  });
 }
 
 // ===========================================
@@ -460,16 +460,16 @@ export async function getAllTestimonials(preview = false): Promise<Testimonial[]
   return sanityFetch<Testimonial[]>({
     query: getAllTestimonialsQuery,
     preview,
-    tags: ['testimonial'],
-  })
+    tags: ['testimonial']
+  });
 }
 
 export async function getFeaturedTestimonials(preview = false): Promise<Testimonial[]> {
   return sanityFetch<Testimonial[]>({
     query: getFeaturedTestimonialsQuery,
     preview,
-    tags: ['testimonial'],
-  })
+    tags: ['testimonial']
+  });
 }
 
 // ===========================================
@@ -480,8 +480,8 @@ export async function getAllAuthors(preview = false): Promise<Author[]> {
   return sanityFetch<Author[]>({
     query: getAllAuthorsQuery,
     preview,
-    tags: ['author'],
-  })
+    tags: ['author']
+  });
 }
 
 export async function getAuthorById(
@@ -490,10 +490,10 @@ export async function getAuthorById(
 ): Promise<Author | null> {
   return sanityFetch<Author>({
     query: getAuthorByIdQuery,
-    params: { authorId },
+    params: {authorId},
     preview,
-    tags: ['author', `author:${authorId}`],
-  })
+    tags: ['author', `author:${authorId}`]
+  });
 }
 
 // ===========================================
@@ -504,8 +504,8 @@ export async function getNewsletterIssues(preview = false): Promise<NewsletterIs
   return sanityFetch<NewsletterIssue[]>({
     query: getNewsletterIssuesQuery,
     preview,
-    tags: ['newsletterIssue'],
-  })
+    tags: ['newsletterIssue']
+  });
 }
 
 export async function getNewsletterIssueBySlug(
@@ -514,10 +514,10 @@ export async function getNewsletterIssueBySlug(
 ): Promise<NewsletterIssue | null> {
   return sanityFetch<NewsletterIssue>({
     query: getNewsletterIssueBySlugQuery,
-    params: { slug },
+    params: {slug},
     preview,
-    tags: ['newsletterIssue', `newsletterIssue:${slug}`],
-  })
+    tags: ['newsletterIssue', `newsletterIssue:${slug}`]
+  });
 }
 
 export async function getLatestNewsletterIssue(
@@ -526,8 +526,8 @@ export async function getLatestNewsletterIssue(
   return sanityFetch<NewsletterIssue>({
     query: getLatestNewsletterIssueQuery,
     preview,
-    tags: ['newsletterIssue'],
-  })
+    tags: ['newsletterIssue']
+  });
 }
 
 // ===========================================
@@ -538,8 +538,8 @@ export async function getSpeakingEvents(preview = false): Promise<SpeakingEvent[
   return sanityFetch<SpeakingEvent[]>({
     query: getSpeakingEventsQuery,
     preview,
-    tags: ['speakingEvent'],
-  })
+    tags: ['speakingEvent']
+  });
 }
 
 export async function getUpcomingSpeakingEvents(
@@ -548,16 +548,16 @@ export async function getUpcomingSpeakingEvents(
   return sanityFetch<SpeakingEvent[]>({
     query: getUpcomingSpeakingEventsQuery,
     preview,
-    tags: ['speakingEvent'],
-  })
+    tags: ['speakingEvent']
+  });
 }
 
 export async function getPastSpeakingEvents(preview = false): Promise<SpeakingEvent[]> {
   return sanityFetch<SpeakingEvent[]>({
     query: getPastSpeakingEventsQuery,
     preview,
-    tags: ['speakingEvent'],
-  })
+    tags: ['speakingEvent']
+  });
 }
 
 // ===========================================
@@ -579,10 +579,10 @@ export async function search(searchTerm: string, preview = false): Promise<{
     caseStudies: SearchResult[]
   }>({
     query: searchQuery,
-    params: { searchTerm },
+    params: {searchTerm},
     preview,
-    tags: ['blogPost', 'template', 'seoAgent', 'glossaryTerm', 'caseStudy'],
-  })
+    tags: ['blogPost', 'template', 'seoAgent', 'glossaryTerm', 'caseStudy']
+  });
 }
 
 // ===========================================
@@ -613,9 +613,9 @@ export async function getAllSlugs(): Promise<{
       'glossaryTerm',
       'blogCategory',
       'templateCategory',
-      'agentCategory',
-    ],
-  })
+      'agentCategory'
+    ]
+  });
 }
 
 // ===========================================
@@ -626,8 +626,8 @@ export async function getAllContacts(preview = false): Promise<Contact[]> {
   return sanityFetch<Contact[]>({
     query: getAllContactsQuery,
     preview,
-    tags: ['contact'],
-  })
+    tags: ['contact']
+  });
 }
 
 export async function getContactsBySource(
@@ -636,8 +636,8 @@ export async function getContactsBySource(
 ): Promise<Contact[]> {
   return sanityFetch<Contact[]>({
     query: getContactsBySourceQuery,
-    params: { source },
+    params: {source},
     preview,
-    tags: ['contact'],
-  })
+    tags: ['contact']
+  });
 }

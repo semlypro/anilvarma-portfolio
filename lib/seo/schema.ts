@@ -1,4 +1,4 @@
-import { BlogPost, Template, SEOAgent, CaseStudy, GlossaryTerm } from '@/types';
+import {BlogPost, Template, SEOAgent, CaseStudy, GlossaryTerm} from '@/types';
 
 /**
  * JSON-LD Schema Generators
@@ -17,24 +17,24 @@ export function generateOrganizationSchema() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     '@id': `${baseUrl}#person`,
-    name: 'Anil Varma',
-    url: baseUrl,
-    image: `${baseUrl}/images/anil-varma.jpg`,
-    sameAs: [
+    'name': 'Anil Varma',
+    'url': baseUrl,
+    'image': `${baseUrl}/images/anil-varma.jpg`,
+    'sameAs': [
       'https://linkedin.com/in/anilvarma',
       'https://twitter.com/anilvarma',
-      'https://github.com/anilvarma',
+      'https://github.com/anilvarma'
     ],
-    jobTitle: 'SEO Consultant',
-    description:
+    'jobTitle': 'SEO Consultant',
+    'description':
       'International SEO and Technical SEO expert helping businesses scale globally through search optimization.',
-    knowsAbout: [
+    'knowsAbout': [
       'Search Engine Optimization',
       'International SEO',
       'Technical SEO',
       'Content Strategy',
-      'Digital Marketing',
-    ],
+      'Digital Marketing'
+    ]
   };
 }
 
@@ -46,21 +46,21 @@ export function generateWebsiteSchema() {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
     '@id': `${baseUrl}#website`,
-    url: baseUrl,
-    name: 'Anil Varma - SEO Expert',
-    description:
+    'url': baseUrl,
+    'name': 'Anil Varma - SEO Expert',
+    'description':
       'International SEO & Technical SEO consulting, free templates, AI-powered SEO agents, and in-depth guides.',
-    publisher: {
-      '@id': `${baseUrl}#person`,
+    'publisher': {
+      '@id': `${baseUrl}#person`
     },
-    potentialAction: {
+    'potentialAction': {
       '@type': 'SearchAction',
-      target: {
+      'target': {
         '@type': 'EntryPoint',
-        urlTemplate: `${baseUrl}/search?q={search_term_string}`,
+        'urlTemplate': `${baseUrl}/search?q={search_term_string}`
       },
-      'query-input': 'required name=search_term_string',
-    },
+      'query-input': 'required name=search_term_string'
+    }
   };
 }
 
@@ -72,26 +72,26 @@ export function generateBlogPostSchema(post: BlogPost) {
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     '@id': `${baseUrl}/blog/${post.slug.current}`,
-    headline: post.title,
-    description: post.excerpt,
-    image: post.featuredImage
-      ? `${baseUrl}/images/blog/${post.slug.current}.jpg`
-      : undefined,
-    datePublished: post.publishedAt,
-    dateModified: post.updatedAt || post.publishedAt,
-    author: {
+    'headline': post.title,
+    'description': post.excerpt,
+    'image': post.featuredImage ?
+      `${baseUrl}/images/blog/${post.slug.current}.jpg` :
+      undefined,
+    'datePublished': post.publishedAt,
+    'dateModified': post.updatedAt || post.publishedAt,
+    'author': {
       '@type': 'Person',
       '@id': `${baseUrl}#person`,
-      name: post.author?.name || 'Anil Varma',
+      'name': post.author?.name || 'Anil Varma'
     },
-    publisher: {
-      '@id': `${baseUrl}#person`,
+    'publisher': {
+      '@id': `${baseUrl}#person`
     },
-    mainEntityOfPage: {
+    'mainEntityOfPage': {
       '@type': 'WebPage',
-      '@id': `${baseUrl}/blog/${post.slug.current}`,
+      '@id': `${baseUrl}/blog/${post.slug.current}`
     },
-    keywords: post.tags?.join(', '),
+    'keywords': post.tags?.join(', ')
   };
 }
 
@@ -106,17 +106,17 @@ export function generateArticleSchema(
     '@context': 'https://schema.org',
     '@type': type,
     '@id': `${baseUrl}/blog/${post.slug.current}`,
-    headline: post.title,
-    description: post.excerpt,
-    datePublished: post.publishedAt,
-    author: {
+    'headline': post.title,
+    'description': post.excerpt,
+    'datePublished': post.publishedAt,
+    'author': {
       '@type': 'Person',
       '@id': `${baseUrl}#person`,
-      name: 'Anil Varma',
+      'name': 'Anil Varma'
     },
-    publisher: {
-      '@id': `${baseUrl}#person`,
-    },
+    'publisher': {
+      '@id': `${baseUrl}#person`
+    }
   };
 }
 
@@ -128,22 +128,22 @@ export function generateSoftwareApplicationSchema(agent: SEOAgent) {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     '@id': `${baseUrl}/agents/${agent.slug.current}`,
-    name: agent.name,
-    description: agent.longDescription
-      ? agent.longDescription[0]?.children?.[0]?.text
-      : agent.name,
-    applicationCategory: 'WebApplication',
-    offers: {
+    'name': agent.name,
+    'description': agent.longDescription ?
+      agent.longDescription[0]?.children?.[0]?.text :
+      agent.name,
+    'applicationCategory': 'WebApplication',
+    'offers': {
       '@type': 'Offer',
-      price: '0',
-      priceCurrency: 'USD',
+      'price': '0',
+      'priceCurrency': 'USD'
     },
-    operatingSystem: 'Web Browser',
-    author: {
+    'operatingSystem': 'Web Browser',
+    'author': {
       '@type': 'Person',
       '@id': `${baseUrl}#person`,
-      name: 'Anil Varma',
-    },
+      'name': 'Anil Varma'
+    }
   };
 }
 
@@ -155,20 +155,20 @@ export function generateHowToSchema(template: Template) {
     '@context': 'https://schema.org',
     '@type': 'HowTo',
     '@id': `${baseUrl}/templates/${template.slug.current}`,
-    name: template.name,
-    description: template.shortDescription,
-    image: template.previewImages?.[0]
-      ? `${baseUrl}/images/templates/${template.slug.current}.jpg`
-      : undefined,
-    tool: {
+    'name': template.name,
+    'description': template.shortDescription,
+    'image': template.previewImages?.[0] ?
+      `${baseUrl}/images/templates/${template.slug.current}.jpg` :
+      undefined,
+    'tool': {
       '@type': 'HowToTool',
-      name: template.name,
+      'name': template.name
     },
-    totalTime: 'PT30M', // Estimated 30 minutes
-    supply: {
+    'totalTime': 'PT30M', // Estimated 30 minutes
+    'supply': {
       '@type': 'HowToSupply',
-      name: template.name,
-    },
+      'name': template.name
+    }
   };
 }
 
@@ -180,21 +180,21 @@ export function generateCaseStudySchema(caseStudy: CaseStudy) {
     '@context': 'https://schema.org',
     '@type': 'Article',
     '@id': `${baseUrl}/case-studies/${caseStudy.slug.current}`,
-    headline: caseStudy.title,
-    description: `${caseStudy.client} - ${caseStudy.industry}`,
-    datePublished: caseStudy.publishedAt,
-    author: {
+    'headline': caseStudy.title,
+    'description': `${caseStudy.client} - ${caseStudy.industry}`,
+    'datePublished': caseStudy.publishedAt,
+    'author': {
       '@type': 'Person',
       '@id': `${baseUrl}#person`,
-      name: 'Anil Varma',
+      'name': 'Anil Varma'
     },
-    publisher: {
-      '@id': `${baseUrl}#person`,
+    'publisher': {
+      '@id': `${baseUrl}#person`
     },
-    about: {
+    'about': {
       '@type': 'Thing',
-      name: caseStudy.client,
-    },
+      'name': caseStudy.client
+    }
   };
 }
 
@@ -206,9 +206,9 @@ export function generateDefinedTermSchema(term: GlossaryTerm) {
     '@context': 'https://schema.org',
     '@type': 'DefinedTerm',
     '@id': `${baseUrl}/glossary/${term.slug.current}`,
-    name: term.term,
-    description: term.shortDefinition,
-    inDefinedTermSet: `${baseUrl}/glossary`,
+    'name': term.term,
+    'description': term.shortDefinition,
+    'inDefinedTermSet': `${baseUrl}/glossary`
   };
 }
 
@@ -221,14 +221,14 @@ export function generateFAQSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    mainEntity: faqs.map((faq) => ({
+    'mainEntity': faqs.map(faq => ({
       '@type': 'Question',
-      name: faq.question,
-      acceptedAnswer: {
+      'name': faq.question,
+      'acceptedAnswer': {
         '@type': 'Answer',
-        text: faq.answer,
-      },
-    })),
+        'text': faq.answer
+      }
+    }))
   };
 }
 
@@ -241,12 +241,12 @@ export function generateBreadcrumbSchema(
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: items.map((item, index) => ({
+    'itemListElement': items.map((item, index) => ({
       '@type': 'ListItem',
-      position: index + 1,
-      name: item.name,
-      item: item.url,
-    })),
+      'position': index + 1,
+      'name': item.name,
+      'item': item.url
+    }))
   };
 }
 
@@ -255,6 +255,6 @@ export function generateBreadcrumbSchema(
  */
 export function renderJSONLD(schema: object) {
   return {
-    __html: JSON.stringify(schema),
+    __html: JSON.stringify(schema)
   };
 }

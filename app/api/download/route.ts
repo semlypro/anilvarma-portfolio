@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { client } from '@/lib/sanity/client';
-import { downloadRequestSchema } from '@/lib/utils/validation';
-import { sendEmail } from '@/lib/email/resend';
-import { DownloadEmail } from '@/lib/email/templates/download';
-import { groq } from 'next-sanity';
+import {NextRequest, NextResponse} from 'next/server';
+import {client} from '@/lib/sanity/client';
+import {downloadRequestSchema} from '@/lib/utils/validation';
+import {sendEmail} from '@/lib/email/resend';
+import {DownloadEmail} from '@/lib/email/templates/download';
+import {groq} from 'next-sanity';
 import * as crypto from 'crypto';
 
 /**
@@ -44,13 +44,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Invalid request data',
-          details: validation.error.errors.map((err) => err.message),
+          details: validation.error.errors.map(err => err.message)
         },
-        { status: 400 }
+        {status: 400}
       );
     }
 
-    const { templateId, email, name } = validation.data;
+    const {templateId, email, name} = validation.data;
 
     // Fetch template from Sanity
     const template = await client.fetch<Template>(
@@ -61,20 +61,20 @@ export async function POST(request: NextRequest) {
         fileUrl,
         category->
       }`,
-      { templateId }
+      {templateId}
     );
 
     if (!template) {
       return NextResponse.json(
-        { error: 'Template not found' },
-        { status: 404 }
+        {error: 'Template not found'},
+        {status: 404}
       );
     }
 
     // Check if email exists in contacts
     const existingContact = await client.fetch(
       groq`*[_type == "contact" && email == $email][0]`,
-      { email }
+      {email}
     );
 
     // Create contact if new
@@ -89,8 +89,8 @@ export async function POST(request: NextRequest) {
         createdAt: new Date().toISOString(),
         metadata: {
           firstTemplate: template.name,
-          templateSlug: template.slug.current,
-        },
+          templateSlug: template.slug.current
+        }
       });
     }
 
@@ -105,7 +105,7 @@ export async function POST(request: NextRequest) {
         name,
         "slug": slug.current
       }`,
-      { categoryId: template.category?._id, templateId: template._id }
+      {categoryId: template.category?._id, templateId: template._id}
     );
 
     // Send download email
@@ -117,29 +117,29 @@ export async function POST(request: NextRequest) {
         firstName,
         templateName: template.name,
         downloadUrl: signedUrl,
-        relatedTemplates,
-      }),
+        relatedTemplates
+      })
     });
 
     // Increment download count
     await client
       .patch(template._id)
-      .inc({ downloadCount: 1 })
+      .inc({downloadCount: 1})
       .commit();
 
     return NextResponse.json({
       success: true,
       message: 'Check your email for the download link',
-      templateName: template.name,
+      templateName: template.name
     });
   } catch (error) {
     console.error('Download API Error:', error);
     return NextResponse.json(
       {
         error: 'Failed to process download request',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }

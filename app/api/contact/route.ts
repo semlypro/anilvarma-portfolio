@@ -1,10 +1,10 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { client } from '@/lib/sanity/client';
-import { contactFormSchema } from '@/lib/utils/validation';
-import { sendEmail } from '@/lib/email/resend';
-import { ContactNotificationEmail } from '@/lib/email/templates/contact-notification';
-import { ContactConfirmationEmail } from '@/lib/email/templates/contact-confirmation';
-import { groq } from 'next-sanity';
+import {NextRequest, NextResponse} from 'next/server';
+import {client} from '@/lib/sanity/client';
+import {contactFormSchema} from '@/lib/utils/validation';
+import {sendEmail} from '@/lib/email/resend';
+import {ContactNotificationEmail} from '@/lib/email/templates/contact-notification';
+import {ContactConfirmationEmail} from '@/lib/email/templates/contact-confirmation';
+import {groq} from 'next-sanity';
 
 /**
  * Contact Form API Route
@@ -28,13 +28,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Invalid form data',
-          details: validation.error.errors.map((err) => err.message),
+          details: validation.error.errors.map(err => err.message)
         },
-        { status: 400 }
+        {status: 400}
       );
     }
 
-    const { name, email, subject, message } = validation.data;
+    const {name, email, subject, message} = validation.data;
 
     // Check if email exists in contacts
     const existingContact = await client.fetch(
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
         _id,
         tags
       }`,
-      { email }
+      {email}
     );
 
     if (existingContact) {
@@ -55,8 +55,8 @@ export async function POST(request: NextRequest) {
           metadata: {
             lastContactedAt: new Date().toISOString(),
             lastMessage: message,
-            lastSubject: subject,
-          },
+            lastSubject: subject
+          }
         })
         .commit();
     } else {
@@ -70,8 +70,8 @@ export async function POST(request: NextRequest) {
         createdAt: new Date().toISOString(),
         metadata: {
           firstMessage: message,
-          firstSubject: subject,
-        },
+          firstSubject: subject
+        }
       });
     }
 
@@ -82,7 +82,7 @@ export async function POST(request: NextRequest) {
       day: 'numeric',
       hour: '2-digit',
       minute: '2-digit',
-      timeZoneName: 'short',
+      timeZoneName: 'short'
     });
 
     // Send notification email to Anil
@@ -96,8 +96,8 @@ export async function POST(request: NextRequest) {
         email,
         subject,
         message,
-        timestamp,
-      }),
+        timestamp
+      })
     });
 
     // Send confirmation email to user
@@ -106,22 +106,22 @@ export async function POST(request: NextRequest) {
       subject: 'Thank you for reaching out!',
       react: ContactConfirmationEmail({
         name,
-        message,
-      }),
+        message
+      })
     });
 
     return NextResponse.json({
       success: true,
-      message: 'Message sent successfully! Check your email for confirmation.',
+      message: 'Message sent successfully! Check your email for confirmation.'
     });
   } catch (error) {
     console.error('Contact API Error:', error);
     return NextResponse.json(
       {
         error: 'Failed to send message',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }

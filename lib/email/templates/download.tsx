@@ -20,7 +20,7 @@ export function DownloadEmail({
   firstName,
   templateName,
   downloadUrl,
-  relatedTemplates = [],
+  relatedTemplates = []
 }: DownloadEmailProps) {
   return (
     <html>
@@ -174,17 +174,17 @@ export function DownloadEmail({
               </div>
             )}
 
-            <p style={{ marginTop: '32px' }}>
+            <p style={{marginTop: '32px'}}>
               Want more SEO resources? Check out my latest blog posts, try the
               AI-powered SEO agents, or explore my case studies.
             </p>
 
-            <p style={{ marginTop: '24px' }}>
+            <p style={{marginTop: '24px'}}>
               Happy optimizing!
               <br />
               <strong>Anil Varma</strong>
               <br />
-              <span style={{ color: '#64748b', fontSize: '14px' }}>
+              <span style={{color: '#64748b', fontSize: '14px'}}>
                 International SEO & Technical SEO Expert
               </span>
             </p>
@@ -196,7 +196,7 @@ export function DownloadEmail({
               <a href="https://anilvarma.com/templates">More Templates</a> |{' '}
               <a href="https://anilvarma.com/blog">Blog</a>
             </p>
-            <p style={{ marginTop: '8px' }}>
+            <p style={{marginTop: '8px'}}>
               © {new Date().getFullYear()} Anil Varma. All rights reserved.
             </p>
           </div>

@@ -19,7 +19,7 @@ export function ContactNotificationEmail({
   email,
   subject,
   message,
-  timestamp,
+  timestamp
 }: ContactNotificationEmailProps) {
   return (
     <html>
@@ -110,7 +110,7 @@ export function ContactNotificationEmail({
           </div>
 
           <div className="content">
-            <p style={{ fontSize: '16px', color: '#475569', marginBottom: '24px' }}>
+            <p style={{fontSize: '16px', color: '#475569', marginBottom: '24px'}}>
               You have received a new message from your website contact form.
             </p>
 
@@ -122,7 +122,7 @@ export function ContactNotificationEmail({
               <div className="info-row">
                 <div className="info-label">Email:</div>
                 <div className="info-value">
-                  <a href={`mailto:${email}`} style={{ color: '#3b82f6', textDecoration: 'none' }}>
+                  <a href={`mailto:${email}`} style={{color: '#3b82f6', textDecoration: 'none'}}>
                     {email}
                   </a>
                 </div>
@@ -139,7 +139,7 @@ export function ContactNotificationEmail({
               </div>
             </div>
 
-            <h3 style={{ color: '#0f172a', fontSize: '18px', fontWeight: '600', marginBottom: '12px' }}>
+            <h3 style={{color: '#0f172a', fontSize: '18px', fontWeight: '600', marginBottom: '12px'}}>
               Message:
             </h3>
             <div className="message-box">{message}</div>
@@ -150,14 +150,14 @@ export function ContactNotificationEmail({
               </a>
             </center>
 
-            <p style={{ marginTop: '32px', fontSize: '14px', color: '#64748b', textAlign: 'center' }}>
+            <p style={{marginTop: '32px', fontSize: '14px', color: '#64748b', textAlign: 'center'}}>
               This is an automated notification from your website contact form.
             </p>
           </div>
 
           <div className="footer">
             <p>anilvarma.com Contact Form Notification</p>
-            <p style={{ marginTop: '8px' }}>
+            <p style={{marginTop: '8px'}}>
               © {new Date().getFullYear()} Anil Varma
             </p>
           </div>

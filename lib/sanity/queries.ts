@@ -1,4 +1,4 @@
-import { groq } from 'next-sanity'
+import {groq} from 'next-sanity';
 
 // ===========================================
 // SITE SETTINGS & NAVIGATION
@@ -15,13 +15,13 @@ export const getSiteSettingsQuery = groq`*[_type == "siteSettings"][0]{
   contactPhone,
   address,
   defaultSeo
-}`
+}`;
 
 export const getNavigationQuery = groq`*[_type == "navigation"][0]{
   _id,
   mainNav,
   footerNav
-}`
+}`;
 
 // ===========================================
 // HOMEPAGE
@@ -76,7 +76,7 @@ export const getHomepageQuery = groq`*[_type == "homepage"][0]{
   },
   clientLogos,
   seo
-}`
+}`;
 
 // ===========================================
 // ABOUT
@@ -94,7 +94,7 @@ export const getAboutQuery = groq`*[_type == "about"][0]{
   philosophy,
   cta,
   seo
-}`
+}`;
 
 // ===========================================
 // BLOG
@@ -120,7 +120,7 @@ export const getAllBlogPostsQuery = groq`*[_type == "blogPost"] | order(publishe
     color
   },
   tags
-}`
+}`;
 
 export const getBlogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current == $slug][0]{
   _id,
@@ -166,7 +166,7 @@ export const getBlogPostBySlugQuery = groq`*[_type == "blogPost" && slug.current
   answerBox,
   keyTakeaways,
   tldr
-}`
+}`;
 
 export const getBlogCategoriesQuery = groq`*[_type == "blogCategory"] | order(title asc){
   _id,
@@ -174,7 +174,7 @@ export const getBlogCategoriesQuery = groq`*[_type == "blogCategory"] | order(ti
   slug,
   description,
   color
-}`
+}`;
 
 export const getBlogPostsByCategoryQuery = groq`*[_type == "blogPost" && $categoryId in categories[]._ref] | order(publishedAt desc){
   _id,
@@ -193,7 +193,7 @@ export const getBlogPostsByCategoryQuery = groq`*[_type == "blogPost" && $catego
     slug,
     color
   }
-}`
+}`;
 
 export const getBlogPostsByTagQuery = groq`*[_type == "blogPost" && $tag in tags] | order(publishedAt desc){
   _id,
@@ -213,7 +213,7 @@ export const getBlogPostsByTagQuery = groq`*[_type == "blogPost" && $tag in tags
     color
   },
   tags
-}`
+}`;
 
 export const getRecentBlogPostsQuery = groq`*[_type == "blogPost"] | order(publishedAt desc)[0...5]{
   _id,
@@ -223,7 +223,7 @@ export const getRecentBlogPostsQuery = groq`*[_type == "blogPost"] | order(publi
   featuredImage,
   publishedAt,
   readingTime
-}`
+}`;
 
 // ===========================================
 // COMPARISON POSTS
@@ -238,7 +238,7 @@ export const getAllComparisonPostsQuery = groq`*[_type == "comparisonPost"] | or
   verdict,
   publishedAt,
   updatedAt
-}`
+}`;
 
 export const getComparisonPostBySlugQuery = groq`*[_type == "comparisonPost" && slug.current == $slug][0]{
   _id,
@@ -255,7 +255,7 @@ export const getComparisonPostBySlugQuery = groq`*[_type == "comparisonPost" && 
   seo,
   publishedAt,
   updatedAt
-}`
+}`;
 
 // ===========================================
 // LISTICLE POSTS
@@ -270,7 +270,7 @@ export const getAllListiclePostsQuery = groq`*[_type == "listiclePost"] | order(
   quickList,
   publishedAt,
   updatedAt
-}`
+}`;
 
 export const getListiclePostBySlugQuery = groq`*[_type == "listiclePost" && slug.current == $slug][0]{
   _id,
@@ -286,7 +286,7 @@ export const getListiclePostBySlugQuery = groq`*[_type == "listiclePost" && slug
   seo,
   publishedAt,
   updatedAt
-}`
+}`;
 
 // ===========================================
 // TEMPLATES
@@ -311,7 +311,7 @@ export const getAllTemplatesQuery = groq`*[_type == "template"] | order(download
   emailGateEnabled,
   createdAt,
   updatedAt
-}`
+}`;
 
 export const getTemplateBySlugQuery = groq`*[_type == "template" && slug.current == $slug][0]{
   _id,
@@ -353,7 +353,7 @@ export const getTemplateBySlugQuery = groq`*[_type == "template" && slug.current
   thankYouMessage,
   createdAt,
   updatedAt
-}`
+}`;
 
 export const getTemplateCategoriesQuery = groq`*[_type == "templateCategory"] | order(title asc){
   _id,
@@ -361,7 +361,7 @@ export const getTemplateCategoriesQuery = groq`*[_type == "templateCategory"] | 
   slug,
   description,
   icon
-}`
+}`;
 
 export const getTemplatesByCategoryQuery = groq`*[_type == "template" && category._ref == $categoryId] | order(downloadCount desc){
   _id,
@@ -377,7 +377,7 @@ export const getTemplatesByCategoryQuery = groq`*[_type == "template" && categor
   fileFormat,
   downloadCount,
   createdAt
-}`
+}`;
 
 export const getFeaturedTemplatesQuery = groq`*[_type == "template"] | order(downloadCount desc)[0...6]{
   _id,
@@ -392,7 +392,7 @@ export const getFeaturedTemplatesQuery = groq`*[_type == "template"] | order(dow
   },
   fileFormat,
   downloadCount
-}`
+}`;
 
 // ===========================================
 // SEO AGENTS
@@ -413,7 +413,7 @@ export const getAllAgentsQuery = groq`*[_type == "seoAgent" && isEnabled == true
   pricingTier,
   usageLimit,
   createdAt
-}`
+}`;
 
 export const getAgentBySlugQuery = groq`*[_type == "seoAgent" && slug.current == $slug && isEnabled == true][0]{
   _id,
@@ -440,7 +440,7 @@ export const getAgentBySlugQuery = groq`*[_type == "seoAgent" && slug.current ==
   seo,
   isEnabled,
   createdAt
-}`
+}`;
 
 export const getAgentByIdQuery = groq`*[_type == "seoAgent" && _id == $agentId][0]{
   _id,
@@ -454,7 +454,7 @@ export const getAgentByIdQuery = groq`*[_type == "seoAgent" && _id == $agentId][
   pricingTier,
   usageLimit,
   isEnabled
-}`
+}`;
 
 export const getAgentCategoriesQuery = groq`*[_type == "agentCategory"] | order(title asc){
   _id,
@@ -462,7 +462,7 @@ export const getAgentCategoriesQuery = groq`*[_type == "agentCategory"] | order(
   slug,
   description,
   icon
-}`
+}`;
 
 export const getAgentsByCategoryQuery = groq`*[_type == "seoAgent" && category._ref == $categoryId && isEnabled == true] | order(name asc){
   _id,
@@ -477,7 +477,7 @@ export const getAgentsByCategoryQuery = groq`*[_type == "seoAgent" && category._
   },
   pricingTier,
   createdAt
-}`
+}`;
 
 export const getFeaturedAgentsQuery = groq`*[_type == "seoAgent" && isEnabled == true] | order(_createdAt desc)[0...6]{
   _id,
@@ -491,7 +491,7 @@ export const getFeaturedAgentsQuery = groq`*[_type == "seoAgent" && isEnabled ==
     icon
   },
   pricingTier
-}`
+}`;
 
 // ===========================================
 // CASE STUDIES
@@ -510,7 +510,7 @@ export const getAllCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(publi
   featuredImage,
   publishedAt,
   updatedAt
-}`
+}`;
 
 export const getCaseStudyBySlugQuery = groq`*[_type == "caseStudy" && slug.current == $slug][0]{
   _id,
@@ -542,7 +542,7 @@ export const getCaseStudyBySlugQuery = groq`*[_type == "caseStudy" && slug.curre
   seo,
   publishedAt,
   updatedAt
-}`
+}`;
 
 export const getFeaturedCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(publishedAt desc)[0...3]{
   _id,
@@ -554,7 +554,7 @@ export const getFeaturedCaseStudiesQuery = groq`*[_type == "caseStudy"] | order(
   metrics,
   featuredImage,
   publishedAt
-}`
+}`;
 
 // ===========================================
 // GLOSSARY
@@ -568,7 +568,7 @@ export const getAllGlossaryTermsQuery = groq`*[_type == "glossaryTerm"] | order(
   letter,
   createdAt,
   updatedAt
-}`
+}`;
 
 export const getGlossaryTermBySlugQuery = groq`*[_type == "glossaryTerm" && slug.current == $slug][0]{
   _id,
@@ -595,7 +595,7 @@ export const getGlossaryTermBySlugQuery = groq`*[_type == "glossaryTerm" && slug
   letter,
   createdAt,
   updatedAt
-}`
+}`;
 
 export const getGlossaryTermsByLetterQuery = groq`*[_type == "glossaryTerm" && letter == $letter] | order(term asc){
   _id,
@@ -603,11 +603,11 @@ export const getGlossaryTermsByLetterQuery = groq`*[_type == "glossaryTerm" && l
   slug,
   definition,
   letter
-}`
+}`;
 
 export const getGlossaryLettersQuery = groq`*[_type == "glossaryTerm"]{
   "letter": letter
-} | order(letter asc)`
+} | order(letter asc)`;
 
 // ===========================================
 // TESTIMONIALS
@@ -624,7 +624,7 @@ export const getAllTestimonialsQuery = groq`*[_type == "testimonial"] | order(_c
   linkedinUrl,
   resultAchieved,
   isFeatured
-}`
+}`;
 
 export const getFeaturedTestimonialsQuery = groq`*[_type == "testimonial" && isFeatured == true] | order(_createdAt desc){
   _id,
@@ -635,7 +635,7 @@ export const getFeaturedTestimonialsQuery = groq`*[_type == "testimonial" && isF
   quote,
   videoUrl,
   resultAchieved
-}`
+}`;
 
 // ===========================================
 // AUTHORS
@@ -648,7 +648,7 @@ export const getAllAuthorsQuery = groq`*[_type == "author"] | order(name asc){
   image,
   bio,
   socialLinks
-}`
+}`;
 
 export const getAuthorByIdQuery = groq`*[_type == "author" && _id == $authorId][0]{
   _id,
@@ -657,7 +657,7 @@ export const getAuthorByIdQuery = groq`*[_type == "author" && _id == $authorId][
   image,
   bio,
   socialLinks
-}`
+}`;
 
 // ===========================================
 // NEWSLETTER
@@ -669,7 +669,7 @@ export const getNewsletterIssuesQuery = groq`*[_type == "newsletterIssue" && isP
   slug,
   previewText,
   publishedAt
-}`
+}`;
 
 export const getNewsletterIssueBySlugQuery = groq`*[_type == "newsletterIssue" && slug.current == $slug && isPublished == true][0]{
   _id,
@@ -678,7 +678,7 @@ export const getNewsletterIssueBySlugQuery = groq`*[_type == "newsletterIssue" &
   previewText,
   content,
   publishedAt
-}`
+}`;
 
 export const getLatestNewsletterIssueQuery = groq`*[_type == "newsletterIssue" && isPublished == true] | order(publishedAt desc)[0]{
   _id,
@@ -686,7 +686,7 @@ export const getLatestNewsletterIssueQuery = groq`*[_type == "newsletterIssue" &
   slug,
   previewText,
   publishedAt
-}`
+}`;
 
 // ===========================================
 // SPEAKING EVENTS
@@ -704,7 +704,7 @@ export const getSpeakingEventsQuery = groq`*[_type == "speakingEvent"] | order(d
   eventLogo,
   eventUrl,
   isUpcoming
-}`
+}`;
 
 export const getUpcomingSpeakingEventsQuery = groq`*[_type == "speakingEvent" && isUpcoming == true] | order(date asc){
   _id,
@@ -715,7 +715,7 @@ export const getUpcomingSpeakingEventsQuery = groq`*[_type == "speakingEvent" &&
   description,
   eventLogo,
   eventUrl
-}`
+}`;
 
 export const getPastSpeakingEventsQuery = groq`*[_type == "speakingEvent" && isUpcoming == false] | order(date desc){
   _id,
@@ -727,7 +727,7 @@ export const getPastSpeakingEventsQuery = groq`*[_type == "speakingEvent" && isU
   videoUrl,
   slidesUrl,
   eventLogo
-}`
+}`;
 
 // ===========================================
 // SEARCH
@@ -790,7 +790,7 @@ export const searchQuery = groq`{
     "excerpt": clientName + " - " + industry,
     "url": "/case-studies/" + slug.current
   }
-}`
+}`;
 
 // ===========================================
 // SITEMAP (for generating sitemap.xml)
@@ -834,7 +834,7 @@ export const getAllSlugsQuery = groq`{
   "agentCategories": *[_type == "agentCategory" && defined(slug.current)]{
     "slug": slug.current
   }
-}`
+}`;
 
 // ===========================================
 // CONTACTS (Admin only)
@@ -849,7 +849,7 @@ export const getAllContactsQuery = groq`*[_type == "contact"] | order(createdAt 
   tags,
   createdAt,
   metadata
-}`
+}`;
 
 export const getContactsBySourceQuery = groq`*[_type == "contact" && source == $source] | order(createdAt desc){
   _id,
@@ -859,4 +859,4 @@ export const getContactsBySourceQuery = groq`*[_type == "contact" && source == $
   sourceId,
   tags,
   createdAt
-}`
+}`;

@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 /**
  * Validation Schemas
@@ -9,7 +9,7 @@ import { z } from 'zod';
 // Agent Request Schema
 export const agentRequestSchema = z.object({
   agentId: z.string().min(1, 'Agent ID is required'),
-  inputs: z.record(z.string(), z.string()),
+  inputs: z.record(z.string(), z.string())
 });
 
 export type AgentRequestData = z.infer<typeof agentRequestSchema>;
@@ -18,7 +18,7 @@ export type AgentRequestData = z.infer<typeof agentRequestSchema>;
 export const downloadRequestSchema = z.object({
   templateId: z.string().min(1, 'Template ID is required'),
   email: z.string().email('Valid email is required'),
-  name: z.string().optional(),
+  name: z.string().optional()
 });
 
 export type DownloadRequestData = z.infer<typeof downloadRequestSchema>;
@@ -27,7 +27,7 @@ export type DownloadRequestData = z.infer<typeof downloadRequestSchema>;
 export const subscribeRequestSchema = z.object({
   email: z.string().email('Valid email is required'),
   source: z.string().optional(),
-  tags: z.array(z.string()).optional(),
+  tags: z.array(z.string()).optional()
 });
 
 export type SubscribeRequestData = z.infer<typeof subscribeRequestSchema>;
@@ -37,7 +37,7 @@ export const contactFormSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Valid email is required'),
   subject: z.string().optional(),
-  message: z.string().min(10, 'Message must be at least 10 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters')
 });
 
 export type ContactFormData = z.infer<typeof contactFormSchema>;
@@ -46,7 +46,7 @@ export type ContactFormData = z.infer<typeof contactFormSchema>;
 export const searchQuerySchema = z.object({
   q: z.string().min(1, 'Search query is required'),
   type: z.enum(['all', 'blog', 'template', 'agent', 'glossary']).optional(),
-  limit: z.number().min(1).max(50).optional(),
+  limit: z.number().min(1).max(50).optional()
 });
 
 export type SearchQueryData = z.infer<typeof searchQuerySchema>;
@@ -79,9 +79,9 @@ export function safeValidateRequest<T>(
   const result = schema.safeParse(data);
 
   if (result.success) {
-    return { success: true, data: result.data };
+    return {success: true, data: result.data};
   }
 
-  const errors = result.error.errors.map((err) => err.message);
-  return { success: false, errors };
+  const errors = result.error.errors.map(err => err.message);
+  return {success: false, errors};
 }

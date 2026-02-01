@@ -1,7 +1,7 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { client } from '@/lib/sanity/client';
-import { searchQuerySchema } from '@/lib/utils/validation';
-import { groq } from 'next-sanity';
+import {NextRequest, NextResponse} from 'next/server';
+import {client} from '@/lib/sanity/client';
+import {searchQuerySchema} from '@/lib/utils/validation';
+import {groq} from 'next-sanity';
 
 /**
  * Search API Route
@@ -29,20 +29,20 @@ export async function GET(request: NextRequest) {
     const validation = searchQuerySchema.safeParse({
       q: query,
       type,
-      limit,
+      limit
     });
 
     if (!validation.success) {
       return NextResponse.json(
         {
           error: 'Invalid search parameters',
-          details: validation.error.errors.map((err) => err.message),
+          details: validation.error.errors.map(err => err.message)
         },
-        { status: 400 }
+        {status: 400}
       );
     }
 
-    const { q, type: searchType, limit: maxResults } = validation.data;
+    const {q, type: searchType, limit: maxResults} = validation.data;
 
     // Build search queries based on type
     const results: SearchResult[] = [];
@@ -64,7 +64,7 @@ export async function GET(request: NextRequest) {
       `;
 
       const blogResults = await client.fetch<SearchResult[]>(blogQuery, {
-        searchTerm: `*${q}*`,
+        searchTerm: `*${q}*`
       });
       results.push(...blogResults);
     }
@@ -87,7 +87,7 @@ export async function GET(request: NextRequest) {
 
       const templateResults = await client.fetch<SearchResult[]>(
         templateQuery,
-        { searchTerm: `*${q}*` }
+        {searchTerm: `*${q}*`}
       );
       results.push(...templateResults);
     }
@@ -109,7 +109,7 @@ export async function GET(request: NextRequest) {
       `;
 
       const agentResults = await client.fetch<SearchResult[]>(agentQuery, {
-        searchTerm: `*${q}*`,
+        searchTerm: `*${q}*`
       });
       results.push(...agentResults);
     }
@@ -131,7 +131,7 @@ export async function GET(request: NextRequest) {
 
       const glossaryResults = await client.fetch<SearchResult[]>(
         glossaryQuery,
-        { searchTerm: `*${q}*` }
+        {searchTerm: `*${q}*`}
       );
       results.push(...glossaryResults);
     }
@@ -143,16 +143,16 @@ export async function GET(request: NextRequest) {
       query: q,
       type: searchType,
       count: limitedResults.length,
-      results: limitedResults,
+      results: limitedResults
     });
   } catch (error) {
     console.error('Search API Error:', error);
     return NextResponse.json(
       {
         error: 'Failed to perform search',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }

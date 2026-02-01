@@ -1,9 +1,9 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { getAgentById } from '@/lib/sanity/fetch';
-import { streamClaude, isAnthropicConfigured } from '@/lib/ai/anthropic';
-import { agentRequestSchema, safeValidateRequest } from '@/lib/utils/validation';
-import { checkRateLimit, getClientIp } from '@/lib/utils/rateLimit';
-import { AgentResponse } from '@/types';
+import {NextRequest, NextResponse} from 'next/server';
+import {getAgentById} from '@/lib/sanity/fetch';
+import {streamClaude, isAnthropicConfigured} from '@/lib/ai/anthropic';
+import {agentRequestSchema, safeValidateRequest} from '@/lib/utils/validation';
+import {checkRateLimit, getClientIp} from '@/lib/utils/rateLimit';
+import {AgentResponse} from '@/types';
 
 /**
  * SEO Agent API Endpoint
@@ -28,13 +28,13 @@ export async function POST(
 ) {
   try {
     // Get agentId from route params
-    const { agentId } = await context.params;
+    const {agentId} = await context.params;
 
     // Parse and validate request body
     const body = await request.json();
     const validation = safeValidateRequest(agentRequestSchema, {
       agentId,
-      inputs: body.inputs || {},
+      inputs: body.inputs || {}
     });
 
     if (!validation.success) {
@@ -42,9 +42,9 @@ export async function POST(
         {
           success: false,
           error: 'Validation failed',
-          errors: validation.errors,
+          errors: validation.errors
         },
-        { status: 400 }
+        {status: 400}
       );
     }
 
@@ -53,9 +53,9 @@ export async function POST(
       return NextResponse.json(
         {
           success: false,
-          error: 'AI service not configured',
+          error: 'AI service not configured'
         },
-        { status: 503 }
+        {status: 503}
       );
     }
 
@@ -66,9 +66,9 @@ export async function POST(
       return NextResponse.json(
         {
           success: false,
-          error: 'Agent not found',
+          error: 'Agent not found'
         },
-        { status: 404 }
+        {status: 404}
       );
     }
 
@@ -76,9 +76,9 @@ export async function POST(
       return NextResponse.json(
         {
           success: false,
-          error: 'Agent is currently disabled',
+          error: 'Agent is currently disabled'
         },
-        { status: 403 }
+        {status: 403}
       );
     }
 
@@ -88,7 +88,7 @@ export async function POST(
     const rateLimit = await checkRateLimit({
       uniqueId: rateLimitKey,
       limit: agent.usageLimit || 10, // Default to 10 requests per day
-      window: 86400, // 24 hours in seconds
+      window: 86400 // 24 hours in seconds
     });
 
     if (!rateLimit.success) {
@@ -96,23 +96,23 @@ export async function POST(
         {
           success: false,
           error: 'Rate limit exceeded',
-          resetAt: new Date(rateLimit.reset).toISOString(),
+          resetAt: new Date(rateLimit.reset).toISOString()
         },
         {
           status: 429,
           headers: {
             'X-RateLimit-Limit': String(agent.usageLimit || 10),
             'X-RateLimit-Remaining': String(rateLimit.remaining),
-            'X-RateLimit-Reset': String(rateLimit.reset),
-          },
+            'X-RateLimit-Reset': String(rateLimit.reset)
+          }
         }
       );
     }
 
     // Validate required inputs
-    const requiredFields = agent.inputFields.filter((field) => field.required);
+    const requiredFields = agent.inputFields.filter(field => field.required);
     const missingFields = requiredFields.filter(
-      (field) => !validation.data.inputs[field.name]
+      field => !validation.data.inputs[field.name]
     );
 
     if (missingFields.length > 0) {
@@ -120,17 +120,19 @@ export async function POST(
         {
           success: false,
           error: 'Missing required fields',
-          fields: missingFields.map((f) => f.name),
+          fields: missingFields.map(f => f.name)
         },
-        { status: 400 }
+        {status: 400}
       );
     }
 
     // Format user inputs into a message
     const userMessage = agent.inputFields
-      .map((field) => {
+      .map(field => {
         const value = validation.data.inputs[field.name];
-        if (!value) return null;
+        if (!value) {
+          return null;
+        }
         return `${field.label}: ${value}`;
       })
       .filter(Boolean)
@@ -148,7 +150,7 @@ export async function POST(
             systemPrompt: agent.systemPrompt,
             userMessage,
             maxTokens: 4096,
-            temperature: 1.0,
+            temperature: 1.0
           });
 
           for await (const chunk of generator) {
@@ -168,8 +170,8 @@ export async function POST(
             output: '', // Already streamed
             usage: {
               inputTokens: totalInputTokens,
-              outputTokens: totalOutputTokens,
-            },
+              outputTokens: totalOutputTokens
+            }
           };
 
           controller.enqueue(
@@ -177,7 +179,6 @@ export async function POST(
           );
 
           controller.close();
-
         } catch (error) {
           console.error('Streaming error:', error);
           const errorMessage = error instanceof Error ? error.message : 'Stream failed';
@@ -186,7 +187,7 @@ export async function POST(
           );
           controller.close();
         }
-      },
+      }
     });
 
     return new NextResponse(stream, {
@@ -195,19 +196,18 @@ export async function POST(
         'Transfer-Encoding': 'chunked',
         'X-RateLimit-Limit': String(agent.usageLimit || 10),
         'X-RateLimit-Remaining': String(rateLimit.remaining),
-        'X-RateLimit-Reset': String(rateLimit.reset),
-      },
+        'X-RateLimit-Reset': String(rateLimit.reset)
+      }
     });
-
   } catch (error) {
     console.error('Agent API error:', error);
     return NextResponse.json(
       {
         success: false,
         error: 'Internal server error',
-        message: error instanceof Error ? error.message : 'Unknown error',
+        message: error instanceof Error ? error.message : 'Unknown error'
       },
-      { status: 500 }
+      {status: 500}
     );
   }
 }
@@ -215,7 +215,7 @@ export async function POST(
 // Only allow POST requests
 export async function GET() {
   return NextResponse.json(
-    { error: 'Method not allowed. Use POST.' },
-    { status: 405 }
+    {error: 'Method not allowed. Use POST.'},
+    {status: 405}
   );
 }

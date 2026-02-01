@@ -1,4 +1,4 @@
-import { z } from 'zod';
+import {z} from 'zod';
 
 /**
  * Environment Variable Validation
@@ -29,7 +29,7 @@ const envSchema = z.object({
   NEXT_PUBLIC_SITE_URL: z.string().url('Valid site URL is required').optional(),
 
   // Node env
-  NODE_ENV: z.enum(['development', 'production', 'test']).default('development'),
+  NODE_ENV: z.enum(['development', 'production', 'test']).default('development')
 });
 
 export type Env = z.infer<typeof envSchema>;
@@ -63,12 +63,12 @@ export function validateEnv(): Env {
       NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL,
 
       // Node env
-      NODE_ENV: process.env.NODE_ENV,
+      NODE_ENV: process.env.NODE_ENV
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
       const missingVars = error.errors
-        .map((err) => `${err.path.join('.')}: ${err.message}`)
+        .map(err => `${err.path.join('.')}: ${err.message}`)
         .join('\n');
 
       throw new Error(
