@@ -36,6 +36,7 @@ import {
   // SEO Agents
   getAllAgentsQuery,
   getAgentBySlugQuery,
+  getAgentByIdQuery,
   getAgentCategoriesQuery,
   getAgentsByCategoryQuery,
   getFeaturedAgentsQuery,
@@ -332,6 +333,18 @@ export async function getAgentBySlug(
     params: { slug },
     preview,
     tags: ['seoAgent', `seoAgent:${slug}`],
+  })
+}
+
+export async function getAgentById(
+  agentId: string,
+  preview = false
+): Promise<SEOAgent | null> {
+  return sanityFetch<SEOAgent>({
+    query: getAgentByIdQuery,
+    params: { agentId },
+    preview,
+    tags: ['seoAgent', `seoAgent:${agentId}`],
   })
 }
 

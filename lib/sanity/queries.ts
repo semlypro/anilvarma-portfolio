@@ -442,6 +442,20 @@ export const getAgentBySlugQuery = groq`*[_type == "seoAgent" && slug.current ==
   createdAt
 }`
 
+export const getAgentByIdQuery = groq`*[_type == "seoAgent" && _id == $agentId][0]{
+  _id,
+  name,
+  slug,
+  icon,
+  shortDescription,
+  systemPrompt,
+  inputFields,
+  outputFormat,
+  pricingTier,
+  usageLimit,
+  isEnabled
+}`
+
 export const getAgentCategoriesQuery = groq`*[_type == "agentCategory"] | order(title asc){
   _id,
   title,

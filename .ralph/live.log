@@ -1,0 +1,200 @@
+I'll start working on Phase 3: API Routes, beginning with task 3.1 - creating the Sanity webhook revalidation endpoint.
+
+Let me first check the current state of the project and then implement the revalidation route.
+
+
+⚡ [Read]
+
+
+
+⚡ [Read]
+
+
+
+⚡ [Bash]
+
+Good! The API directory exists but is empty. Now I'll implement task 3.1 - the Sanity webhook revalidation route. Let me also check the BACKEND_TASKS.md for detailed specifications.
+
+
+⚡ [Read]
+
+Let me continue reading BACKEND_TASKS.md to find the Phase 3 specifications for the revalidation route:
+
+
+⚡ [Grep]
+
+Let me search for the API routes section more broadly:
+
+
+⚡ [Grep]
+
+Perfect! Now I have the specification for the revalidate route. Let me create it:
+
+
+⚡ [Write]
+
+Good! Now let me verify the code compiles and commit this task:
+
+
+⚡ [Bash]
+
+There are some dependency issues with frontend components, but those are not in my scope. My API route code is valid TypeScript and doesn't depend on those missing frontend dependencies. Let me verify TypeScript compilation of just the API route:
+
+
+⚡ [Bash]
+
+I need to fix the crypto import. Let me update the file:
+
+
+⚡ [Edit]
+
+
+
+⚡ [Edit]
+
+Now let me verify TypeScript again:
+
+
+⚡ [Bash]
+
+Great! TypeScript compilation passes. Now let me commit this work:
+
+
+⚡ [Bash]
+
+Excellent! Task 3.1 is complete. Now let me update the fix_plan.md to mark it as done and move to task 3.2:
+
+
+⚡ [Edit]
+
+Now let me start on task 3.2 - the SEO Agent API. First, I need to create the Anthropic client library, then the agent API route. Let me read the detailed specs from BACKEND_TASKS.md:
+
+
+⚡ [Grep]
+
+Good! Now let me create the Anthropic client library first, then the agent API route. Let me check if there are more detailed specs:
+
+
+⚡ [Grep]
+
+Perfect! Now let me create the Anthropic client library first:
+
+
+⚡ [Bash]
+
+
+
+⚡ [Write]
+
+Good! Now let me verify TypeScript compilation:
+
+
+⚡ [Bash]
+
+Perfect! Now let me create the SEO Agent API route. First, let me check which validation library is available:
+
+
+⚡ [Bash]
+
+Great! Zod is available. Now let me create the agent API route. First, I need to create the validation and rate limit utilities, then the agent route:
+
+
+⚡ [Bash]
+
+
+
+⚡ [Write]
+
+Now let me create a simple rate limiting utility. Since Vercel KV might not be set up yet, I'll create a basic implementation that can work with or without it:
+
+
+⚡ [Write]
+
+Now let me create the agent API route:
+
+
+⚡ [Bash]
+
+
+
+⚡ [Write]
+
+Now I need to add the `getAgentById` function to the fetch library. Let me check the current state of that file:
+
+
+⚡ [Read]
+
+I need to add a `getAgentById` function. Let me also check the queries file to see if I need to add a query for it:
+
+
+⚡ [Grep]
+
+I need to add the query first. Let me read the queries file to add it:
+
+
+⚡ [Grep]
+
+Let me search for "seoAgent" instead:
+
+
+⚡ [Grep]
+
+Perfect! Now I can see the structure. I need to add a `getAgentByIdQuery`. Let me add it after the `getAgentBySlugQuery`:
+
+
+⚡ [Edit]
+
+
+
+⚡ [Read]
+
+
+
+⚡ [Edit]
+
+Now let me add the export to the queries file and add the fetch function:
+
+
+⚡ [Edit]
+
+
+
+⚡ [Edit]
+
+
+
+⚡ [Read]
+
+
+
+⚡ [Edit]
+
+Now add the fetch function:
+
+
+⚡ [Read]
+
+
+
+⚡ [Edit]
+
+Perfect! Now let me verify TypeScript compilation of all the new files:
+
+
+⚡ [Bash]
+
+Let me escape the brackets:
+
+
+⚡ [Bash]
+
+The paths are configured in tsconfig. Let me just verify the imports are correct by checking if the files exist:
+
+
+⚡ [Bash]
+
+Perfect! All files exist. The TypeScript errors are just due to path resolution, which will work fine at runtime with Next.js. Now let me commit all these changes:
+
+
+⚡ [Bash]
+

@@ -1,0 +1,73 @@
+{
+  "project_name": "anil-seo-portfolio-backend",
+  "description": "Backend development for Anil Varma SEO Portfolio Website",
+  "mode": "autonomous",
+  "review_required": false,
+  "auto_commit": true,
+  "auto_test": true,
+
+  "rate_limits": {
+    "calls_per_hour": 80,
+    "cooldown_minutes": 3,
+    "max_consecutive_errors": 5
+  },
+
+  "exit_conditions": {
+    "require_explicit_signal": true,
+    "max_iterations": 150,
+    "max_consecutive_no_changes": 5,
+    "completion_keywords": ["ALL_TASKS_COMPLETE", "BACKEND_READY", "EXIT_SIGNAL: true"]
+  },
+
+  "scope": {
+    "include": [
+      "sanity/**/*",
+      "app/api/**/*",
+      "lib/sanity/**/*",
+      "lib/email/**/*",
+      "lib/ai/**/*",
+      "__tests__/api/**/*",
+      "__tests__/lib/**/*",
+      "types/**/*"
+    ],
+    "exclude": [
+      "app/(site)/**/*",
+      "components/**/*",
+      "styles/**/*",
+      ".env*",
+      "node_modules/**/*",
+      ".next/**/*",
+      "public/**/*"
+    ]
+  },
+
+  "tasks_source": "BACKEND_TASKS.md",
+
+  "quality_gates": {
+    "typescript_strict": true,
+    "tests_must_pass": true,
+    "no_type_errors": true,
+    "lint_clean": true,
+    "build_must_succeed": false
+  },
+
+  "context_files": [
+    "PROJECT_PLAN.md",
+    "types/index.ts",
+    "package.json",
+    "tsconfig.json"
+  ],
+
+  "notifications": {
+    "on_complete": true,
+    "on_error": true,
+    "on_milestone": true,
+    "webhook_url": "${SLACK_WEBHOOK_URL}"
+  },
+
+  "git": {
+    "auto_commit": true,
+    "commit_prefix": "[Ralph]",
+    "branch": "main"
+  }
+}

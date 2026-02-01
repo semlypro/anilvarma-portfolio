@@ -1,0 +1,33 @@
+# Robots.txt for Anil Varma SEO Portfolio
+# https://anilvarma.com
+
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://anilvarma.com/sitemap.xml
+
+# AI Crawlers (AEO - Answer Engine Optimization)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Disallow admin routes
+User-agent: *
+Disallow: /studio/
+Disallow: /api/
+Disallow: /_next/
