@@ -196,7 +196,7 @@ export default defineType({
           validation: (Rule) =>
             Rule.uri({
               scheme: ['http', 'https'],
-            }).custom((url) => {
+            }).custom((url: string | undefined) => {
               if (!url) return true
               const isYouTube = url.includes('youtube.com') || url.includes('youtu.be')
               const isVimeo = url.includes('vimeo.com')
