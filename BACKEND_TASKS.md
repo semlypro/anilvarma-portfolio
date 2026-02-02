@@ -29,6 +29,32 @@ Create production ready 3000+ word SEO optimized content for ALL 20 content piec
 
 ---
 
+## 🔴 URGENT: Fix 404 Blog Post Error
+
+**Status**: TODO
+**Priority**: HIGH
+**Issue**: Blog post `/blog/surfer-seo-vs-clearscope` returns 404 error
+
+### Task
+Create a comprehensive blog post comparing Surfer SEO vs Clearscope:
+- Slug: `surfer-seo-vs-clearscope`
+- Title: "Surfer SEO vs Clearscope: Which Content Optimization Tool is Right for You?"
+- Category: Tools & Software / SEO Tools
+- Word Count: 3000+ words
+- Include: Features comparison table, pricing, pros/cons, use cases, recommendations
+
+### Content Structure
+1. Introduction (why content optimization matters)
+2. Surfer SEO Overview (features, pricing, strengths)
+3. Clearscope Overview (features, pricing, strengths)
+4. Head-to-Head Comparison (table format)
+5. Best For Different Use Cases
+6. Pricing Comparison
+7. Final Verdict & Recommendations
+8. FAQ Section
+
+---
+
 ## Project Context
 You are building the backend for Anil Varma's SEO portfolio website.
 - **Tech Stack**: Next.js 14 (App Router), Sanity CMS v3, TypeScript, Resend, Claude Sonnet API
