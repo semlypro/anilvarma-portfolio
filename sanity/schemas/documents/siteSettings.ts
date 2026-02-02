@@ -94,6 +94,18 @@ export default defineType({
       rows: 2,
     }),
     defineField({
+      name: 'ctaLabel',
+      title: 'CTA Button Label',
+      type: 'string',
+      description: 'Text for the main call-to-action button in header (e.g., "Book a Call")',
+    }),
+    defineField({
+      name: 'ctaHref',
+      title: 'CTA Button Link',
+      type: 'string',
+      description: 'URL for the main call-to-action button (e.g., "/contact")',
+    }),
+    defineField({
       name: 'defaultSeo',
       title: 'Default SEO Settings',
       type: 'seo',

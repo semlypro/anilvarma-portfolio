@@ -28,11 +28,11 @@ export function Footer({ navigation, siteSettings }: FooterProps) {
           {settings && (
             <div className="lg:col-span-2">
               <Link href="/" className="text-2xl font-bold text-white">
-                {settings.companyName || 'Company'}
+                {settings.siteName || 'Company'}
               </Link>
-              {settings.companyDescription && (
+              {settings.siteDescription && (
                 <p className="mt-4 text-neutral-400 max-w-md leading-relaxed">
-                  {settings.companyDescription}
+                  {settings.siteDescription}
                 </p>
               )}
 
@@ -65,7 +65,7 @@ export function Footer({ navigation, siteSettings }: FooterProps) {
               )}
 
               {/* Contact Info */}
-              {(settings.contactEmail || settings.contactPhone || settings.location) && (
+              {(settings.contactEmail || settings.contactPhone || settings.address) && (
                 <div className="mt-6 space-y-3">
                   {settings.contactEmail && (
                     <a
@@ -85,10 +85,10 @@ export function Footer({ navigation, siteSettings }: FooterProps) {
                       <span>{settings.contactPhone}</span>
                     </a>
                   )}
-                  {settings.location && (
+                  {settings.address && (
                     <div className="flex items-center gap-3 text-neutral-400">
                       <MapPin className="w-4 h-4" />
-                      <span>{settings.location}</span>
+                      <span>{settings.address}</span>
                     </div>
                   )}
                 </div>
@@ -118,12 +118,12 @@ export function Footer({ navigation, siteSettings }: FooterProps) {
       </div>
 
       {/* Bottom Bar */}
-      {settings?.companyName && (
+      {settings?.siteName && (
         <div className="border-t border-neutral-800">
           <div className="container-custom py-6">
             <div className="flex flex-col md:flex-row items-center justify-between gap-4">
               <p className="text-neutral-500 text-sm">
-                &copy; {currentYear} {settings.companyName}. All rights reserved.
+                &copy; {currentYear} {settings.siteName}. All rights reserved.
               </p>
               {footerNav?.columns && (
                 <div className="flex items-center gap-6 text-sm">

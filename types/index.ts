@@ -69,6 +69,8 @@ export interface SiteSettings {
   contactEmail: string;
   contactPhone?: string;
   address?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
   defaultSeo: SEO;
 }
 
