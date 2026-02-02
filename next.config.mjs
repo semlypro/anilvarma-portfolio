@@ -41,24 +41,22 @@ const nextConfig = {
     return config;
   },
   
+  // Turbopack configuration for Next.js 16
+  turbopack: {
+    resolveAlias: {
+      'media-chrome/dist/media-theme-element.js': 'media-chrome',
+    },
+  },
+
   // Experimental features
   experimental: {
     serverActions: {
       bodySizeLimit: '2mb',
     },
-    turbo: {
-      resolveAlias: {
-        'media-chrome/dist/media-theme-element.js': 'media-chrome',
-      },
-    },
   },
-  
+
   typescript: {
     ignoreBuildErrors: false,
-  },
-  
-  eslint: {
-    ignoreDuringBuilds: true,
   },
   
   // Transpile packages that need it

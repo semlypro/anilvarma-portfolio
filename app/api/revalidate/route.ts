@@ -192,7 +192,7 @@ export async function POST(request: NextRequest) {
 
     // Also revalidate by tag if document has an ID
     if (payload._id) {
-      revalidateTag(payload._id);
+      revalidateTag(payload._id, {});
     }
 
     return NextResponse.json({
