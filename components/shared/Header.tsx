@@ -196,7 +196,7 @@ export function Header({
                       <div className="bg-white rounded-2xl shadow-soft-lg border border-neutral-200/60 overflow-hidden min-w-[540px]">
                         <div className="flex">
                           {/* Menu Columns */}
-                          <div className="flex-1 p-5 grid grid-cols-2 gap-5">
+                          <div className="flex-1 p-5 grid grid-cols-2 gap-6 auto-cols-fr">
                             {item.megaMenu?.columns.map((column, idx) => (
                               <div key={idx}>
                                 <h4 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-3 px-3">
