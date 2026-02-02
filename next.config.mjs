@@ -7,7 +7,18 @@ const nextConfig = {
         hostname: 'cdn.sanity.io',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60,
   },
+
+  // Compression
+  compress: true,
+
+  // Production optimizations
+  productionBrowserSourceMaps: false,
+
+  // Warn about multiple lockfiles
+  outputFileTracingRoot: process.cwd(),
   
   // Webpack configuration for Sanity v5 compatibility
   webpack: (config, { isServer }) => {
