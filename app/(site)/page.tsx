@@ -5,6 +5,7 @@ import { ServicesSection } from '@/components/sections/ServicesSection';
 import { FeaturedBlogSection } from '@/components/sections/FeaturedBlogSection';
 import { TestimonialsSection } from '@/components/sections/TestimonialsSection';
 import { CTASection } from '@/components/sections/CTASection';
+import { ContextualForm } from '@/components/shared/ContextualForm';
 import { getHomepage, getRecentBlogPosts, getFeaturedTestimonials } from '@/lib/sanity/fetch';
 
 export const metadata: Metadata = {
@@ -43,12 +44,11 @@ export default async function HomePage() {
 
       <TestimonialsSection testimonials={testimonials} />
 
-      <CTASection
-        title="Ready to Scale Your Organic Traffic?"
-        description="Book a free 30-minute consultation to discuss your SEO challenges and discover growth opportunities."
-        buttonText="Book a Free Consultation"
-        buttonLink="/contact"
-      />
+      <section className="py-16 px-4 md:px-8">
+        <div className="max-w-4xl mx-auto">
+          <ContextualForm pageType="homepage" />
+        </div>
+      </section>
     </>
   );
 }

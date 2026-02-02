@@ -5,6 +5,7 @@ import {
   CheckCircle2, ArrowRight, Clock, Users, TrendingUp,
   FileText, BarChart3, Target
 } from 'lucide-react';
+import { ContextualForm } from '@/components/shared/ContextualForm';
 
 export const metadata: Metadata = {
   title: 'Technical SEO Services | Site Speed & Core Web Vitals Optimization | Anil Varma',
@@ -319,6 +320,13 @@ export default function TechnicalSEOPage() {
               No credit card required • Free 30-min consultation included
             </p>
           </div>
+        </div>
+      </section>
+
+      {/* Contextual Contact Form */}
+      <section className="py-16 px-4 md:px-8 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <ContextualForm pageType="service" pageTitle="Technical SEO" />
         </div>
       </section>
     </main>
