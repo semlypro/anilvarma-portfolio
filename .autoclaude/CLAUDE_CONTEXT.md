@@ -1,6 +1,6 @@
 # AutoClaude Project Context
 
-Generated at: 2026-02-02T09:30:49.777Z
+Generated at: 2026-02-02T09:55:49.801Z
 
 ---
 
@@ -9,22 +9,22 @@ Generated at: 2026-02-02T09:30:49.777Z
 ## Workspace
 - **Root**: /Users/anilvarma/Library/Mobile Documents/com~apple~CloudDocs/Work/Anil Varma/portfolio website
 - **Type**: single
-- **Last Updated**: 2026-02-02T09:30:48.811Z
+- **Last Updated**: 2026-02-02T09:55:49.107Z
 
 ## Statistics
-- **Total Files**: 469
-- **Estimated Lines**: 358711
-- **Average File Size**: 2788074 bytes
+- **Total Files**: 678
+- **Estimated Lines**: 978306
+- **Average File Size**: 2121199 bytes
 
 ## Languages
-- **javascript**: 5616843 files
-- **typescript**: 2506805 files
-- **typescriptreact**: 1888285 files
-- **json**: 1779783 files
-- **markdown**: 413866 files
-- **html**: 134462 files
-- **css**: 99149 files
-- **shellscript**: 52147 files
+- **javascript**: 5875647 files
+- **typescript**: 2597778 files
+- **typescriptreact**: 1945485 files
+- **json**: 1890275 files
+- **markdown**: 436746 files
+- **html**: 145885 files
+- **css**: 104174 files
+- **shellscript**: 54812 files
 
 ## Project Structure
 - **Main Languages**: Not detected
@@ -46,16 +46,16 @@ Generated at: 2026-02-02T09:30:49.777Z
 
 
 ## Largest Files
-- .next/cache/webpack/client-production/0.pack (287253KB)
-- .next/cache/webpack/server-production/12.pack (185629KB)
+- .next/cache/webpack/server-production/2.pack (226398KB)
+- .next/cache/webpack/client-production/0.pack (164646KB)
+- .next/cache/webpack/client-production/9.pack (135808KB)
 - .next/cache/webpack/server-production/8.pack (123198KB)
-- .next/cache/webpack/server-production/18.pack (80899KB)
-- .next/cache/webpack/server-production/6.pack (80430KB)
+- .next/cache/webpack/server-production/6.pack (80427KB)
+- .next/cache/webpack/server-production/18.pack (71879KB)
 - .next/cache/webpack/server-production/17.pack (61256KB)
 - .next/cache/webpack/server-production/13.pack (52657KB)
-- .next/cache/webpack/server-production/index.pack (51717KB)
-- .next/cache/webpack/server-production/index.pack.old (51319KB)
-- .next/cache/webpack/server-production/19.pack (44991KB)
+- .next/cache/webpack/server-production/index.pack (51946KB)
+- .next/cache/webpack/server-production/index.pack.old (51946KB)
 
 
 ---
@@ -90,39 +90,17 @@ No unfinished tasks
 ### Git Status
 ```
  M .autoclaude/CLAUDE_CONTEXT.md
- M .autoclaude/logs/autoclaude-2026-02-01.log
+ M .autoclaude/logs/autoclaude-2026-02-02.log
  M .autoclaude/monitoring.log
- M .autoclaude/tasks/sessions.json
- D .claude_agent_farm_state.json
- M .heartbeats/agent00.heartbeat
- M app/(site)/agents/[slug]/page.tsx
- M app/(site)/blog/[slug]/page.tsx
- M app/(site)/case-studies/[slug]/page.tsx
- M app/(site)/glossary/[slug]/page.tsx
- M app/(site)/glossary/page.tsx
- M app/(site)/templates/[slug]/page.tsx
- M app/api/contact/route.ts
- M app/api/download/route.ts
- M app/api/search/route.ts
- M app/api/subscribe/route.ts
- M lib/env.ts
- M lib/utils/validation.ts
- M next.config.mjs
- D package-lock.json
- M package.json
- M tsconfig.json
-?? .autoclaude/logs/autoclaude-2026-02-02.log
-?? .claude_agent_farm_backups/settings_2026-02-02T08-57-07-834Z.json
-?? ".ralph/.ralph_session 2"
-?? DEPENDENCY_UPDATES.md
-?? DEPLOYMENT_SUMMARY.md
-?? "app/(site)/layout 2.tsx"
-?? fix-params.sh
+ M components/shared/Header.tsx
+?? .playwright-mcp/
 
 ```
 
 ### Recent Commits
 ```
+07c5b0a fix: Add .npmrc to enable legacy-peer-deps for Vercel deployment
+4348288 Update dependencies to latest versions
 ef7acee Update metadata and monitoring logs
 b39f6f9 Add comprehensive SEO content and upload scripts
 d7f62ac Update design system and add Sanity content scripts
@@ -131,8 +109,6 @@ c15b381 docs: Add comprehensive content creation tasks for Ralph
 586fb08 feat: Complete Sanity CMS integration and populate all content
 63f6355 fix: Resolve Sanity schema errors and update layout
 746e0c8 Complete portfolio website with Sanity CMS integration
-5a122cf docs: Mark Phase 6 (Testing) as complete in fix_plan
-fdc8632 test: Add comprehensive test suite for API routes and libraries
 
 ```
 

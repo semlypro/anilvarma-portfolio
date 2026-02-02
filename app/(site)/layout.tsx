@@ -1,5 +1,6 @@
 import { Header } from '@/components/shared/Header';
 import { Footer } from '@/components/shared/Footer';
+import { FloatingCTA } from '@/components/shared/FloatingCTA';
 import { getNavigation, getSiteSettings } from '@/lib/sanity/fetch';
 
 // Default navigation for fallback
@@ -37,6 +38,7 @@ export default async function SiteLayout({
       />
       <main className="flex-1">{children}</main>
       <Footer navigation={navigation} siteSettings={siteSettings} />
+      <FloatingCTA showOnMobileOnly={true} />
     </div>
   );
 }
