@@ -299,7 +299,7 @@ export function Header({
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: 'easeInOut' }}
-            className="lg:hidden bg-white border-t border-neutral-100 overflow-hidden"
+            className="relative lg:hidden bg-white border-t border-neutral-100 overflow-hidden"
           >
             <div className="container-custom py-4">
               <div className="space-y-1">
