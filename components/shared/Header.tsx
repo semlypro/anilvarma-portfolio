@@ -193,10 +193,10 @@ export function Header({
                       onMouseEnter={() => handleMenuEnter(item.label)}
                       onMouseLeave={handleMenuLeave}
                     >
-                      <div className="bg-white rounded-2xl shadow-soft-lg border border-neutral-200/60 overflow-hidden min-w-[540px]">
+                      <div className="bg-white rounded-2xl shadow-soft-lg border border-neutral-200/60 overflow-hidden min-w-[640px]">
                         <div className="flex">
                           {/* Menu Columns */}
-                          <div className="flex-1 p-5 grid grid-cols-2 gap-6 auto-cols-fr">
+                          <div className="flex-1 p-5 grid grid-cols-2 gap-8 auto-cols-fr">
                             {item.megaMenu?.columns.map((column, idx) => (
                               <div key={idx}>
                                 <h4 className="text-xs font-semibold text-neutral-400 uppercase tracking-wider mb-3 px-3">
@@ -216,7 +216,7 @@ export function Header({
                                         <p className="text-sm font-medium text-neutral-800 group-hover:text-primary-600 transition-colors">
                                           {subItem.label}
                                         </p>
-                                        <p className="text-xs text-neutral-500 mt-0.5 line-clamp-2">
+                                        <p className="text-xs text-neutral-500 mt-0.5">
                                           {subItem.description}
                                         </p>
                                       </div>
