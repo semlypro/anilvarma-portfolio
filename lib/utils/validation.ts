@@ -82,6 +82,6 @@ export function safeValidateRequest<T>(
     return {success: true, data: result.data};
   }
 
-  const errors = result.error.errors.map(err => err.message);
+  const errors = result.error.issues.map(err => err.message);
   return {success: false, errors};
 }

@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         {
           error: 'Invalid form data',
-          details: validation.error.errors.map(err => err.message)
+          details: validation.error.issues.map(err => err.message)
         },
         {status: 400}
       );

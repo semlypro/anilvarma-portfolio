@@ -1,52 +1,68 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    // Disable ESLint during build to focus on TypeScript errors first
-    ignoreDuringBuilds: true,
-  },
-  typescript: {
-    // Show TypeScript errors but don't fail the build
-    // Remove this once errors are fixed
-    ignoreBuildErrors: false,
-  },
   images: {
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'cdn.sanity.io',
-        pathname: '/images/**',
       },
     ],
   },
-  experimental: {
-    taint: true,
-  },
-  async headers() {
-    return [
-      {
-        source: '/(.*)',
-        headers: [
-          {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
-          },
-          {
-            key: 'X-Frame-Options',
-            value: 'DENY',
-          },
-          {
-            key: 'X-XSS-Protection',
-            value: '1; mode=block',
-          },
-        ],
+  
+  // Webpack configuration for Sanity v5 compatibility
+  webpack: (config, { isServer }) => {
+    // Handle media-chrome ESM issues
+    config.resolve.alias = {
+      ...config.resolve.alias,
+      'media-chrome/dist/media-theme-element.js': 'media-chrome',
+    };
+    
+    // Allow importing of media-chrome
+    config.module = config.module || {};
+    config.module.rules = config.module.rules || [];
+    
+    config.module.rules.push({
+      test: /\.m?js$/,
+      type: 'javascript/auto',
+      resolve: {
+        fullySpecified: false,
       },
-    ];
+    });
+    
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+      };
+    }
+    
+    return config;
   },
-  async redirects() {
-    return [
-      // Add redirects here as needed
-    ];
+  
+  // Experimental features
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+    turbo: {
+      resolveAlias: {
+        'media-chrome/dist/media-theme-element.js': 'media-chrome',
+      },
+    },
   },
+  
+  typescript: {
+    ignoreBuildErrors: false,
+  },
+  
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  
+  // Transpile packages that need it
+  transpilePackages: ['@sanity/vision', 'sanity', '@mux/mux-player', '@mux/mux-player-react', 'media-chrome'],
 };
 
 export default nextConfig;

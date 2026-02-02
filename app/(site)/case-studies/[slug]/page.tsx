@@ -4,10 +4,11 @@ import { CaseStudyDetailPage } from '@/components/pages/CaseStudyDetailPage';
 import { mockCaseStudies } from '@/lib/mocks/data';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Props): Promise<Metadata> {
+  const params = await paramsPromise;
   const caseStudy = mockCaseStudies.find(cs => cs.slug?.current === params.slug);
 
   if (!caseStudy) {
@@ -34,7 +35,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function CaseStudyDetailsPage({ params }: Props) {
+export default async function CaseStudyDetailsPage({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const caseStudy = mockCaseStudies.find(cs => cs.slug?.current === params.slug);
 
   if (!caseStudy) {

@@ -4,10 +4,11 @@ import { AgentDetailPage } from '@/components/pages/AgentDetailPage';
 import { mockSEOAgents } from '@/lib/mocks/data';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Props): Promise<Metadata> {
+  const params = await paramsPromise;
   const agent = mockSEOAgents.find(a => a.slug?.current === params.slug);
 
   if (!agent) {
@@ -33,7 +34,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function AgentDetailsPage({ params }: Props) {
+export default async function AgentDetailsPage({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const agent = mockSEOAgents.find(a => a.slug?.current === params.slug);
 
   if (!agent) {

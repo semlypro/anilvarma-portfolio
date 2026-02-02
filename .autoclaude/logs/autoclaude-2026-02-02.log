@@ -1,0 +1,73 @@
+[2026-02-02T08:20:40.025Z] [INFO] | Source: infoLog: [Stability] Initializing stability systems
+[2026-02-02T08:20:40.025Z] [INFO] | Source: infoLog: [SessionStability] Starting health monitoring
+[2026-02-02T08:20:40.038Z] [INFO] | Source: infoLog: [Stability] Stability systems initialized
+[2026-02-02T08:20:40.039Z] [INFO] | Source: infoLog: [AutoRecovery] Starting monitoring
+[2026-02-02T08:20:40.039Z] [INFO] | Source: infoLog: Stability systems initialized successfully
+[2026-02-02T08:20:40.039Z] [INFO] | Source: infoLog: [UpdateManager] Initializing Claude update manager
+[2026-02-02T08:43:50.590Z] [INFO] | Source: infoLog: Claude update manager initialized
+[2026-02-02T08:43:50.594Z] [INFO] | Source: infoLog: Extension activated with validated configuration | Context: {"version":"3.20.1","developmentMode":false}
+[2026-02-02T08:55:28.985Z] [INFO] | Source: infoLog: AutoClaude extension activated successfully
+[2026-02-02T08:55:28.987Z] [INFO] | Source: infoLog: [AutoClaude] Extension activation completed successfully
+[2026-02-02T08:55:37.320Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T08:55:37.323Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T08:55:40.788Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T08:55:45.312Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T08:58:07.934Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T08:58:07.935Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T08:58:07.949Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T08:58:15.643Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:00:15.652Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:00:53.734Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:00:53.735Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:00:53.738Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:02:45.670Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:03:24.060Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:03:24.060Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:03:24.067Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:03:45.678Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:05:15.686Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:05:26.069Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:05:26.070Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:05:26.079Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:06:47.623Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:07:18.216Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:07:26.931Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:07:26.932Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:07:26.996Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:08:18.224Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:08:48.297Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:09:18.303Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:09:26.964Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:09:26.964Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:09:26.967Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:09:48.305Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:12:00.354Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:12:00.355Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:12:00.437Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:13:50.344Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:14:16.460Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:14:16.461Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:14:16.467Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:14:20.350Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:14:50.369Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:17:17.129Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:17:17.130Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:17:17.140Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:19:20.310Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:19:20.311Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:19:20.317Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:19:20.415Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:19:51.082Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:22:23.761Z] [INFO] | Source: infoLog: [SessionStability] Triggering memory cleanup
+[2026-02-02T09:22:23.762Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:22:23.763Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:22:23.767Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:24:25.793Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:24:25.794Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:24:25.799Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:27:45.861Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:27:45.863Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:27:46.078Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak
+[2026-02-02T09:33:19.267Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting recovery: Memory Leak
+[2026-02-02T09:33:19.268Z] [INFO] | Source: infoLog: [AutoRecovery] Attempting to recover from high memory usage
+[2026-02-02T09:33:19.823Z] [INFO] | Source: infoLog: [AutoRecovery] Recovery successful: Memory Leak

@@ -4,10 +4,11 @@ import { TemplateDetailPage } from '@/components/pages/TemplateDetailPage';
 import { mockTemplates } from '@/lib/mocks/data';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Props): Promise<Metadata> {
+  const params = await paramsPromise;
   const template = mockTemplates.find(t => t.slug?.current === params.slug);
 
   if (!template) {
@@ -34,7 +35,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function TemplateDetailsPage({ params }: Props) {
+export default async function TemplateDetailsPage({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const template = mockTemplates.find(t => t.slug?.current === params.slug);
 
   if (!template) {

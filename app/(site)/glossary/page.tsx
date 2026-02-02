@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import { GlossaryListingPage } from '@/components/pages/GlossaryListingPage';
 import { getAllGlossaryTerms } from '@/lib/sanity/fetch';
+import { mockGlossaryTerms } from '@/lib/mocks/data';
 
 export const metadata: Metadata = {
   title: 'SEO Glossary | 200+ Terms Explained | Anil Varma',
@@ -15,8 +16,16 @@ export const metadata: Metadata = {
 export const revalidate = 60;
 
 export default async function GlossaryPage() {
-  // Fetch from Sanity
-  const glossaryTerms = await getAllGlossaryTerms().catch(() => []);
+  // Fetch from Sanity, fallback to mock data
+  let glossaryTerms = await getAllGlossaryTerms().catch(() => []);
+
+  // Filter out any terms with invalid definition (should be string, not portable text)
+  glossaryTerms = glossaryTerms.filter(term => typeof term.definition === 'string');
+
+  // Use mock data if Sanity is empty
+  if (glossaryTerms.length === 0) {
+    glossaryTerms = mockGlossaryTerms;
+  }
 
   // Group terms by first letter
   const termsByLetter = glossaryTerms.reduce((acc, term) => {

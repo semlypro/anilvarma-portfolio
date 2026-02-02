@@ -4,10 +4,11 @@ import { GlossaryDetailPage } from '@/components/pages/GlossaryDetailPage';
 import { mockGlossaryTerms } from '@/lib/mocks/data';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Props): Promise<Metadata> {
+  const params = await paramsPromise;
   const term = mockGlossaryTerms.find(t => t.slug?.current === params.slug);
 
   if (!term) {
@@ -33,7 +34,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function GlossaryTermPage({ params }: Props) {
+export default async function GlossaryTermPage({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const term = mockGlossaryTerms.find(t => t.slug?.current === params.slug);
 
   if (!term) {

@@ -4,7 +4,7 @@ import { BlogDetailPage } from '@/components/pages/BlogDetailPage';
 import { mockBlogPosts, mockComparisonPosts, mockListiclePosts } from '@/lib/mocks/data';
 
 interface Props {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Combine all posts for lookup
@@ -14,7 +14,8 @@ const allPosts = [
   ...mockListiclePosts.map(post => ({ ...post, postType: 'listicle' as const })),
 ];
 
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
+export async function generateMetadata({ params: paramsPromise }: Props): Promise<Metadata> {
+  const params = await paramsPromise;
   const post = allPosts.find(p => p.slug?.current === params.slug);
 
   if (!post) {
@@ -46,7 +47,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function BlogPostPage({ params }: Props) {
+export default async function BlogPostPage({ params: paramsPromise }: Props) {
+  const params = await paramsPromise;
   const post = allPosts.find(p => p.slug?.current === params.slug);
 
   if (!post) {
